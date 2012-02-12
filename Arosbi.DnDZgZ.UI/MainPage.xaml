@@ -29,24 +29,22 @@
 		            Grid.Row="0"
 		            Margin="24,24,0,12">
 			<TextBlock x:Name="ApplicationTitle"
-			           Text="{Binding ApplicationTitle}"
+			           Text="{Binding ApplicationTitle, Mode=OneWay}"
 			           Style="{StaticResource PhoneTextNormalStyle}" />
-			<TextBlock x:Name="PageTitle"
-			           Text="{Binding PageName}"
-			           Margin="-3,-8,0,0"
-			           Style="{StaticResource PhoneTextTitle1Style}" />
+			
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->
 		<Grid x:Name="ContentGrid"
 		      Grid.Row="1">
-
-			<TextBlock Text="{Binding Welcome}"
-			           Style="{StaticResource PhoneTextNormalStyle}"
-			           HorizontalAlignment="Center"
-			           VerticalAlignment="Center"
-			           FontSize="40" />
-
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"  />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Button x:Name="btnBuses" Content="{Binding Autobuses, Mode=OneWay}" Grid.Row="0" Command="{Binding AutobusesCommand, Mode=OneWay}" />
+			<Button x:Name="btnBizis" Content="{Binding Bizi, Mode=OneWay}" Grid.Row="1" Command="{Binding BiziCommand, Mode=OneWay}" />
+			<Button x:Name="btnWifi" Content="{Binding Wifi, Mode=OneWay}" Grid.Row="2" Command="{Binding WifiCommand, Mode=OneWay}" />
 		</Grid>
 	</Grid>
     

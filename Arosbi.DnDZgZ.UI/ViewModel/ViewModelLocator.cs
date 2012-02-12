@@ -16,6 +16,10 @@
 
 namespace Arosbi.DnDZgZ.UI.ViewModel
 {
+    using System;
+
+    using Arosbi.DnDZgZ.UI.Services;
+
     using GalaSoft.MvvmLight;
 
     /// <summary>
@@ -57,7 +61,12 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
-        private static MainViewModel _main;
+        public static readonly Uri BusesPage = new Uri("/BusesPage.xaml", UriKind.Relative);
+        public const string BizisPage = "";
+        public const string WifiPage = "";
+
+        private static MainViewModel main;
+        private static BusesViewModel buses;
 
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
@@ -76,6 +85,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             CreateMain();
         }
 
+        #region Main
         /// <summary>
         /// Gets the Main property.
         /// </summary>
@@ -83,12 +93,12 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         {
             get
             {
-                if (_main == null)
+                if (main == null)
                 {
                     CreateMain();
                 }
 
-                return _main;
+                return main;
             }
         }
 
@@ -111,8 +121,8 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// </summary>
         public static void ClearMain()
         {
-            _main.Cleanup();
-            _main = null;
+            main.Cleanup();
+            main = null;
         }
 
         /// <summary>
@@ -120,11 +130,67 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// </summary>
         public static void CreateMain()
         {
-            if (_main == null)
+            if (main == null)
             {
-                _main = new MainViewModel();
+                main = IoC.Resolve<MainViewModel>();
             }
         }
+
+        #endregion
+
+        #region Buses
+
+        /// <summary>
+        /// Gets the $ViewModelPropertyName$ property.
+        /// </summary>
+        public static BusesViewModel BusesStatic
+        {
+            get
+            {
+                if (buses == null)
+                {
+                    CreateBuses();
+                }
+
+                return buses;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Buses property.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public BusesViewModel Buses
+        {
+            get
+            {
+                return BusesStatic;
+            }
+        }
+
+        /// <summary>
+        /// Provides a deterministic way to delete the $ViewModelPropertyName$ property.
+        /// </summary>
+        public static void ClearBuses()
+        {
+            buses.Cleanup();
+            buses = null;
+        }
+
+        /// <summary>
+        /// Provides a deterministic way to create the $ViewModelPropertyName$ property.
+        /// </summary>
+        public static void CreateBuses()
+        {
+            if (buses == null)
+            {
+                buses = IoC.Resolve<BusesViewModel>();
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// Cleans up all the resources.
@@ -132,6 +198,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         public static void Cleanup()
         {
             ClearMain();
+            ClearBuses();
         }
     }
 }

@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
+﻿using System.Windows;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+using Arosbi.DnDZgZ.UI.ViewModel;
+
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Arosbi.DnDZgZ.UI.ViewModel;
 
 namespace Arosbi.DnDZgZ.UI
 {

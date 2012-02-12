@@ -16,6 +16,8 @@
 
 namespace Arosbi.DnDZgZ.UI.ViewModel
 {
+    using GalaSoft.MvvmLight;
+
     /// <summary>
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.
@@ -62,14 +64,14 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// </summary>
         public ViewModelLocator()
         {
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view models
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view models
-            ////}
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                // Create design time view models
+            }
+            else
+            {
+                // Create run time view models
+            }
 
             CreateMain();
         }

@@ -87,8 +87,10 @@
     <Compile Include="Model\ServicePointBase.cs" />
     <Compile Include="Model\WifiServicePoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Fakes\FakeData.cs" />
+    <Compile Include="Services\Fakes\FakeRepository.cs" />
     <Compile Include="Services\IRepository.cs" />
-    <Compile Include="Services\RestApi\JsonSerializer.cs" />
+    <Compile Include="Services\JsonSerializer.cs" />
     <Compile Include="Services\RestApi\RestRepository.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

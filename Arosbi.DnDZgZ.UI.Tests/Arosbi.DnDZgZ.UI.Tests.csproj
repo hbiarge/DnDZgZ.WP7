@@ -74,7 +74,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\Services\RestApi\JsonSerializeTest.cs" />
+    <Compile Include="Tests\Services\JsonSerializeTest.cs" />
     <Compile Include="Tests\Services\RestApi\RestApiTest.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,48 +1,39 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RestRepository.cs" company="Arosbi">
+// <copyright file="FakeRepository.cs" company="Arosbi">
 //   Copyright (c) Hugo Biarge. Todos los derechos reservados.
 // </copyright>
 // <summary>
-//   Defines the RestDataAccess type.
+//   Defines the FakeRepository type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Arosbi.DnDZgZ.UI.Services.RestApi
+namespace Arosbi.DnDZgZ.UI.Services.Fakes
 {
     using System;
     using System.Collections.Generic;
-    using System.Net;
 
     using Arosbi.DnDZgZ.UI.Model;
 
-    using JsonFx.Json;
-
     /// <summary>
-    /// Implementation of <see cref="IRepository"/> that fetches the info from a public REST API.
+    /// Fake IRepository for UI design and test.
     /// </summary>
-    public class RestRepository : IRepository
+    public class FakeRepository : IRepository
     {
         /// <summary>
-        /// Stores the instance of the Json Deserializer.
+        /// Stores the JsonSerializer.
         /// </summary>
         private readonly JsonSerializer jsonSerializer;
 
         /// <summary>
-        /// URI to get the stations info.
+        /// Initializes a new instance of the <see cref="FakeRepository"/> class.
         /// </summary>
-        private const string FetchUri = @"http://www.dndzgz.com/fetch?service={0}";
-
-        /// <summary>
-        /// URI to get details for a station.
-        /// </summary>
-        private const string PointUri = @"http://www.dndzgz.com/point?service={0}&id={1}";
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RestRepository"/> class.
-        /// </summary>
-        /// <param name="jsonSerializer">The json serializer.</param>
-        /// <exception cref="ArgumentNullException">If json serializer is null.</exception>
-        public RestRepository(JsonSerializer jsonSerializer)
+        /// <param name="jsonSerializer">
+        /// The json serializer.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// If the JsonSerializer is null.
+        /// </exception>
+        public FakeRepository(JsonSerializer jsonSerializer)
         {
             if (jsonSerializer == null)
             {
@@ -63,8 +54,8 @@ namespace Arosbi.DnDZgZ.UI.Services.RestApi
                 throw new ArgumentNullException("callback");
             }
 
-            var uri = new Uri(string.Format(FetchUri, "bus"));
-            this.GetData(uri, callback);
+            var buses = this.jsonSerializer.Deserialize<IEnumerable<BusServicePoint>>(FakeData.GetBusesData());
+            callback(buses);
         }
 
         /// <summary>
@@ -78,8 +69,8 @@ namespace Arosbi.DnDZgZ.UI.Services.RestApi
                 throw new ArgumentNullException("callback");
             }
 
-            var uri = new Uri(string.Format(FetchUri, "bizi"));
-            this.GetData(uri, callback);
+            var bizis = this.jsonSerializer.Deserialize<IEnumerable<BiziServicePoint>>(FakeData.GetBizisData());
+            callback(bizis);
         }
 
         /// <summary>
@@ -93,8 +84,8 @@ namespace Arosbi.DnDZgZ.UI.Services.RestApi
                 throw new ArgumentNullException("callback");
             }
 
-            var uri = new Uri(string.Format(FetchUri, "wifi"));
-            this.GetData(uri, callback);
+            var wifis = this.jsonSerializer.Deserialize<IEnumerable<WifiServicePoint>>(FakeData.GetWifisData());
+            callback(wifis);
         }
 
         /// <summary>
@@ -109,8 +100,8 @@ namespace Arosbi.DnDZgZ.UI.Services.RestApi
                 throw new ArgumentNullException("callback");
             }
 
-            var uri = new Uri(string.Format(PointUri, "bus", id));
-            this.GetData(uri, callback);
+            var busDetail = this.jsonSerializer.Deserialize<BusDetail>(FakeData.GetDetalleBusData());
+            callback(busDetail);
         }
 
         /// <summary>
@@ -125,32 +116,8 @@ namespace Arosbi.DnDZgZ.UI.Services.RestApi
                 throw new ArgumentNullException("callback");
             }
 
-            var uri = new Uri(string.Format(PointUri, "bizi", id));
-            this.GetData(uri, callback);
-        }
-
-        /// <summary>
-        /// Get data from the specified service.
-        /// </summary>
-        /// <param name="uri">The uri to get.</param>
-        /// <param name="callback">The callback.</param>
-        /// <typeparam name="T">The generic Type.</typeparam>
-        /// <exception cref="InvalidOperationException">If http call don't return with 200 OK.</exception>
-        private void GetData<T>(Uri uri, Action<T> callback) where T : class
-        {
-            var request = new WebClient();
-            request.DownloadStringCompleted += (sender, args) =>
-             {
-                 if (args.Error != null)
-                 {
-                     throw new InvalidOperationException("No se han podido recuperar los datos", args.Error);
-                 }
-
-                 var data = jsonSerializer.Deserialize<T>(args.Result);
-                 callback(data);
-             };
-
-            request.DownloadStringAsync(uri);
+            var biziDetail = this.jsonSerializer.Deserialize<BiziDetail>(FakeData.GetDetalleBiziData());
+            callback(biziDetail);
         }
     }
 }

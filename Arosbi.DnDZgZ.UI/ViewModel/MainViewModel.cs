@@ -1,7 +1,7 @@
-﻿using GalaSoft.MvvmLight;
-
-namespace Arosbi.DnDZgZ.UI.ViewModel
+﻿namespace Arosbi.DnDZgZ.UI.ViewModel
 {
+    using GalaSoft.MvvmLight;
+
     /// <summary>
     /// This class contains properties that the main View can data bind to.
     /// <para>

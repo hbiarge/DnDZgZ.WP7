@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using Arosbi.DnDZgZ.UI.Model;
+    using Arosbi.DnDZgZ.UI.Services;
     using Arosbi.DnDZgZ.UI.Services.RestApi;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;

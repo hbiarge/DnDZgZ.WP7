@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Arosbi.DnDZgZ.UI.Services.RestApi
+namespace Arosbi.DnDZgZ.UI.Services
 {
     using JsonFx.Json;
     using JsonFx.Serialization;

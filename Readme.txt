@@ -1,0 +1,1 @@
+Aplicación nativa para Windows Phone 7 con información de paradas de autobús, estaciones de bizi y puntos wifi

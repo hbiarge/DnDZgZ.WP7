@@ -12,6 +12,7 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
     using System;
     using System.Collections.Generic;
 
+    using Arosbi.DnDZgZ.UI.Infrastructure;
     using Arosbi.DnDZgZ.UI.Model;
 
     /// <summary>

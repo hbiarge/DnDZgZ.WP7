@@ -9,9 +9,14 @@
              xmlns:vm="clr-namespace:Arosbi.DnDZgZ.UI.ViewModel">
 
     <Application.Resources>
-        <!--Global View Model Locator-->
-        <vm:ViewModelLocator x:Key="Locator"
-                             d:IsDataSource="True" />
+    	<ResourceDictionary>
+    		<ResourceDictionary.MergedDictionaries>
+    			<ResourceDictionary Source="Resources/Styles/DefaultStyle.xaml"/>
+    		</ResourceDictionary.MergedDictionaries>
+    		<!--Global View Model Locator-->
+    		<vm:ViewModelLocator x:Key="Locator"
+    			d:IsDataSource="True" />
+    	</ResourceDictionary>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

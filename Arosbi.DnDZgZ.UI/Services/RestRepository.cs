@@ -7,15 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Arosbi.DnDZgZ.UI.Services.RestApi
+namespace Arosbi.DnDZgZ.UI.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Net;
 
+    using Arosbi.DnDZgZ.UI.Infrastructure;
     using Arosbi.DnDZgZ.UI.Model;
-
-    using JsonFx.Json;
 
     /// <summary>
     /// Implementation of <see cref="IRepository"/> that fetches the info from a public REST API.

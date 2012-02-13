@@ -17,53 +17,34 @@
 namespace Arosbi.DnDZgZ.UI.ViewModel
 {
     using System;
-
-    using Arosbi.DnDZgZ.UI.Services;
+    using System.Device.Location;
 
     using GalaSoft.MvvmLight;
 
-    /// <summary>
-    /// This class contains static references to all the view models in the
-    /// application and provides an entry point for the bindings.
-    /// <para>
-    /// Use the <strong>mvvmlocatorproperty</strong> snippet to add ViewModels
-    /// to this locator.
-    /// </para>
-    /// <para>
-    /// In Silverlight and WPF, place the ViewModelLocatorTemplate in the App.xaml resources:
-    /// </para>
-    /// <code>
-    /// &lt;Application.Resources&gt;
-    ///     &lt;vm:ViewModelLocatorTemplate xmlns:vm="clr-namespace:Arosbi.DnDZgZ.UI.ViewModel"
-    ///                                  x:Key="Locator" /&gt;
-    /// &lt;/Application.Resources&gt;
-    /// </code>
-    /// <para>
-    /// Then use:
-    /// </para>
-    /// <code>
-    /// DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
-    /// </code>
-    /// <para>
-    /// You can also use Blend to do all this with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm/getstarted
-    /// </para>
-    /// <para>
-    /// In <strong>*WPF only*</strong> (and if databinding in Blend is not relevant), you can delete
-    /// the Main property and bind to the ViewModelNameStatic property instead:
-    /// </para>
-    /// <code>
-    /// xmlns:vm="clr-namespace:Arosbi.DnDZgZ.UI.ViewModel"
-    /// DataContext="{Binding Source={x:Static vm:ViewModelLocatorTemplate.ViewModelNameStatic}}"
-    /// </code>
-    /// </summary>
+    using Microsoft.Phone.Controls.Maps;
+
+    using IoC = Arosbi.DnDZgZ.UI.Infrastructure.IoC;
+
     public class ViewModelLocator
     {
-        public static readonly Uri BusesPage = new Uri("/BusesPage.xaml", UriKind.Relative);
-        public const string BizisPage = "";
-        public const string WifiPage = "";
+        /// <summary>
+        /// Credentials for the map control.
+        /// </summary>
+        internal static readonly CredentialsProvider CredentialsProvider = new ApplicationIdCredentialsProvider(MapId);
+
+        /// <summary>
+        /// Default location coordinate.
+        /// </summary>
+        internal static readonly GeoCoordinate DefaultLocation = new GeoCoordinate(41.6521, -0.8809);
+
+        internal static readonly Uri BusesPage = new Uri("/BusesPage.xaml", UriKind.Relative);
+        internal static readonly Uri BizisPage = new Uri("/BizisPage.xaml", UriKind.Relative);
+        internal static readonly Uri WifiPage = new Uri("/WifisPage.xaml", UriKind.Relative);
+
+        /// <summary>
+        /// Registered ID used to access map control and Bing maps service.
+        /// </summary>
+        private const string MapId = "replace-with-your-private-key";
 
         private static MainViewModel main;
         private static BusesViewModel buses;
@@ -175,6 +156,11 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// </summary>
         public static void ClearBuses()
         {
+            if (buses == null)
+            {
+                return;
+            }
+
             buses.Cleanup();
             buses = null;
         }

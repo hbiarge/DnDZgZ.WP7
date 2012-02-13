@@ -25,6 +25,8 @@
     <SilverlightAppEntry>Arosbi.DnDZgZ.UI.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.30816.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,6 +61,8 @@
     <Reference Include="JsonFx">
       <HintPath>..\packages\JsonFx.2.0.1106.2610\lib\sl40-wp\JsonFx.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Phone.Controls.Maps, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Windows.Interactivity">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WP71\System.Windows.Interactivity.dll</HintPath>
@@ -79,6 +83,9 @@
     <Compile Include="BusesPage.xaml.cs">
       <DependentUpon>BusesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\IoC.cs" />
+    <Compile Include="Infrastructure\IoC.Registrations.cs" />
+    <Compile Include="Infrastructure\JsonSerializer.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -86,19 +93,17 @@
     <Compile Include="Model\BiziServicePoint.cs" />
     <Compile Include="Model\BusDetail.cs" />
     <Compile Include="Model\BusServicePoint.cs" />
+    <Compile Include="Model\PushpinModel.cs" />
     <Compile Include="Model\DetailBase.cs" />
     <Compile Include="Model\ServicePointBase.cs" />
     <Compile Include="Model\WifiServicePoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\INavigationService.cs" />
-    <Compile Include="Services\IoC.Registrations.cs" />
-    <Compile Include="Services\IoC.cs" />
     <Compile Include="Services\Fakes\FakeData.cs" />
     <Compile Include="Services\Fakes\FakeRepository.cs" />
     <Compile Include="Services\IRepository.cs" />
-    <Compile Include="Services\JsonSerializer.cs" />
-    <Compile Include="Services\RestApi\RestRepository.cs" />
+    <Compile Include="Services\RestRepository.cs" />
     <Compile Include="ViewModel\BusesViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -116,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\Styles\DefaultStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -129,11 +138,28 @@
     <Content Include="Background.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Icons\ApplicationBar\Directions.png" />
+    <Resource Include="Resources\Icons\ApplicationBar\Location.png" />
+    <Resource Include="Resources\Icons\ApplicationBar\Mode.png" />
+    <Resource Include="Resources\Icons\ApplicationBar\Route.png" />
+    <Resource Include="Resources\Icons\Pushpins\PushpinBicycle.png" />
+    <Resource Include="Resources\Icons\Pushpins\PushpinCar.png" />
+    <Resource Include="Resources\Icons\Pushpins\PushpinDrink.png" />
+    <Resource Include="Resources\Icons\Pushpins\PushpinFuel.png" />
+    <Resource Include="Resources\Icons\Pushpins\PushpinHouse.png" />
+    <Resource Include="Resources\Icons\Pushpins\PushpinLocation.png" />
+    <Resource Include="Resources\Icons\Pushpins\PushpinRestaurant.png" />
+    <Resource Include="Resources\Icons\Pushpins\PushpinShop.png" />
+    <Resource Include="Resources\Icons\Route\SearchBlack.png" />
+    <Resource Include="Resources\Icons\Route\SearchWhite.png" />
+    <Resource Include="Resources\Icons\Zoom\ZoomIn_Black.png" />
+    <Resource Include="Resources\Icons\Zoom\ZoomIn_White.png" />
+    <Resource Include="Resources\Icons\Zoom\ZoomOut_Black.png" />
+    <Resource Include="Resources\Icons\Zoom\ZoomOut_White.png" />
     <Content Include="SplashScreenImage.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

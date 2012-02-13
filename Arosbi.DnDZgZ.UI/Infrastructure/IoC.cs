@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Arosbi.DnDZgZ.UI.Services
+﻿namespace Arosbi.DnDZgZ.UI.Infrastructure
 {
+    using System;
+    using System.Collections.Generic;
+
     public static partial class IoC
     {
         private static readonly Dictionary<Type, Type> _registration = new Dictionary<Type, Type>();

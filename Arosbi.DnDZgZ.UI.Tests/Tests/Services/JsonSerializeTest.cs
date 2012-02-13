@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
 
+    using Arosbi.DnDZgZ.UI.Infrastructure;
     using Arosbi.DnDZgZ.UI.Model;
     using Arosbi.DnDZgZ.UI.Services;
     using Arosbi.DnDZgZ.UI.Services.Fakes;
@@ -12,7 +13,7 @@
     public class JsonSerializeTest
     {
         [TestMethod]
-        public void Puede_Leer_Buses()
+        public void Puede_Leer_Json_Buses()
         {
             var data = FakeData.GetBusesData();
             var sut = new JsonSerializer();
@@ -33,7 +34,7 @@
         }
 
         [TestMethod]
-        public void Puede_Leer_Bizis()
+        public void Puede_Leer_Json_Bizis()
         {
             var data = FakeData.GetBizisData();
             var sut = new JsonSerializer();
@@ -54,7 +55,7 @@
         }
 
         [TestMethod]
-        public void Puede_Leer_Wifis()
+        public void Puede_Leer_Json_Wifis()
         {
             var data = FakeData.GetWifisData();
             var sut = new JsonSerializer();
@@ -75,7 +76,7 @@
         }
 
         [TestMethod]
-        public void Puede_Leer_Detalle_Bus()
+        public void Puede_Leer_Json_Detalle_Bus()
         {
             var data = FakeData.GetDetalleBusData();
             var sut = new JsonSerializer();
@@ -86,7 +87,7 @@
         }
 
         [TestMethod]
-        public void Puede_Leer_Detalle_Bizi()
+        public void Puede_Leer_Json_Detalle_Bizi()
         {
             var data = FakeData.GetDetalleBiziData();
             var sut = new JsonSerializer();

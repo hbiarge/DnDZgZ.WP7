@@ -5,7 +5,7 @@
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps" xmlns:System_Device_Location="clr-namespace:System.Device.Location;assembly=System.Device" x:Class="Arosbi.DnDZgZ.UI.BusesPage"
+                            xmlns:maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps" xmlns:System_Device_Location="clr-namespace:System.Device.Location;assembly=System.Device" xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71" x:Class="Arosbi.DnDZgZ.UI.BusesPage"
                             mc:Ignorable="d"
                             d:DesignWidth="480"
                             d:DesignHeight="696"
@@ -49,9 +49,14 @@
 				<maps:MapItemsControl x:Name="Buses" ItemsSource="{Binding BusStops}">
 					<maps:MapItemsControl.ItemTemplate>
 						<DataTemplate>
-							<maps:Pushpin Style="{StaticResource PushpinStyle}"
+							<maps:Pushpin x:Name="pushpin" Style="{StaticResource PushpinStyle}"
 										  Location="{Binding Location}" 
 										  Background="{StaticResource PushpinBrush}" >
+								<i:Interaction.Triggers>
+									<i:EventTrigger SourceName="pushpin" EventName="Tap">
+										<GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding Buses.PushpinCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding Id}"/>
+									</i:EventTrigger>
+								</i:Interaction.Triggers>
 								<Image Source="{Binding Icon}" />
 							</maps:Pushpin>
 						</DataTemplate>

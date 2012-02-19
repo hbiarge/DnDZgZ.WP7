@@ -14,6 +14,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
     using System;
     using System.Collections.ObjectModel;
     using System.Device.Location;
+    using System.Diagnostics;
     using System.Linq;
     using System.Windows.Input;
 
@@ -59,6 +60,11 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// Command for the ZoomOut button.
         /// </summary>
         private RelayCommand zoomOutCommand;
+
+        /// <summary>
+        /// Command for the pushpins.
+        /// </summary>
+        private RelayCommand<string> pushpinCommand;
 
         /// <summary>
         /// Map zoom level.
@@ -182,6 +188,21 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             }
         }
 
+        public ICommand PushpinCommand
+        {
+            get
+            {
+                if (this.pushpinCommand == null)
+                {
+                    this.pushpinCommand = new RelayCommand<string>(
+                        p => this.repository.GetBusDetails(
+                            p, busDetail => Debug.WriteLine(string.Join(", ", busDetail.Timelines))));
+                }
+
+                return this.pushpinCommand;
+            }
+        }
+
         /// <summary>
         /// Set defaults.
         /// </summary>
@@ -193,7 +214,11 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             this.repository.GetBuses(buses =>
                 {
                     var pushpins = buses
-                        .Select(b => new PushpinModel { Location = new GeoCoordinate(b.Lat, b.Lon) });
+                        .Select(b => new PushpinModel
+                            {
+                                Location = new GeoCoordinate(b.Lat, b.Lon),
+                                Id = b.Id
+                            });
 
                     foreach (var pushpin in pushpins)
                     {

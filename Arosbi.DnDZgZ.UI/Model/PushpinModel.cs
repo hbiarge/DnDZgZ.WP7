@@ -27,5 +27,10 @@ namespace Arosbi.DnDZgZ.UI.Model
         /// Gets or sets the pushpin icon uri.
         /// </summary>
         public Uri Icon { get; set; }
+
+        /// <summary>
+        /// Gets or sets Id.
+        /// </summary>
+        public string Id { get; set; }
     }
 }

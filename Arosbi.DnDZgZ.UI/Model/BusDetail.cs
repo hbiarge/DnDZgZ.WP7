@@ -38,6 +38,11 @@ namespace Arosbi.DnDZgZ.UI.Model
             public int? MinutesToArrive { get; private set; }
             public string TimeToArrive { get; private set; }
             public string Direction { get; private set; }
+
+            public override string ToString()
+            {
+                return string.Format("{0}: {1}", this.BusNumber, this.TimeToArrive);
+            }
         }
 
         private BusArrival[] timelines;

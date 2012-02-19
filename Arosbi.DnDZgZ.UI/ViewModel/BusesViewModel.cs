@@ -14,7 +14,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
     using System;
     using System.Collections.ObjectModel;
     using System.Device.Location;
-    using System.Diagnostics;
     using System.Linq;
     using System.Windows.Input;
 
@@ -28,22 +27,28 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
     public class BusesViewModel : ViewModelBase
     {
         /// <summary>
-        /// Default map zoom level.
-        /// </summary>
-        private const double DefaultZoomLevel = 18.0;
-
-        /// <summary>
         /// Maximum map zoom level allowed.
         /// </summary>
-        private const double MaxZoomLevel = 20.0;
+        internal const double MaxZoomLevel = 19.0;
 
         /// <summary>
         /// Minimum map zoom level allowed.
         /// </summary>
-        private const double MinZoomLevel = 15.0;
+        internal const double MinZoomLevel = 16.0;
 
+        /// <summary>
+        /// Default map zoom level.
+        /// </summary>
+        internal const double DefaultZoomLevel = 18.0;
+
+        /// <summary>
+        /// The device location service.
+        /// </summary>
         private readonly ILocationService locationService;
 
+        /// <summary>
+        /// The repository.
+        /// </summary>
         private readonly IRepository repository;
 
         /// <summary>
@@ -67,6 +72,11 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         private RelayCommand<string> pushpinCommand;
 
         /// <summary>
+        /// Command that closes the popup.
+        /// </summary>
+        private RelayCommand closePopupCommand;
+
+        /// <summary>
         /// Map zoom level.
         /// </summary>
         private double zoom;
@@ -75,6 +85,16 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// Map center coordinate.
         /// </summary>
         private GeoCoordinate center;
+
+        /// <summary>
+        /// The state of the info popup.
+        /// </summary>
+        private bool isPopupOpen;
+
+        /// <summary>
+        /// Info of the current bus stop.
+        /// </summary>
+        private BusDetail currentBusInfo;
 
         public BusesViewModel(ILocationService locationService, IRepository repository)
         {
@@ -86,6 +106,23 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             if (repository == null)
             {
                 throw new ArgumentNullException("repository");
+            }
+
+            if (IsInDesignMode)
+            {
+                this.CurrentBusInfo = new BusDetail
+                    {
+                        Id = "123",
+                        Service = "Bus",
+                        Title = "123",
+                        Items = new string[][]
+                            {
+                                new string[] { "[Ci1] 7 min.", "Dirección CAMINO LAS TORRES" },
+                                new string[] { "[Ci1] 14 min.", "Dirección CAMINO LAS TORRES" },
+                                new string[] { "[20] 2 min.", "Dirección CAMINO LAS TORRES" },
+                                new string[] { "[20] 20 min.", "Dirección CAMINO LAS TORRES" },
+                            }
+                    };
             }
 
             this.locationService = locationService;
@@ -114,7 +151,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             {
                 return this.zoom;
             }
-            set
+            internal set
             {
                 var coercedZoom = Math.Max(MinZoomLevel, Math.Min(MaxZoomLevel, value));
 
@@ -137,7 +174,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             {
                 return this.center;
             }
-            set
+            internal set
             {
                 if (this.center != value)
                 {
@@ -155,6 +192,40 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             get
             {
                 return this.busStops;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the popup is open.
+        /// </summary>
+        public bool IsPopupOpen
+        {
+            get
+            {
+                return this.isPopupOpen;
+            }
+            internal set
+            {
+                if (value == this.isPopupOpen)
+                {
+                    return;
+                }
+
+                this.isPopupOpen = value;
+                RaisePropertyChanged("IsPopupOpen");
+            }
+        }
+
+        public BusDetail CurrentBusInfo
+        {
+            get
+            {
+                return this.currentBusInfo;
+            }
+            private set
+            {
+                this.currentBusInfo = value;
+                this.RaisePropertyChanged("CurrentBusInfo");
             }
         }
 
@@ -196,10 +267,28 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
                 {
                     this.pushpinCommand = new RelayCommand<string>(
                         p => this.repository.GetBusDetails(
-                            p, busDetail => Debug.WriteLine(string.Join(", ", busDetail.Timelines))));
+                            p,
+                            busDetail =>
+                            {
+                                this.CurrentBusInfo = busDetail;
+                                this.IsPopupOpen = true;
+                            }));
                 }
 
                 return this.pushpinCommand;
+            }
+        }
+
+        public ICommand ClosePopupCommand
+        {
+            get
+            {
+                if (this.closePopupCommand == null)
+                {
+                    this.closePopupCommand = new RelayCommand(() => this.IsPopupOpen = false);
+                }
+
+                return this.closePopupCommand;
             }
         }
 

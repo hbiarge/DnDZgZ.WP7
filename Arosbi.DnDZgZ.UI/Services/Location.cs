@@ -16,9 +16,6 @@ namespace Arosbi.DnDZgZ.UI.Services
     /// </summary>
     public class Location : ILocation
     {
-        #region Variables
-        #endregion
-
         #region Constructor & destructor
         /// <summary>
         /// Initializes a new instance of the <see cref="Location"/> class.
@@ -54,6 +51,7 @@ namespace Arosbi.DnDZgZ.UI.Services
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Gets the latitude. The latitute is the angular distance of that location south or north of the equator.
         /// </summary>
@@ -71,6 +69,7 @@ namespace Arosbi.DnDZgZ.UI.Services
         /// </summary>
         /// <value>The altitude.</value>
         public double Altitude { get; private set; }
+
         #endregion
     }
 }

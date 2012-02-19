@@ -11,6 +11,7 @@ namespace Arosbi.DnDZgZ.UI.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Text.RegularExpressions;
     using System.Linq;
 
@@ -39,31 +40,43 @@ namespace Arosbi.DnDZgZ.UI.Model
             public string TimeToArrive { get; private set; }
             public string Direction { get; private set; }
 
+            public string ArrivalInfo
+            {
+                get
+                {
+                    return this.ToString();
+                }
+            }
+
             public override string ToString()
             {
                 return string.Format("{0}: {1}", this.BusNumber, this.TimeToArrive);
             }
         }
 
-        private BusArrival[] timelines;
+        private bool timelinesLoaded = false;
 
-        public IEnumerable<BusArrival> Timelines
+        private ObservableCollection<BusArrival> timelines = new ObservableCollection<BusArrival>();
+
+        public ObservableCollection<BusArrival> Timelines
         {
             get
             {
-                if (this.timelines == null)
+                if (!this.timelinesLoaded)
                 {
-                    this.timelines = new BusArrival[this.Items.Length];
+                    this.timelinesLoaded = true;
 
-                    for (var i = 0; i < this.Items.Length; i++)
-                    {
-                        this.timelines[i] = new BusArrival(this.Items[i]);
-                    }
+                    var llegadas = this.Items
+                        .Select(data => new BusArrival(data));
 
-                    this.timelines = this.timelines
+                    var llegadasOrdenadas = llegadas
                         .OrderBy(t => !t.MinutesToArrive.HasValue)
-                        .ThenBy(t => t.MinutesToArrive)
-                        .ToArray();
+                        .ThenBy(t => t.MinutesToArrive);
+
+                    foreach (var busArrival in llegadasOrdenadas)
+                    {
+                        this.timelines.Add(busArrival);
+                    }
                 }
 
                 return this.timelines;

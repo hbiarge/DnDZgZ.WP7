@@ -44,9 +44,9 @@
 					<maps:RoadMode />
 				</maps:Map.Mode>
 
-                <maps:Pushpin Style="{StaticResource CenterStyle}" Location="{Binding Center}"/>
+                <maps:Pushpin x:Name="Center" Style="{StaticResource CenterStyle}" Location="{Binding Center}"/>
 				
-				<maps:MapItemsControl ItemsSource="{Binding BusStops}">
+				<maps:MapItemsControl x:Name="Buses" ItemsSource="{Binding BusStops}">
 					<maps:MapItemsControl.ItemTemplate>
 						<DataTemplate>
 							<maps:Pushpin Style="{StaticResource PushpinStyle}"

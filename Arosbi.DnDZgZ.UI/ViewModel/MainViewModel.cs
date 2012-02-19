@@ -17,6 +17,7 @@
         private RelayCommand autobusesCommand;
         private RelayCommand biziCommand;
         private RelayCommand wifiCommand;
+        private RelayCommand aboutCommand;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -105,6 +106,31 @@
                 }
 
                 return this.wifiCommand;
+            }
+        }
+
+        public string About
+        {
+            get
+            {
+                return "Acerca de...";
+            }
+        }
+
+        public ICommand AboutCommand
+        {
+            get
+            {
+                if (this.aboutCommand == null)
+                {
+                    this.aboutCommand =
+                        new RelayCommand(
+                            () =>
+                            this.navigationService.NavigateTo(
+                                new Uri("/YourLastAboutDialog;component/AboutPage.xaml", UriKind.Relative)));
+                }
+
+                return this.aboutCommand;
             }
         }
     }

@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:it="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+	xmlns:ic="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
 	xmlns:m="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps">
 	
 	<LinearGradientBrush x:Key="PushpinBrush" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -12,6 +14,48 @@
 									</LinearGradientBrush>
 	
 	<!-- #Styles -->
+    <Style x:Key="CenterStyle" TargetType="m:Pushpin">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Ellipse x:Name="ellipse" Width="50" Height="50" Margin="-25,0,0,-25">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="VisualStateGroup">
+                                    <VisualState x:Name="Loaded">
+                                        <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="ellipse">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="1">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0.3">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="Red" Offset="0"/>
+                                    <GradientStop Color="#009E6969" Offset="1"/>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                            <it:Interaction.Triggers>
+                                <it:EventTrigger>
+                                    <ic:GoToStateAction StateName="Loaded"/>
+                                </it:EventTrigger>
+                            </it:Interaction.Triggers>
+                        </Ellipse>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     <Style x:Key="PushpinStyle" TargetType="m:Pushpin">
         <Setter Property="BorderBrush" Value="#FFF4F4F5" />
         <Setter Property="Template">
@@ -72,8 +116,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-	
-	<Style x:Key="ButtonZoomInStyle" TargetType="Button">
+
+    <Style x:Key="ButtonZoomInStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>

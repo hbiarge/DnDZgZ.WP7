@@ -6,7 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             xmlns:vm="clr-namespace:Arosbi.DnDZgZ.UI.ViewModel">
+             xmlns:ViewModel="clr-namespace:Arosbi.DnDZgZ.UI.ViewModel">
 
     <Application.Resources>
     	<ResourceDictionary>
@@ -14,7 +14,7 @@
     			<ResourceDictionary Source="Resources/Styles/DefaultStyle.xaml"/>
     		</ResourceDictionary.MergedDictionaries>
     		<!--Global View Model Locator-->
-    		<vm:ViewModelLocator x:Key="Locator"
+    		<ViewModel:ViewModelLocator x:Key="Locator"
     			d:IsDataSource="True" />
     	</ResourceDictionary>
     </Application.Resources>

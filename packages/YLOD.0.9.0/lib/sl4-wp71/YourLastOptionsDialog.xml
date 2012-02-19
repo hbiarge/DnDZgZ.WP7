@@ -1,0 +1,1172 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YourLastOptionsDialog</name>
+    </assembly>
+    <members>
+        <member name="M:YourLastOptionsDialog.Views.StringEditor.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.OptionsItemViewModel">
+            <summary>
+            A view model for a single pivot item that contains a list of options sharing the same group name.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.OptionsItemViewModel.#ctor(YourLastOptionsDialog.ViewModels.Options.OptionGroup)">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.ViewModels.OptionsItemViewModel"/> class.
+            </summary>
+            <param name="optionGroup">The option group to use for this item.</param>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.OptionsItemViewModel.Header">
+            <summary>
+            Gets the header that should be used in the UI.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.OptionsItemViewModel.Options">
+            <summary>
+            Gets the options that are to be displayed in the UI.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Views.EnumEditor.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Views.DateTimeEditor.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.StringValidator">
+            <summary>
+            A validator for string values.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.RegularExpressionValidator">
+            <summary>
+            A validator that uses a regular expression for validation.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Controls.IValidator">
+            <summary>
+            Describes an implementation of validation capabilities that takes an input string
+            and returns a validation result.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Controls.IValidator.Validate(System.String)">
+            <summary>
+            Validates the specified input and returns a <see cref="T:YourLastOptionsDialog.Controls.ValidationResult"/> with the outcome of the validation.
+            </summary>
+            <param name="input">The input value to validate.</param>
+            <returns>The result of the validation.</returns>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.RegularExpressionValidator.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.ViewModels.Options.RegularExpressionValidator"/> class.
+            </summary>
+            <param name="regularExpression">The regular expression to use for validation.</param>
+            <param name="validationErrorMessage">The validation error message.</param>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.RegularExpressionValidator.Validate(System.String)">
+            <summary>
+            Validates the specified input and returns a <see cref="T:YourLastOptionsDialog.Controls.ValidationResult"/> with the outcome of the validation.
+            </summary>
+            <param name="input">The input value to validate.</param>
+            <returns>
+            The result of the validation.
+            </returns>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.RegularExpressionValidator.RegularExpression">
+            <summary>
+            Gets or sets the regular expression used for validation.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.RegularExpressionValidator.ValidationErrorMessage">
+            <summary>
+            Gets or sets the validation error message.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.StringValidator.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.ViewModels.Options.StringValidator"/> class.
+            </summary>
+            <param name="regularExpression">The regular expression to use for validation.</param>
+            <param name="validationErrorMessage">The validation error message.</param>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.StringValidator.Validate(System.String)">
+            <summary>
+            Validates the specified input and returns a <see cref="T:YourLastOptionsDialog.Controls.ValidationResult"/> with the outcome of the validation.
+            </summary>
+            <param name="input">The input value to validate.</param>
+            <returns>
+            The result of the validation.
+            </returns>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.StringValidator.MinLength">
+            <summary>
+            Gets or sets the minimum allowed length of the string.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.StringValidator.MaxLength">
+            <summary>
+            Gets or sets the maximum allowed length of the string.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.Option">
+            <summary>
+            Contains properties common to all options, 
+            as well as get and set accessors to the property values of the original source.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.ViewModelBase">
+            <summary>
+            A simple base class for view models that implements the <c>INotifyPropertyChanged</c> interface.
+            </summary>
+        </member>
+        <member name="E:YourLastOptionsDialog.ViewModels.ViewModelBase.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.Option.DisplayName">
+            <summary>
+            Gets or sets the display name.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.Option.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.Option.GroupName">
+            <summary>
+            Gets or sets the name of the group used to group the options in the UI.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.Option.DisplayOrder">
+            <summary>
+            Gets or sets the display order which determines the order of options within a group.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.Option.GetAccessor">
+            <summary>
+            Gets or sets the get accessor that can be used to retrieve the original option value 
+            from the source.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.Option.SetAccessor">
+            <summary>
+            Gets or sets the set accessor that can be used to write back the option value
+            to the originating source.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.OptionsFactory">
+            <summary>
+            Takes a property info from an arbitrary object and checks whether it has any option related attributes applied.
+            Creates option instances from these properties, using the parameters configured by the attributes.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.OptionsFactory.CreateOptionFor(System.Reflection.PropertyInfo,System.Object)">
+            <summary>
+            Creates an option for a given property of an arbitrary object instance.
+            </summary>
+            <param name="property">The property info to process.</param>
+            <param name="instance">The instance the property can be found on.</param>
+            <returns>An instance of a class derived from <see cref="T:YourLastOptionsDialog.ViewModels.Options.Option"/>, or <c>null</c> if the property type is not supported or errors occurred during creation.</returns>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.IntegralOption`1">
+            <summary>
+            A generic option implementation for integral options.
+            </summary>
+            <typeparam name="T">The type of integral, must be one of the available integral types.</typeparam>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.IntegralOptionBase">
+            <summary>
+            A base implementation for all integral option types.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.IntegralOptionBase.Minimum">
+            <summary>
+            Gets or sets the minimum allowed value for this option.
+            The default is <see cref="F:System.Int64.MinValue"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.IntegralOptionBase.Maximum">
+            <summary>
+            Gets or sets the maximum allowed value for this option.
+            The default is <see cref="F:System.Int64.MaxValue"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.IntegralOptionBase.ValidationErrorMessage">
+            <summary>
+            Gets or sets the validation error message that is used if the value is outside the configured 
+            minimum or maximum bounds, or if the user enters a string that cannot be converted to an integral value.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.IntegralOptionBase.Validator">
+            <summary>
+            Gets the integral validator.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.IntegralOption`1.Value">
+            <summary>
+            Gets or sets the value of the wrapped underlying source.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.IntegralOption`1.TextValue">
+            <summary>
+            Gets or sets the value of the wrapped underlying source as string for UI binding.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.IntegralOption`1.Validator">
+            <summary>
+            Gets the integral validator.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Common.BooleanToVisibilityConverter">
+            <summary>
+            Converts a boolean value to a visibiliy value. The converter parameter allows inversion of the behavior, i.e.:
+            value == true  AND parameter == false => Visibility.Visible
+            value == true  AND parameter == true  => Visibility.Collapsed
+            value == false AND parameter == false => Visibility.Collapsed
+            value == false AND parameter == true  => Visibility.Visible
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Common.BooleanToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Modifies the source data before passing it to the target for display in the UI.
+            </summary>
+            <param name="value">The source data being passed to the target.</param>
+            <param name="targetType">The <see cref="T:System.Type"/> of data expected by the target dependency property.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+            <returns>
+            The value to be passed to the target dependency property.
+            </returns>
+        </member>
+        <member name="M:YourLastOptionsDialog.Common.BooleanToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Modifies the target data before passing it to the source object.  This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay"/> bindings.
+            </summary>
+            <param name="value">The target data being passed to the source.</param>
+            <param name="targetType">The <see cref="T:System.Type"/> of data expected by the source object.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+            <returns>
+            The value to be passed to the source object.
+            </returns>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.NavigationViewModelBase">
+            <summary>
+            A view model base class that abstracts the navigation features of Silverlight's page model.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Attributes.OptionEnumAttribute">
+            <summary>
+            An option attribute that represents an enumeration option.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Attributes.OptionAttribute">
+            <summary>
+            An attribute used to decorate properties of arbitrary classes to configure their treatment as options.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Attributes.OptionAttribute.Format(System.String)">
+            <summary>
+            Formats the specified property value, either by returning a localized resource for the given
+            value, or by returning the value itself if no localized resources have been configured.
+            </summary>
+            <param name="propertyValueOrKey">The property value that may or may not be a resource key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:YourLastOptionsDialog.Attributes.OptionAttribute.GetPropertyAccessor(System.String)">
+            <summary>
+            Gets an accessor to the actual value of any property of the option attribute.
+            This works as follows: if the user has defined a <see cref="P:YourLastOptionsDialog.Attributes.OptionAttribute.ResourceType"/>,
+            this method reflects on the resource to get an accessor that can be used to 
+            fetch the actual value. If no <see cref="P:YourLastOptionsDialog.Attributes.OptionAttribute.ResourceType"/> has been configured
+            or the property value could not be found in the resources as key, the returned
+            accessor passes through the property value itself.
+            </summary>
+            <param name="propertyValueOrKey">The property value that also is a potential key
+            in a resource class if the <see cref="P:YourLastOptionsDialog.Attributes.OptionAttribute.ResourceType"/> has been configured.</param>
+            <returns>An accessor that returns either the value from a resource class, 
+            or simply the unchanged property value for the given property.</returns>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionAttribute.DisplayName">
+            <summary>
+            Gets or sets the display name.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionAttribute.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionAttribute.GroupName">
+            <summary>
+            Gets or sets the name of the group that is used to group multiple options in the UI.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionAttribute.DisplayOrder">
+            <summary>
+            Gets or sets the display order that determines the order of options within a group.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionAttribute.ResourceType">
+            <summary>
+            Gets or sets the type of the resource used to retrieve (localized) values for other properties
+            like <see cref="P:YourLastOptionsDialog.Attributes.OptionAttribute.DisplayName"/> and <see cref="P:YourLastOptionsDialog.Attributes.OptionAttribute.Description"/>. If this is set, 
+            the values of these properties are treated as lookup keys for the actual values.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.EnumValue">
+            <summary>
+            Represents a single enumeration value used by the <see cref="T:YourLastOptionsDialog.ViewModels.Options.EnumOption"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.EnumValue.DisplayName">
+            <summary>
+            Gets or sets the display name for this enumeration value.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.EnumValue.OriginalValue">
+            <summary>
+            Gets or sets the original value of this enumeration value.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Attributes.OptionIntegralAttribute">
+            <summary>
+            An option attribute that represents an integral option (<see cref="T:System.Byte"/>, <see cref="T:System.SByte"/>, <see cref="T:System.Int16"/>, <see cref="T:System.UInt16"/>,
+            <see cref="T:System.Int32"/>, <see cref="T:System.UInt32"/>, <see cref="T:System.Int64"/>, <see cref="T:System.UInt64"/>).
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionIntegralAttribute.Minimum">
+            <summary>
+            Gets or sets the minimum allowed value for this option.
+            The default is <see cref="F:System.Int64.MinValue"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionIntegralAttribute.Maximum">
+            <summary>
+            Gets or sets the maximum allowed value for this option.
+            The default is <see cref="F:System.Int64.MaxValue"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionIntegralAttribute.ValidationErrorMessage">
+            <summary>
+            Gets or sets the validation error message that is used if the value is outside the configured 
+            minimum or maximum bounds, or if the user enters a string that cannot be converted to an integral value.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Attributes.OptionBooleanAttribute">
+            <summary>
+            An option attribute that represents a boolean option.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionBooleanAttribute.UserMustConfirmActivation">
+            <summary>
+            Gets or sets a value indicating whether the user must confirm activation of this value (i.e. changing the value from <c>false</c> to <c>true</c>).
+            </summary>
+            <value>
+            	<c>true</c> if the user must confirm activation; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionBooleanAttribute.UserMustConfirmDeactivation">
+            <summary>
+            Gets or sets a value indicating whether the user must confirm deactivation of this value (i.e. changing the value from <c>true</c> to <c>false</c>).
+            </summary>
+            <value>
+            	<c>true</c> if the user must confirm deactivation; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionBooleanAttribute.ActivationPrompt">
+            <summary>
+            Gets or sets the activation prompt. This is only used if <see cref="P:YourLastOptionsDialog.Attributes.OptionBooleanAttribute.UserMustConfirmActivation"/> is set to true.
+            If a <see cref="P:YourLastOptionsDialog.Attributes.OptionAttribute.ResourceType"/> is set in the base class, this should contain the key to the localized entry in the resources.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionBooleanAttribute.DeactivationPrompt">
+            <summary>
+            Gets or sets the deactivation prompt. This is only used if <see cref="P:YourLastOptionsDialog.Attributes.OptionBooleanAttribute.UserMustConfirmDeactivation"/> is set to true.
+            If a <see cref="P:YourLastOptionsDialog.Attributes.OptionAttribute.ResourceType"/> is set in the base class, this should contain the key to the localized entry in the resources.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Attributes.OptionDateTimeAttribute">
+            <summary>
+            An option attribute that represents a boolean option.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionDateTimeAttribute.Mode">
+            <summary>
+            Gets or sets the mode used for editing the <see cref="T:System.DateTime"/> instance.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.StringOption">
+            <summary>
+            An option that represents a <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.StringOption.TextValue">
+            <summary>
+            Gets or sets the value of the wrapped underlying source.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.StringOption.MinLength">
+            <summary>
+            Gets or sets the minimum allowed length of the value.
+            This is used for validation if no custom validator has been configured.
+            The default value is zero.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.StringOption.MaxLength">
+            <summary>
+            Gets or sets the maximum allowed length of the value.
+            This is used for validation if no custom validator has been configured.
+            The default value is <see cref="F:System.Int32.MaxValue"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.StringOption.InputScopeNameValue">
+            <summary>
+            Gets or sets the input scope name value that is used to create the <see cref="P:YourLastOptionsDialog.ViewModels.Options.StringOption.InputScope"/> to display a suitable SIP keyboard layout to the user.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.StringOption.InputScope">
+            <summary>
+            Gets the input scope used to display a suitable SIP keyboard layout to the user. 
+            This value is determined by the value of the <see cref="P:YourLastOptionsDialog.ViewModels.Options.StringOption.InputScopeNameValue"/> property.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.StringOption.RegularExpression">
+            <summary>
+            Gets or sets a regular expression that is used to validate the string entered by the user.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.StringOption.ValidationErrorMessage">
+            <summary>
+            Gets or sets the validation error message that is used if the value is outside the configured 
+            minimum or maximum length, or if the value does not satisfy the given regular expression.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.StringOption.Validator">
+            <summary>
+            Gets or sets the type of validator to use for validation. If a validator is 
+            specified, then none of the other validation properties are in effect anymore. In particular,
+            if a validator is configured, the values of <see cref="P:YourLastOptionsDialog.ViewModels.Options.StringOption.MinLength"/>, <see cref="P:YourLastOptionsDialog.ViewModels.Options.StringOption.MaxLength"/>,
+            <see cref="P:YourLastOptionsDialog.ViewModels.Options.StringOption.RegularExpression"/> and <see cref="P:YourLastOptionsDialog.ViewModels.Options.StringOption.ValidationErrorMessage"/> are ignored and the 
+            validator is instead used for all validation.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Controls.ValidatingTextBox">
+            <summary>
+            A validating text box that shows a validation error message if a validator has been configured and failed validation.
+            </summary>
+        </member>
+        <member name="F:YourLastOptionsDialog.Controls.ValidatingTextBox.ValidatorProperty">
+            <summary>
+            Identifies the <see cref="F:YourLastOptionsDialog.Controls.ValidatingTextBox.ValidatorProperty"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:YourLastOptionsDialog.Controls.ValidatingTextBox.ValidationErrorMessageProperty">
+            <summary>
+            Identifies the <see cref="P:YourLastOptionsDialog.Controls.ValidatingTextBox.ValidationErrorMessage"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:YourLastOptionsDialog.Controls.ValidatingTextBox.ValidationErrorMessageVisibilityProperty">
+            <summary>
+            Identifies the <see cref="P:YourLastOptionsDialog.Controls.ValidatingTextBox.ValidationErrorMessageVisibility"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:YourLastOptionsDialog.Controls.ValidatingTextBox.ActualValidationErrorMessageVisibilityProperty">
+            <summary>
+            Identifies the <see cref="P:YourLastOptionsDialog.Controls.ValidatingTextBox.ActualValidationErrorMessageVisibility"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:YourLastOptionsDialog.Controls.ValidatingTextBox.IsValidProperty">
+            <summary>
+            Identifies the <see cref="P:YourLastOptionsDialog.Controls.ValidatingTextBox.IsValid"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Controls.ValidatingTextBox.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.Controls.ValidatingTextBox"/> class.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Controls.ValidatingTextBox.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate"/>. In simplest terms, this means the method is called just before a UI element displays in an application. For more information, see Remarks.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Controls.ValidatingTextBox.OnLostFocus(System.Windows.RoutedEventArgs)">
+            <summary>
+            Called before <see cref="E:System.Windows.UIElement.LostFocus"/> event occurs.
+            </summary>
+            <param name="e">The data for the event.</param>
+        </member>
+        <member name="P:YourLastOptionsDialog.Controls.ValidatingTextBox.Validator">
+            <summary>
+            Gets or sets the validator used for validation.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Controls.ValidatingTextBox.ValidationErrorMessage">
+            <summary>
+            Gets or sets the validation error message that is displayed when the validation fails.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Controls.ValidatingTextBox.ValidationErrorMessageVisibility">
+            <summary>
+            Gets or sets the validation error message visibility that determines whether the text box should show 
+            its own validation error message. If a user of the text box wants to display their own validation error,
+            this can be set to <see cref="F:System.Windows.Visibility.Collapsed"/> to suppress the display of the validation message.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Controls.ValidatingTextBox.ActualValidationErrorMessageVisibility">
+            <summary>
+            Gets or sets the actual validation error message visibility. The value of this property
+            depends on whether the current state of the content is valid or not, and whether the
+            text box is allowed to display its own validation error message or not.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Controls.ValidatingTextBox.IsValid">
+            <summary>
+            Gets or sets a value indicating whether the value of the text box is valid or not.
+            </summary>
+            <value>
+              <c>true</c> if the value is valid; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:YourLastOptionsDialog.OptionsService">
+            <summary>
+            The service that allows navigation to the options page as well as its configuration 
+            and provides extension points for customization.
+            </summary>
+        </member>
+        <member name="F:YourLastOptionsDialog.OptionsService.Current">
+            <summary>
+            The singleton instance of the <see cref="T:YourLastOptionsDialog.OptionsService"/>.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.OptionsService.Show(System.Object,YourLastOptionsDialog.OptionsConfiguration)">
+            <summary>
+            Shows the options page using the given values and configuration.
+            </summary>
+            <param name="values">The values the options are generated from.</param>
+            <param name="configuration">The configuration with additional parameters for the <see cref="T:YourLastOptionsDialog.OptionsService"/>.</param>
+        </member>
+        <member name="M:YourLastOptionsDialog.OptionsService.Show(System.Object)">
+            <summary>
+            Shows the options page using the given values.
+            </summary>
+            <param name="values">The values the options are generated from.</param>
+        </member>
+        <member name="M:YourLastOptionsDialog.OptionsService.RestoreAfterTombstoning(System.Object)">
+            <summary>
+            Restores the state of the option page after a real tombstoning situation.
+            Users of the <see cref="T:YourLastOptionsDialog.OptionsService"/> are supposed to pass in a reference to the restored
+            values object after tombstoning. If no updated reference is provided, the options page initiates
+            a back navigation when it returns from tombstoning.
+            Note: If the <see cref="P:YourLastOptionsDialog.OptionsService.OptionsViewFactory"/> and/or <see cref="P:YourLastOptionsDialog.OptionsService.OptionsFactoryExtender"/> properties are 
+            used, users of the <see cref="T:YourLastOptionsDialog.OptionsService"/> are also required to restore these after tombstoning.
+            </summary>
+            <param name="values">The values that are restored.</param>
+        </member>
+        <member name="M:YourLastOptionsDialog.OptionsService.RestoreAfterTombstoning(System.Object,YourLastOptionsDialog.OptionsConfiguration)">
+            <summary>
+            Restores the state of the option page after a real tombstoning situation.
+            Users of the <see cref="T:YourLastOptionsDialog.OptionsService"/> are supposed to pass in a reference to the restored
+            values object after tombstoning. If no updated reference is provided, the options page initiates
+            a back navigation when it returns from tombstoning.
+            Note: If the <see cref="P:YourLastOptionsDialog.OptionsService.OptionsViewFactory"/> and/or <see cref="P:YourLastOptionsDialog.OptionsService.OptionsFactoryExtender"/> properties are 
+            used, users of the <see cref="T:YourLastOptionsDialog.OptionsService"/> are also required to restore these after tombstoning.
+            </summary>
+            <param name="values">The values that are restored.</param>
+            <param name="configuration">The configuration with additional parameters for the <see cref="T:YourLastOptionsDialog.OptionsService"/>
+            that are restored.</param>
+        </member>
+        <member name="P:YourLastOptionsDialog.OptionsService.Configuration">
+            <summary>
+            Gets or sets the current configuration of the <see cref="T:YourLastOptionsDialog.OptionsService"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.OptionsService.Values">
+            <summary>
+            Gets or sets the arbitrary object used to generate the options.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.OptionsService.OptionsViewFactory">
+            <summary>
+            Gets or sets the options view factory that is used to create UI editors for 
+            the options. By default this uses an instance of the <see cref="T:YourLastOptionsDialog.DefaultOptionsViewFactory"/>,
+            which can be overriden by own implementations or classes derived from the default implementation,
+            to provide custom views for certain option types.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.OptionsService.OptionsFactoryExtender">
+            <summary>
+            Gets or sets the options factory extender. This can be set to add support for additional
+            property types, or to change the behavior of the options service for existing types. If 
+            an extender is added for new types, it's also required to provide an <see cref="P:YourLastOptionsDialog.OptionsService.OptionsViewFactory"/>
+            that serves view implementations for these types. By default, no extender is used, unless
+            the <c>YourLastOptionsDialog.Extras</c> project is used.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Attributes.OptionIgnoreAttribute">
+            <summary>
+            An option attribute that indicates that a property should be ignored by the options engine.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Common.StringToTopMarginConverter">
+            <summary>
+            A highly specialized converter just for YLOD. Takes a parameter in the format X|Y, where X and Y are doubles.
+            If the given value is null or empty or contains only white spaces, then a margin of (0, X, 0, 0) is returned;
+            otherwise, a margin of (0, Y, 0, 0) is returned.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Common.StringToTopMarginConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Modifies the source data before passing it to the target for display in the UI.
+            </summary>
+            <param name="value">The source data being passed to the target.</param>
+            <param name="targetType">The <see cref="T:System.Type"/> of data expected by the target dependency property.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+            <returns>
+            The value to be passed to the target dependency property.
+            </returns>
+        </member>
+        <member name="M:YourLastOptionsDialog.Common.StringToTopMarginConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Modifies the target data before passing it to the source object.  This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay"/> bindings.
+            </summary>
+            <param name="value">The target data being passed to the source.</param>
+            <param name="targetType">The <see cref="T:System.Type"/> of data expected by the source object.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+            <returns>
+            The value to be passed to the source object.
+            </returns>
+        </member>
+        <member name="T:YourLastOptionsDialog.Views.NavigationPhoneApplicationPage">
+            <summary>
+            A class derived from the <c>PhoneApplicationPage</c> class.
+            Makes use of the <c>NavigationViewModelBase</c> view model base class
+            to notify the view model about navigation events.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.OptionsConfiguration">
+            <summary>
+            A configuration data container that can be used to parameterize details of the <see cref="T:YourLastOptionsDialog.OptionsService"/>,
+            for example for localization scenarios or customization.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.OptionsConfiguration.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.OptionsConfiguration"/> class using the default values.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.OptionsConfiguration.PageTitle">
+            <summary>
+            Gets or sets the page title used for the options page.
+            The default is "OPTIONS".
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.OptionsConfiguration.DefaultGroupName">
+            <summary>
+            Gets or sets the default group name that is used for properties that are not decorated with an <see cref="T:YourLastOptionsDialog.Attributes.OptionAttribute"/>.
+            The default is "general".
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.OptionConversionEventArgs">
+            <summary>
+            Transports the results of a conversion process for options.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.OptionConversionEventArgs.#ctor(System.Collections.Generic.IList{YourLastOptionsDialog.ViewModels.Options.OptionGroup})">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.ViewModels.Options.OptionConversionEventArgs"/> class.
+            </summary>
+            <param name="optionGroups">The grouped options that are the result of a conversion process.</param>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.OptionConversionEventArgs.OptionGroups">
+            <summary>
+            Gets or sets the grouped options that are the result of a conversion process.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Attributes.OptionStringAttribute">
+            <summary>
+            An option attribute that represents a string option.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionStringAttribute.MinLength">
+            <summary>
+            Gets or sets the minimum allowed length of the string.
+            The default is zero.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionStringAttribute.MaxLength">
+            <summary>
+            Gets or sets the maximum allowed length of the string.
+            The default is <see cref="F:System.Int32.MaxValue"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionStringAttribute.InputScopeNameValue">
+            <summary>
+            Gets or sets the input scope name value that is used by the UI to display a suitable SIP keyboard layout to the user.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionStringAttribute.RegularExpression">
+            <summary>
+            Gets or sets a regular expression that is used to validate the string entered by the user.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionStringAttribute.ValidatorType">
+            <summary>
+            Gets or sets the type of validator to use for validation. If a validator is 
+            specified, then none of the other validation properties are in effect anymore. In particular,
+            if a validator is configured, the values of <see cref="P:YourLastOptionsDialog.Attributes.OptionStringAttribute.MinLength"/>, <see cref="P:YourLastOptionsDialog.Attributes.OptionStringAttribute.MaxLength"/>,
+            <see cref="P:YourLastOptionsDialog.Attributes.OptionStringAttribute.RegularExpression"/> and <see cref="P:YourLastOptionsDialog.Attributes.OptionStringAttribute.ValidationErrorMessage"/> are ignored and the 
+            validator is instead used for all validation.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionStringAttribute.ValidationErrorMessage">
+            <summary>
+            Gets or sets the validation error message that is used if the value is outside the configured 
+            minimum or maximum length, or if the value does not satisfy the given regular expression.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.EnumOption">
+            <summary>
+            An option that represents an enumeration value.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.EnumOption.Value">
+            <summary>
+            Gets or sets the value wrapped by this option.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.EnumOption.LookUp">
+            <summary>
+            Gets or sets the look up collection of all possible values for the underlying enumeration type.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Common.StringFormatter">
+            <summary>
+            A simple helper class that offers some string formatting features.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Common.StringFormatter.DisplayNameFromCamelCase(System.String)">
+            <summary>
+            Creates a nicer display name from a camel case source string.
+            </summary>
+            <param name="source">The source string in camel case notion.</param>
+            <returns>A string that contains the formatted source string.</returns>
+        </member>
+        <member name="T:YourLastOptionsDialog.Controls.ValidationResult">
+            <summary>
+            Describes the result of a validation process.
+            </summary>
+        </member>
+        <member name="F:YourLastOptionsDialog.Controls.ValidationResult.Success">
+            <summary>
+            Identifies a successful validation, i.e. a validation result that is valid and has no validation error message.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Controls.ValidationResult.#ctor(System.Boolean,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.Controls.ValidationResult"/> class.
+            </summary>
+            <param name="isValid">If set to <c>true</c> indicates that the validation was successful.</param>
+            <param name="validationErrorMessage">The validation error message in case the validation failed.</param>
+        </member>
+        <member name="P:YourLastOptionsDialog.Controls.ValidationResult.IsValid">
+            <summary>
+            Gets or sets a value indicating whether the performed validation was successful.
+            </summary>
+            <value>
+              <c>true</c> if the validation was successful; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:YourLastOptionsDialog.Controls.ValidationResult.ValidationErrorMessage">
+            <summary>
+            Gets or sets the validation error message.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.DateTimeOption">
+            <summary>
+            An option that represents a <see cref="T:System.DateTime"/> value.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.DateTimeOption.Value">
+            <summary>
+            Gets or sets the value wrapped by this option.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.DateTimeOption.Mode">
+            <summary>
+            Gets or sets the mode used for this <see cref="T:System.DateTime"/> instance.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Common.StringToVisibilityConverter">
+            <summary>
+            Determines a visibility value from a given string. If the string is null, empty or contains only white spaces,
+            then the returned visibility is <see cref="F:System.Windows.Visibility.Collapsed"/>; otherwise, <see cref="F:System.Windows.Visibility.Visible"/> is returned.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Common.StringToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Modifies the source data before passing it to the target for display in the UI.
+            </summary>
+            <param name="value">The source data being passed to the target.</param>
+            <param name="targetType">The <see cref="T:System.Type"/> of data expected by the target dependency property.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+            <returns>
+            The value to be passed to the target dependency property.
+            </returns>
+        </member>
+        <member name="M:YourLastOptionsDialog.Common.StringToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Modifies the target data before passing it to the source object.  This method is called only in <see cref="F:System.Windows.Data.BindingMode.TwoWay"/> bindings.
+            </summary>
+            <param name="value">The target data being passed to the source.</param>
+            <param name="targetType">The <see cref="T:System.Type"/> of data expected by the source object.</param>
+            <param name="parameter">An optional parameter to be used in the converter logic.</param>
+            <param name="culture">The culture of the conversion.</param>
+            <returns>
+            The value to be passed to the source object.
+            </returns>
+        </member>
+        <member name="T:YourLastOptionsDialog.Attributes.OptionFloatAttribute">
+            <summary>
+            An option attribute that represents a floating point option (<see cref="T:System.Decimal"/>, <see cref="T:System.Double"/> or <see cref="T:System.Single"/>).
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionFloatAttribute.Minimum">
+            <summary>
+            Gets or sets the minimum allowed value for this option.
+            The default is <see cref="F:System.Double.MinValue"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionFloatAttribute.Maximum">
+            <summary>
+            Gets or sets the maximum.
+            The default is <see cref="F:System.Double.MaxValue"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionFloatAttribute.ValidationErrorMessage">
+            <summary>
+            Gets or sets the validation error message that is used if the value is outside the configured 
+            minimum or maximum bounds, or if the user enters a string that cannot be converted to a floating point value.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.ThreadedOptionConverter">
+            <summary>
+            Converts the properties of an arbitrary object to a list of option groups, using a background thread from the thread pool.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.ThreadedOptionConverter.StartConversion(System.Object)">
+            <summary>
+            Starts the conversion on a background thread.
+            </summary>
+            <param name="values">The values to convert into options.</param>
+        </member>
+        <member name="E:YourLastOptionsDialog.ViewModels.Options.ThreadedOptionConverter.Completed">
+            <summary>
+            Occurs when the conversion process has completed.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.OptionsPageViewModel">
+            <summary>
+            A view model for the options page that handles conversion of the options and basic setup work.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.OptionsPageViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.ViewModels.OptionsPageViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.OptionsPageViewModel.Title">
+            <summary>
+            Gets or sets the title of the page.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.OptionsPageViewModel.IsBusy">
+            <summary>
+            Gets or sets a value indicating whether the view model is busy with a conversion process.
+            </summary>
+            <value>
+              <c>true</c> if a conversion is in progress; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.OptionsPageViewModel.OptionItems">
+            <summary>
+            Gets the option items to display in individual pivot items.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.FloatOptionBase">
+            <summary>
+            An option that is the base class for all floating point options.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.FloatOptionBase.Minimum">
+            <summary>
+            Gets or sets the minimum allowed value for this option.
+            The default is <see cref="F:System.Double.MinValue"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.FloatOptionBase.Maximum">
+            <summary>
+            Gets or sets the maximum.
+            The default is <see cref="F:System.Double.MaxValue"/>.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.FloatOptionBase.ValidationErrorMessage">
+            <summary>
+            Gets or sets the validation error message that is used if the value is outside the configured 
+            minimum or maximum bounds, or if the user enters a string that cannot be converted to a floating point value.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.FloatOptionBase.Validator">
+            <summary>
+            Gets the floating point value validator.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.FloatOption`1">
+            <summary>
+            A generic option implementation for all floating point options.
+            </summary>
+            <typeparam name="T">The type of the option, must be <see cref="T:System.Single"/>, <see cref="T:System.Double"/> or <see cref="T:System.Decimal"/>.</typeparam>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.FloatOption`1.Value">
+            <summary>
+            Gets or sets the actual value of the wrapped underlying source.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.FloatOption`1.TextValue">
+            <summary>
+            Gets or sets the value of the wrapped underlying source as string for UI binding.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.FloatOption`1.Validator">
+            <summary>
+            Gets the floating point value validator.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.OptionsPage">
+            <summary>
+            The phone application page that contains all the options.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.OptionsPage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.OptionsPage"/> class.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.OptionsPage.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.OptionGroup">
+            <summary>
+            Represents a collection of options that has been grouped by their group name.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.OptionGroup.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.ViewModels.Options.OptionGroup"/> class.
+            </summary>
+            <param name="groupName">The name of the group.</param>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.OptionGroup.#ctor(System.String,System.Collections.Generic.IList{YourLastOptionsDialog.ViewModels.Options.Option})">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.ViewModels.Options.OptionGroup"/> class.
+            </summary>
+            <param name="groupName">The name of the group.</param>
+            <param name="options">The options that are assumed to all share the given group name.</param>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.OptionGroup.GroupName">
+            <summary>
+            Gets or sets the name of the group.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.OptionGroup.Options">
+            <summary>
+            Gets the options that all share the same group name.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.FloatValidator">
+            <summary>
+            Validates a string input as floating point value.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.FloatValidator.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.ViewModels.Options.FloatValidator"/> class.
+            </summary>
+            <param name="minimum">The allowed minimum to use for validation.</param>
+            <param name="maximum">The allowed maximum to use for validation.</param>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.FloatValidator.Validate(System.String)">
+            <summary>
+            Validates the specified input and returns a <see cref="T:YourLastOptionsDialog.Controls.ValidationResult"/> with the outcome of the validation.
+            </summary>
+            <param name="input">The input value to validate.</param>
+            <returns>
+            The result of the validation.
+            </returns>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.FloatValidator.ValidationErrorMessage">
+            <summary>
+            Gets or sets the validation error message.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Attributes.DateTimeMode">
+            <summary>
+            Defines the mode for editing <see cref="F:YourLastOptionsDialog.Attributes.DateTimeMode.DateTime"/> objects.
+            </summary>
+        </member>
+        <member name="F:YourLastOptionsDialog.Attributes.DateTimeMode.Date">
+            <summary>
+            Only the date component is used.
+            </summary>
+        </member>
+        <member name="F:YourLastOptionsDialog.Attributes.DateTimeMode.Time">
+            <summary>
+            Only the time component is used.
+            </summary>
+        </member>
+        <member name="F:YourLastOptionsDialog.Attributes.DateTimeMode.DateTime">
+            <summary>
+            Both the date and time components are used.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Views.NumericEditor.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.BooleanOption">
+            <summary>
+            An option that represents a boolean value.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.BooleanOption.Value">
+            <summary>
+            Gets or sets the value of this options. Retrieved and written from and to the original source.
+            Note: the setter shows a confirmation dialog, if this has been configured for the option.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.BooleanOption.UserMustConfirmActivation">
+            <summary>
+            Gets or sets a value indicating whether the user must confirm activation of this value (i.e. changing the value from <c>false</c> to <c>true</c>).
+            </summary>
+            <value>
+            	<c>true</c> if the user must confirm activation; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.BooleanOption.UserMustConfirmDeactivation">
+            <summary>
+            Gets or sets a value indicating whether the user must confirm deactivation of this value (i.e. changing the value from <c>true</c> to <c>false</c>).
+            </summary>
+            <value>
+            	<c>true</c> if the user must confirm deactivation; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.BooleanOption.ActivationPrompt">
+            <summary>
+            Gets or sets the activation prompt. This is only used if <see cref="P:YourLastOptionsDialog.ViewModels.Options.BooleanOption.UserMustConfirmActivation"/> is set to true.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.BooleanOption.DeactivationPrompt">
+            <summary>
+            Gets or sets the deactivation prompt. This is only used if <see cref="P:YourLastOptionsDialog.ViewModels.Options.BooleanOption.UserMustConfirmDeactivation"/> is set to true.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.IOptionsFactoryExtender">
+            <summary>
+            Describes an extender to the existing <see cref="T:YourLastOptionsDialog.ViewModels.Options.OptionsFactory"/>.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.IOptionsFactoryExtender.DetermineTypesFor(System.Reflection.PropertyInfo,System.Type@,System.Type@)">
+            <summary>
+            Determines the types that should be used for a given property.
+            The extender should set types only if it is capable of handling the type of property.
+            If the property should be handled by the existing <see cref="T:YourLastOptionsDialog.ViewModels.Options.OptionsFactory"/>, the extender
+            is supposed to simply leave the passed in type references as-is.
+            </summary>
+            <param name="property">The property the types need to be determined for.</param>
+            <param name="optionType">Type of the option to use for the given property.</param>
+            <param name="optionAttributeType">Type of the option attribute to use for the given property.</param>
+        </member>
+        <member name="M:YourLastOptionsDialog.IOptionsFactoryExtender.SetCustomValues(System.Reflection.PropertyInfo,YourLastOptionsDialog.ViewModels.Options.Option,YourLastOptionsDialog.Attributes.OptionAttribute,System.Object)">
+            <summary>
+            Sets the custom values of an option.
+            </summary>
+            <param name="property">The property the option was created for.</param>
+            <param name="option">The option that needs its custom values to be set.</param>
+            <param name="optionAttribute">The option attribute that was applied to the property, if available.</param>
+            <param name="instance">The instance the property value can be found on.</param>
+        </member>
+        <member name="M:YourLastOptionsDialog.Views.BooleanEditor.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.DefaultOptionsViewFactory">
+            <summary>
+            The default implementation of the <see cref="T:YourLastOptionsDialog.IOptionsViewFactory"/> interface that is used
+            unless the user overrides it with an own or derived implementation.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.IOptionsViewFactory">
+            <summary>
+            Describes a factory that is able to create views for options.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.IOptionsViewFactory.CreateViewFor(YourLastOptionsDialog.ViewModels.Options.Option)">
+            <summary>
+            Creates a view for a given option instance.
+            </summary>
+            <param name="option">The option to create the view for.</param>
+            <returns>A framework element that is able to edit the given option.</returns>
+        </member>
+        <member name="M:YourLastOptionsDialog.DefaultOptionsViewFactory.CreateViewFor(YourLastOptionsDialog.ViewModels.Options.Option)">
+            <summary>
+            Creates the view for the given option.
+            </summary>
+            <param name="option">The option to create a view for.</param>
+            <returns>A framework element that is able to edit the given option.</returns>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.IntegralValidator">
+            <summary>
+            A validator for integral types.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.IntegralValidator.#ctor(System.Type,System.Int64,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.ViewModels.Options.IntegralValidator"/> class.
+            </summary>
+            <param name="type">The actual type of the integral.</param>
+            <param name="minimum">The allowed minimum used for validation.</param>
+            <param name="maximum">The allowed maximum used for validation.</param>
+        </member>
+        <member name="M:YourLastOptionsDialog.ViewModels.Options.IntegralValidator.Validate(System.String)">
+            <summary>
+            Validates the specified input and returns a <see cref="T:YourLastOptionsDialog.Controls.ValidationResult"/> with the outcome of the validation.
+            </summary>
+            <param name="input">The input value to validate.</param>
+            <returns>
+            The result of the validation.
+            </returns>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.IntegralValidator.ValidationErrorMessage">
+            <summary>
+            Gets or sets the validation error message.
+            </summary>
+        </member>
+    </members>
+</doc>

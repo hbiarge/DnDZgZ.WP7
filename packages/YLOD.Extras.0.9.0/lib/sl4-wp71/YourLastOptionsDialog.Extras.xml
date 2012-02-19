@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YourLastOptionsDialog.Extras</name>
+    </assembly>
+    <members>
+        <member name="T:YourLastOptionsDialog.ExtrasOptionsFactoryExtender">
+            <summary>
+            Extends the options factory to provide support for additional property types,
+            in particular for <see cref="T:System.TimeSpan"/> and <see cref="T:System.Windows.Media.Color"/> properties.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.ExtrasOptionsFactoryExtender.DetermineTypesFor(System.Reflection.PropertyInfo,System.Type@,System.Type@)">
+            <summary>
+            Determines the types that should be used for a given property.
+            The extender should set types only if it is capable of handling the type of property.
+            If the property should be handled by the existing <see cref="T:YourLastOptionsDialog.ViewModels.Options.OptionsFactory"/>, the extender
+            is supposed to simply leave the passed in type references as-is.
+            </summary>
+            <param name="property">The property the types need to be determined for.</param>
+            <param name="optionType">Type of the option to use for the given property.</param>
+            <param name="optionAttributeType">Type of the option attribute to use for the given property.</param>
+        </member>
+        <member name="M:YourLastOptionsDialog.ExtrasOptionsFactoryExtender.SetCustomValues(System.Reflection.PropertyInfo,YourLastOptionsDialog.ViewModels.Options.Option,YourLastOptionsDialog.Attributes.OptionAttribute,System.Object)">
+            <summary>
+            Sets the custom values of an option.
+            </summary>
+            <param name="property">The property the option was created for.</param>
+            <param name="option">The option that needs its custom values to be set.</param>
+            <param name="optionAttribute">The option attribute that was applied to the property, if available.</param>
+            <param name="instance">The instance the property value can be found on.</param>
+        </member>
+        <member name="T:YourLastOptionsDialog.Views.TimeSpanEditor">
+            <summary>
+            A time span editor using the <c>Coding4Fun</c> time span control.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Views.TimeSpanEditor.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.Views.TimeSpanEditor"/> class.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Views.TimeSpanEditor.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Attributes.OptionColorAttribute">
+            <summary>
+            An option attribute that represents a color option.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ExtrasOptionsViewFactory">
+            <summary>
+            Implements the <see cref="T:YourLastOptionsDialog.IOptionsViewFactory"/> interface to provide 
+            additional views for <see cref="T:YourLastOptionsDialog.ViewModels.Options.TimeSpanOption"/> and <see cref="T:YourLastOptionsDialog.ViewModels.Options.ColorOption"/> instances.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.ExtrasOptionsViewFactory.CreateViewFor(YourLastOptionsDialog.ViewModels.Options.Option)">
+            <summary>
+            Creates a view for a given option instance.
+            </summary>
+            <param name="option">The option to create the view for.</param>
+            <returns>A framework element that is able to edit the given option.</returns>
+        </member>
+        <member name="T:YourLastOptionsDialog.Views.ColorEditor">
+            <summary>
+            A color editor using the <c>Coding4Fun</c> color slider.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Views.ColorEditor.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:YourLastOptionsDialog.Views.ColorEditor"/> class.
+            </summary>
+        </member>
+        <member name="M:YourLastOptionsDialog.Views.ColorEditor.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.TimeSpanOption">
+            <summary>
+            An option that represents a <see cref="T:System.TimeSpan"/> value.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.TimeSpanOption.Value">
+            <summary>
+            Gets or sets the <see cref="T:System.TimeSpan"/> value of the wrapped underlying source.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.TimeSpanOption.Maximum">
+            <summary>
+            The maximum value allowed.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.TimeSpanOption.Step">
+            <summary>
+            The step used in the UI for the selector.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.Attributes.OptionTimeSpanAttribute">
+            <summary>
+            An option attribute that represents a <see cref="T:System.TimeSpan"/> option.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionTimeSpanAttribute.Maximum">
+            <summary>
+            The maximum value allowed. Has to be provided as "hh:mm:ss" or other
+            compatible <see cref="T:System.TimeSpan"/> string formats.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.Attributes.OptionTimeSpanAttribute.Step">
+            <summary>
+            The step used in the UI for the selector. Has to be provided as "hh:mm:ss" or other
+            compatible <see cref="T:System.TimeSpan"/> string formats.
+            </summary>
+        </member>
+        <member name="T:YourLastOptionsDialog.ViewModels.Options.ColorOption">
+            <summary>
+            An option that represents a <see cref="T:System.Windows.Media.Color"/> value.
+            </summary>
+        </member>
+        <member name="P:YourLastOptionsDialog.ViewModels.Options.ColorOption.Value">
+            <summary>
+            Gets or sets the color value of the wrapped underlying source.
+            </summary>
+        </member>
+    </members>
+</doc>

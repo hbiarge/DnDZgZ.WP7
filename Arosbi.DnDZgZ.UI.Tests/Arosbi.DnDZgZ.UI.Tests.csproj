@@ -75,6 +75,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Mocks\LocationServiceMock.cs" />
     <Compile Include="Tests\Mocks\NavigationServiceMock.cs" />
     <Compile Include="Tests\Services\JsonSerializeTest.cs" />
     <Compile Include="Tests\Services\RestApi\RestApiTest.cs" />

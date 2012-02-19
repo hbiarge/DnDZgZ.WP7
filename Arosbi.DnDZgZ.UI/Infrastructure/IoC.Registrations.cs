@@ -23,10 +23,13 @@ namespace Arosbi.DnDZgZ.UI.Infrastructure
 
             // Registramos servicios
             Register<INavigationService, NavigationService>();
-            Register<JsonSerializer>();
+            Register<ILocationService, LocationService>();
+            Register<ILocation, Location>();
 
             // Registramos repositorio
             Register<IRepository, FakeRepository>();
+
+            Register<JsonSerializer>();
         }
     }
 }

@@ -5,10 +5,10 @@
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps" x:Class="Arosbi.DnDZgZ.UI.BusesPage"
+                            xmlns:maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps" xmlns:System_Device_Location="clr-namespace:System.Device.Location;assembly=System.Device" x:Class="Arosbi.DnDZgZ.UI.BusesPage"
                             mc:Ignorable="d"
                             d:DesignWidth="480"
-                            d:DesignHeight="768"
+                            d:DesignHeight="696"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -16,6 +16,16 @@
                             Orientation="Portrait"
                             shell:SystemTray.IsVisible="True"
                             DataContext="{Binding Buses, Source={StaticResource Locator}}">
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="true" IsMenuEnabled="True">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Configuración"/>
+            </shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton IconUri="/Resources/Icons/ApplicationBar/Location.png" Text="yo"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 	<Grid x:Name="LayoutRoot">
 		<Grid.RowDefinitions>
@@ -33,6 +43,8 @@
 				<maps:Map.Mode>
 					<maps:RoadMode />
 				</maps:Map.Mode>
+
+                <maps:Pushpin Style="{StaticResource CenterStyle}" Location="{Binding Center}"/>
 				
 				<maps:MapItemsControl ItemsSource="{Binding BusStops}">
 					<maps:MapItemsControl.ItemTemplate>
@@ -49,27 +61,15 @@
 				<Button x:Name="ButtonZoomIn"
                         Style="{StaticResource ButtonZoomInStyle}"
                         HorizontalAlignment="Left" VerticalAlignment="Top"
-                        Height="56" Width="56" Margin="8,180,0,0" Command="{Binding ZoomInCommand, Mode=OneWay}" IsEnabled="{Binding ZoomInCommand.CanExecute, Mode=TwoWay}" />
+                        Height="56" Width="56" Margin="8,180,0,0" Command="{Binding ZoomInCommand, Mode=OneWay}" />
 
                 <Button x:Name="ButtonZoomOut"
                         Style="{StaticResource ButtonZoomOutStyle}"
                         HorizontalAlignment="Left" VerticalAlignment="Top"
-                        Height="56" Width="56" Margin="8,260,0,0" Command="{Binding ZoomOutCommand, Mode=OneWay}" IsEnabled="{Binding ZoomOutCommand.CanExecute}" />
+                        Height="56" Width="56" Margin="8,260,0,0" Command="{Binding ZoomOutCommand, Mode=OneWay}" />
 				
 			</maps:Map>		  
 		</Border>
 	</Grid>
-
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
 
 </phone:PhoneApplicationPage>

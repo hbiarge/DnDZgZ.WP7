@@ -13,10 +13,7 @@
         [TestMethod]
         public void ZooIn_Incrementa_Zoom()
         {
-            var navigationService = new NavigationServiceMock();
-            var jsonSerializer = new JsonSerializer();
-            var repository = new FakeRepository(jsonSerializer);
-            var sut = new BusesViewModel(navigationService, repository);
+            BusesViewModel sut = GetSut();
             var actualZoom = sut.Zoom;
 
             sut.ZoomInCommand.Execute(null);
@@ -27,13 +24,8 @@
         [TestMethod]
         public void No_Puede_Hacer_ZooIn_En_MaxZoom()
         {
-            var navigationService = new NavigationServiceMock();
-            var jsonSerializer = new JsonSerializer();
-            var repository = new FakeRepository(jsonSerializer);
-            var sut = new BusesViewModel(navigationService, repository)
-                {
-                    Zoom = 20.0
-                };
+            BusesViewModel sut = GetSut();
+            sut.Zoom = 20.0;
 
             Assert.IsFalse(sut.ZoomInCommand.CanExecute(null));
         }
@@ -41,10 +33,7 @@
         [TestMethod]
         public void ZooOut_decrementa_Zoom()
         {
-            var navigationService = new NavigationServiceMock();
-            var jsonSerializer = new JsonSerializer();
-            var repository = new FakeRepository(jsonSerializer);
-            var sut = new BusesViewModel(navigationService, repository);
+            BusesViewModel sut = GetSut();
             var actualZoom = sut.Zoom;
 
             sut.ZoomOutCommand.Execute(null);
@@ -55,15 +44,18 @@
         [TestMethod]
         public void No_Puede_Hacer_Zooout_En_MinZoom()
         {
-            var navigationService = new NavigationServiceMock();
-            var jsonSerializer = new JsonSerializer();
-            var repository = new FakeRepository(jsonSerializer);
-            var sut = new BusesViewModel(navigationService, repository)
-            {
-                Zoom = 15.0
-            };
+            BusesViewModel sut = GetSut();
+            sut.Zoom = 15.0;
 
             Assert.IsFalse(sut.ZoomOutCommand.CanExecute(null));
+        }
+
+        private static BusesViewModel GetSut()
+        {
+            var locationService = new LocationServiceMock();
+            var jsonSerializer = new JsonSerializer();
+            var repository = new FakeRepository(jsonSerializer);
+            return new BusesViewModel(locationService, repository);
         }
     }
 }

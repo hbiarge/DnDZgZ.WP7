@@ -41,7 +41,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// </summary>
         private const double MinZoomLevel = 15.0;
 
-        private readonly INavigationService navigationService;
+        private readonly ILocationService locationService;
 
         private readonly IRepository repository;
 
@@ -70,11 +70,11 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// </summary>
         private GeoCoordinate center;
 
-        public BusesViewModel(INavigationService navigationService, IRepository repository)
+        public BusesViewModel(ILocationService locationService, IRepository repository)
         {
-            if (navigationService == null)
+            if (locationService == null)
             {
-                throw new ArgumentNullException("navigationService");
+                throw new ArgumentNullException("locationService");
             }
 
             if (repository == null)
@@ -82,8 +82,11 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
                 throw new ArgumentNullException("repository");
             }
 
-            this.navigationService = navigationService;
+            this.locationService = locationService;
             this.repository = repository;
+
+            this.locationService.Start();
+            this.locationService.LocationChanged += this.OnCurrentLocationChanged;
 
             this.InitializeDefaults();
         }
@@ -143,7 +146,10 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// </summary>
         public ObservableCollection<PushpinModel> BusStops
         {
-            get { return this.busStops; }
+            get
+            {
+                return this.busStops;
+            }
         }
 
         public ICommand ZoomInCommand
@@ -182,14 +188,49 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         private void InitializeDefaults()
         {
             this.Zoom = DefaultZoomLevel;
-            this.Center = ViewModelLocator.DefaultLocation;
+            this.Center = this.GetCenter();
+
+            this.repository.GetBuses(buses =>
+                {
+                    var pushpins = buses
+                        .Select(b => new PushpinModel { Location = new GeoCoordinate(b.Lon, b.Lat) });
+
+                    foreach (var pushpin in pushpins)
+                    {
+                        this.busStops.Add(pushpin);
+                    }
+                });
         }
 
-        ////public override void Cleanup()
-        ////{
-        ////    // Clean own resources if needed
+        private GeoCoordinate GetCenter()
+        {
+            var currentLocation = this.locationService.GetCurrentLocation();
 
-        ////    base.Cleanup();
-        ////}
+            if (currentLocation != null)
+            {
+                return new GeoCoordinate(currentLocation.Latitude, currentLocation.Longitude);
+            }
+
+            return ViewModelLocator.DefaultLocation;
+        }
+
+        private void OnCurrentLocationChanged(object sender, LocationChangedEventArgs e)
+        {
+            if (e.Location == null)
+            {
+                return;
+            }
+
+            this.Center = new GeoCoordinate(e.Location.Latitude, e.Location.Longitude);
+        }
+
+        public override void Cleanup()
+        {
+            // Clean own resources if needed
+            this.locationService.LocationChanged -= this.OnCurrentLocationChanged;
+            this.locationService.Stop();
+
+            base.Cleanup();
+        }
     }
 }

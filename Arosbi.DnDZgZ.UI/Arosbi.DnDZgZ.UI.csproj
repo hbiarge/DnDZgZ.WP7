@@ -167,26 +167,26 @@
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
-    <Resource Include="Resources\Icons\ApplicationBar\Directions.png" />
-    <Resource Include="Resources\Icons\ApplicationBar\Location.png" />
+    <Content Include="Resources\Icons\ApplicationBar\Directions.png" />
+    <Content Include="Resources\Icons\ApplicationBar\Location.png" />
     <Content Include="Resources\Icons\ApplicationBar\Mode.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Resources\Icons\ApplicationBar\Route.png" />
-    <Resource Include="Resources\Icons\Pushpins\PushpinBicycle.png" />
-    <Resource Include="Resources\Icons\Pushpins\PushpinCar.png" />
-    <Resource Include="Resources\Icons\Pushpins\PushpinDrink.png" />
-    <Resource Include="Resources\Icons\Pushpins\PushpinFuel.png" />
-    <Resource Include="Resources\Icons\Pushpins\PushpinHouse.png" />
-    <Resource Include="Resources\Icons\Pushpins\PushpinLocation.png" />
-    <Resource Include="Resources\Icons\Pushpins\PushpinRestaurant.png" />
-    <Resource Include="Resources\Icons\Pushpins\PushpinShop.png" />
-    <Resource Include="Resources\Icons\Route\SearchBlack.png" />
-    <Resource Include="Resources\Icons\Route\SearchWhite.png" />
-    <Resource Include="Resources\Icons\Zoom\ZoomIn_Black.png" />
-    <Resource Include="Resources\Icons\Zoom\ZoomIn_White.png" />
-    <Resource Include="Resources\Icons\Zoom\ZoomOut_Black.png" />
-    <Resource Include="Resources\Icons\Zoom\ZoomOut_White.png" />
+    <Content Include="Resources\Icons\ApplicationBar\Route.png" />
+    <Content Include="Resources\Icons\Pushpins\PushpinBicycle.png" />
+    <Content Include="Resources\Icons\Pushpins\PushpinCar.png" />
+    <Content Include="Resources\Icons\Pushpins\PushpinDrink.png" />
+    <Content Include="Resources\Icons\Pushpins\PushpinFuel.png" />
+    <Content Include="Resources\Icons\Pushpins\PushpinHouse.png" />
+    <Content Include="Resources\Icons\Pushpins\PushpinLocation.png" />
+    <Content Include="Resources\Icons\Pushpins\PushpinRestaurant.png" />
+    <Content Include="Resources\Icons\Pushpins\PushpinShop.png" />
+    <Content Include="Resources\Icons\Route\SearchBlack.png" />
+    <Content Include="Resources\Icons\Route\SearchWhite.png" />
+    <Content Include="Resources\Icons\Zoom\ZoomIn_Black.png" />
+    <Content Include="Resources\Icons\Zoom\ZoomIn_White.png" />
+    <Content Include="Resources\Icons\Zoom\ZoomOut_Black.png" />
+    <Content Include="Resources\Icons\Zoom\ZoomOut_White.png" />
     <Content Include="SplashScreenImage.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

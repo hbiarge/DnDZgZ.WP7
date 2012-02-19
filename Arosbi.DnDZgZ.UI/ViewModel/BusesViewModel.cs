@@ -193,7 +193,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             this.repository.GetBuses(buses =>
                 {
                     var pushpins = buses
-                        .Select(b => new PushpinModel { Location = new GeoCoordinate(b.Lon, b.Lat) });
+                        .Select(b => new PushpinModel { Location = new GeoCoordinate(b.Lat, b.Lon) });
 
                     foreach (var pushpin in pushpins)
                     {

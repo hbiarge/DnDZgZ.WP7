@@ -172,8 +172,8 @@
                         <Border x:Name="ButtonBackground">
                             <ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Grid Height="48" Width="48" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image x:Name="image" Source="/DnDZgZ;component/Resources/Icons/Zoom/ZoomIn_White.png" Stretch="Fill" Visibility="Collapsed"/>
-                                    <Image x:Name="image1" Source="/DnDZgZ;component/Resources/Icons/Zoom/ZoomIn_Black.png" Stretch="Fill"/>
+                                    <Image x:Name="image" Source="/Resources/Icons/Zoom/ZoomIn_White.png" Stretch="Fill" Visibility="Collapsed"/>
+                                    <Image x:Name="image1" Source="/Resources/Icons/Zoom/ZoomIn_Black.png" Stretch="Fill"/>
                                 </Grid>
                             </ContentControl>
                         </Border>
@@ -237,8 +237,8 @@
                         <Border x:Name="ButtonBackground">
                             <ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Grid Height="48" Width="48" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image x:Name="image1" Source="/DnDZgZ;component/Resources/Icons/Zoom/ZoomOut_Black.png" Stretch="Fill"/>
-                                    <Image x:Name="image" Source="/DnDZgZ;component/Resources/Icons/Zoom/ZoomOut_White.png" Stretch="Fill" Visibility="Collapsed"/>
+                                    <Image x:Name="image1" Source="/Resources/Icons/Zoom/ZoomOut_Black.png" Stretch="Fill"/>
+                                    <Image x:Name="image" Source="/Resources/Icons/Zoom/ZoomOut_White.png" Stretch="Fill" Visibility="Collapsed"/>
                                 </Grid>
                             </ContentControl>
                         </Border>

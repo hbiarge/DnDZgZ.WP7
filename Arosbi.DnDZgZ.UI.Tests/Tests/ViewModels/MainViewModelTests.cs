@@ -19,7 +19,7 @@
 
             sut.AutobusesCommand.Execute(null);
 
-            Assert.AreEqual(expectedUri, navigationService.LastNavigateToUri);
+            Assert.AreEqual(expectedUri, navigationService.LastNavigateUri);
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@
 
             sut.BiziCommand.Execute(null);
 
-            Assert.AreEqual(expectedUri, navigationService.LastNavigateToUri);
+            Assert.AreEqual(expectedUri, navigationService.LastNavigateUri);
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@
 
             sut.WifiCommand.Execute(null);
 
-            Assert.AreEqual(expectedUri, navigationService.LastNavigateToUri);
+            Assert.AreEqual(expectedUri, navigationService.LastNavigateUri);
         }
     }
 }

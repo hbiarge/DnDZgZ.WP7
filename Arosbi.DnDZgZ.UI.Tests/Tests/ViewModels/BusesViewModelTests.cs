@@ -2,12 +2,13 @@
 {
     using System.Device.Location;
 
-    using Arosbi.DnDZgZ.UI.Infrastructure;
     using Arosbi.DnDZgZ.UI.Services.Fakes;
     using Arosbi.DnDZgZ.UI.Tests.Mocks;
     using Arosbi.DnDZgZ.UI.ViewModel;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using WP7Contrib.Communications;
 
     [TestClass]
     public class BusesViewModelTests
@@ -142,7 +143,7 @@
         private static BusesViewModel GetSut(CurrentLocationType locationType = CurrentLocationType.DefaultLocation)
         {
             locationService = new LocationServiceMock(locationType);
-            var jsonSerializer = new JsonSerializer();
+            var jsonSerializer = new JsonContractSerializer();
             var repository = new FakeRepository(jsonSerializer);
             return new BusesViewModel(locationService, repository);
         }

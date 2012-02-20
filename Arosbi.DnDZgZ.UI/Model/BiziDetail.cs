@@ -21,7 +21,7 @@ namespace Arosbi.DnDZgZ.UI.Model
         {
             get
             {
-                return this.Items[0][0];
+                return this.items[0][0];
             }
         }
 
@@ -32,7 +32,7 @@ namespace Arosbi.DnDZgZ.UI.Model
         {
             get
             {
-                return this.Items[1][0];
+                return this.items[1][0];
             }
         }
     }

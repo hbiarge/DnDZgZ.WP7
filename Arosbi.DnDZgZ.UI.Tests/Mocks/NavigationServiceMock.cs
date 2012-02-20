@@ -3,22 +3,39 @@
     using System;
     using System.Windows.Navigation;
 
-    using Arosbi.DnDZgZ.UI.Services;
+    using WP7Contrib.Services.Navigation;
 
     public class NavigationServiceMock : INavigationService
     {
-        public event NavigatingCancelEventHandler Navigating;
-
-        public void NavigateTo(Uri pageUri)
+        public Uri CurrentSource
         {
-            this.LastNavigateToUri = pageUri;
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
+
+        public event NavigatingCancelEventHandler Navigating;
 
         public void GoBack()
         {
             throw new NotImplementedException();
         }
 
-        public Uri LastNavigateToUri { get; private set; }
+        public bool Navigate(Uri source)
+        {
+            this.LastNavigateUri = source;
+            return true;
+        }
+
+        public bool CanGoBack
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public Uri LastNavigateUri { get; private set; }
     }
 }

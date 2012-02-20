@@ -66,7 +66,7 @@ namespace Arosbi.DnDZgZ.UI.Model
                 {
                     this.timelinesLoaded = true;
 
-                    var llegadas = this.Items
+                    var llegadas = this.items
                         .Select(data => new BusArrival(data));
 
                     var llegadasOrdenadas = llegadas

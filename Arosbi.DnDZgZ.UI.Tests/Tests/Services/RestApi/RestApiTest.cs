@@ -2,11 +2,12 @@
 {
     using System.Collections.Generic;
 
-    using Arosbi.DnDZgZ.UI.Infrastructure;
     using Arosbi.DnDZgZ.UI.Model;
     using Arosbi.DnDZgZ.UI.Services;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using WP7Contrib.Communications;
 
     [Ignore]
     [TestClass]
@@ -73,7 +74,7 @@
 
         private static RestRepository InitializeSut()
         {
-            var jsonSerializer = new JsonSerializer();
+            var jsonSerializer = new JsonContractSerializer();
             var sut = new RestRepository(jsonSerializer);
             return sut;
         }

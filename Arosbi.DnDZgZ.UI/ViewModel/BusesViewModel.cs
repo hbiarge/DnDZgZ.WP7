@@ -112,10 +112,10 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             {
                 this.CurrentBusInfo = new BusDetail
                     {
-                        Id = "123",
-                        Service = "Bus",
-                        Title = "123",
-                        Items = new string[][]
+                        id = "123",
+                        service = "Bus",
+                        title = "123",
+                        items = new string[][]
                             {
                                 new string[] { "[Ci1] 7 min.", "Dirección CAMINO LAS TORRES" },
                                 new string[] { "[Ci1] 14 min.", "Dirección CAMINO LAS TORRES" },
@@ -305,8 +305,8 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
                     var pushpins = buses
                         .Select(b => new PushpinModel
                             {
-                                Location = new GeoCoordinate(b.Lat, b.Lon),
-                                Id = b.Id
+                                Location = new GeoCoordinate(b.lat, b.lon),
+                                Id = b.id
                             });
 
                     foreach (var pushpin in pushpins)

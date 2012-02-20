@@ -18,12 +18,17 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
 {
     using System;
     using System.Device.Location;
+    using System.Windows;
+
+    using Arosbi.DnDZgZ.UI.Services;
+    using Arosbi.DnDZgZ.UI.Services.Fakes;
 
     using GalaSoft.MvvmLight;
 
     using Microsoft.Phone.Controls.Maps;
 
-    using IoC = Arosbi.DnDZgZ.UI.Infrastructure.IoC;
+    using WP7Contrib.Communications;
+    using WP7Contrib.Services.Navigation;
 
     public class ViewModelLocator
     {
@@ -41,6 +46,8 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         internal static readonly Uri BizisPage = new Uri("/BizisPage.xaml", UriKind.Relative);
         internal static readonly Uri WifiPage = new Uri("/WifisPage.xaml", UriKind.Relative);
 
+        private static Funq.Container container;
+
         /// <summary>
         /// Registered ID used to access map control and Bing maps service.
         /// </summary>
@@ -48,6 +55,26 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
 
         private static MainViewModel main;
         private static BusesViewModel buses;
+
+        static ViewModelLocator()
+        {
+            container = new Funq.Container();
+
+            container.Register<ISerializer>(c => new JsonContractSerializer());
+
+            container.Register<INavigationService>(c => new ApplicationFrameNavigationService(((App)Application.Current).RootFrame));
+            container.Register<ILocationService>(c => new LocationService());
+            
+            container.Register<IRepository>(c => new FakeRepository(
+                container.Resolve<ISerializer>()));
+
+            container.Register<MainViewModel>(c => new MainViewModel(
+                container.Resolve<INavigationService>()));
+            container.Register<BusesViewModel>(c => new BusesViewModel(
+                container.Resolve<ILocationService>(),
+                container.Resolve<IRepository>()));
+
+        }
 
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
@@ -113,7 +140,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         {
             if (main == null)
             {
-                main = IoC.Resolve<MainViewModel>();
+                main = container.Resolve<MainViewModel>();
             }
         }
 
@@ -172,7 +199,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         {
             if (buses == null)
             {
-                buses = IoC.Resolve<BusesViewModel>();
+                buses = container.Resolve<BusesViewModel>();
             }
         }
 
@@ -185,6 +212,8 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         {
             ClearMain();
             ClearBuses();
+
+            container.Dispose();
         }
     }
 }

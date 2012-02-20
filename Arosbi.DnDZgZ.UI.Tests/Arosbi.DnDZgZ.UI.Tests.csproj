@@ -54,9 +54,6 @@
     <Reference Include="GalaSoft.MvvmLight.WP71, Version=3.0.0.19988, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLight.3.1.1\lib\sl4-windowsphone71\GalaSoft.MvvmLight.WP71.dll</HintPath>
     </Reference>
-    <Reference Include="JsonFx, Version=2.0.1106.2610, Culture=neutral, PublicKeyToken=315052dd637f8a52, processorArchitecture=MSIL">
-      <HintPath>..\packages\JsonFx.2.0.1106.2610\lib\sl40-wp\JsonFx.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="Microsoft.Silverlight.Testing">
@@ -75,6 +72,12 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="mscorlib.extensions" />
+    <Reference Include="WP7Contrib.Communications">
+      <HintPath>..\packages\WP7Contrib.Net.1.0.0.16\lib\sl4-wp71\WP7Contrib.Communications.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Services">
+      <HintPath>..\packages\WP7Contrib.Services.1.0.0.16\lib\sl4-wp71\WP7Contrib.Services.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

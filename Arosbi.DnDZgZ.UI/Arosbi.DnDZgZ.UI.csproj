@@ -50,11 +50,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Coding4Fun.Phone.Controls">
-      <HintPath>..\packages\Coding4Fun.Phone.Controls.Complete.1.4.8\lib\Coding4Fun.Phone.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="Coding4Fun.Phone.Controls.Toolkit">
-      <HintPath>..\packages\Coding4Fun.Phone.Controls.Complete.1.4.8\lib\Coding4Fun.Phone.Controls.Toolkit.dll</HintPath>
+    <Reference Include="Funq">
+      <HintPath>..\packages\Funq\WP7\Funq.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras.WP71, Version=3.0.0.19987, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLight.3.1.1\lib\sl4-windowsphone71\GalaSoft.MvvmLight.Extras.WP71.dll</HintPath>
@@ -62,17 +59,24 @@
     <Reference Include="GalaSoft.MvvmLight.WP71, Version=3.0.0.19988, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLight.3.1.1\lib\sl4-windowsphone71\GalaSoft.MvvmLight.WP71.dll</HintPath>
     </Reference>
-    <Reference Include="JsonFx">
-      <HintPath>..\packages\JsonFx.2.0.1106.2610\lib\sl40-wp\JsonFx.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Maps, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit">
-      <HintPath>..\packages\SilverlightToolkitWP.4.2011.12.14\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SilverlightSerializer.WP71">
+      <HintPath>..\packages\WP7Contrib.Caching.1.0.0.16\lib\sl4-WindowsPhone71\SilverlightSerializer.WP71.dll</HintPath>
     </Reference>
     <Reference Include="System.Device" />
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="System.Observable" />
+    <Reference Include="System.Reactive">
+      <HintPath>..\packages\Rx-Main.1.0.11226\lib\SL3-WP\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading">
+      <HintPath>..\packages\Rx-Xaml.1.0.10621\lib\SL3-WP\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -82,14 +86,35 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="mscorlib.extensions" />
+    <Reference Include="WP7Contrib.Caching">
+      <HintPath>..\packages\WP7Contrib.Caching.1.0.0.16\lib\sl4-WindowsPhone71\WP7Contrib.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Collections">
+      <HintPath>..\packages\WP7Contrib.Core.1.0.0.16\lib\sl4-wp71\WP7Contrib.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Common">
+      <HintPath>..\packages\WP7Contrib.Core.1.0.0.16\lib\sl4-wp71\WP7Contrib.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Communications">
+      <HintPath>..\packages\WP7Contrib.Net.1.0.0.16\lib\sl4-wp71\WP7Contrib.Communications.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Diagnostics">
+      <HintPath>..\packages\WP7Contrib.Core.1.0.0.16\lib\sl4-wp71\WP7Contrib.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Logging">
+      <HintPath>..\packages\WP7Contrib.Core.1.0.0.16\lib\sl4-wp71\WP7Contrib.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Serialization.Helpers">
+      <HintPath>..\packages\WP7Contrib.Services.1.0.0.16\lib\sl4-wp71\WP7Contrib.Serialization.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Services">
+      <HintPath>..\packages\WP7Contrib.Services.1.0.0.16\lib\sl4-wp71\WP7Contrib.Services.dll</HintPath>
+    </Reference>
     <Reference Include="YourLastAboutDialog">
       <HintPath>..\packages\YLAD.1.4\lib\sl40-wp71\YourLastAboutDialog.dll</HintPath>
     </Reference>
     <Reference Include="YourLastOptionsDialog">
       <HintPath>..\packages\YLOD.0.9.0\lib\sl4-wp71\YourLastOptionsDialog.dll</HintPath>
-    </Reference>
-    <Reference Include="YourLastOptionsDialog.Extras">
-      <HintPath>..\packages\YLOD.Extras.0.9.0\lib\sl4-wp71\YourLastOptionsDialog.Extras.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +124,6 @@
     <Compile Include="BusesPage.xaml.cs">
       <DependentUpon>BusesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\IoC.cs" />
-    <Compile Include="Infrastructure\IoC.Registrations.cs" />
-    <Compile Include="Infrastructure\JsonSerializer.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -119,8 +141,6 @@
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\Location.cs" />
-    <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\Fakes\FakeData.cs" />
     <Compile Include="Services\Fakes\FakeRepository.cs" />
     <Compile Include="Services\IRepository.cs" />
@@ -183,6 +203,9 @@
     <Content Include="SplashScreenImage.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

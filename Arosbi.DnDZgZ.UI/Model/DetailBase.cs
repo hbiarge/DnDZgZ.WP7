@@ -17,21 +17,21 @@ namespace Arosbi.DnDZgZ.UI.Model
         /// <summary>
         /// Gets or sets Title.
         /// </summary>
-        public string Title { get; set; }
+        public string title { get; set; }
 
         /// <summary>
         /// Gets or sets Id.
         /// </summary>
-        public string Id { get; set; }
+        public string id { get; set; }
 
         /// <summary>
         /// Gets or sets Service.
         /// </summary>
-        public string Service { get; set; }
+        public string service { get; set; }
 
         /// <summary>
         /// Gets or sets Items.
         /// </summary>
-        public string[][] Items { get; set; }
+        public string[][] items { get; set; }
     }
 }

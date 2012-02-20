@@ -10,6 +10,8 @@
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Command;
 
+    using WP7Contrib.Services.Navigation;
+
     public class MainViewModel : ViewModelBase
     {
         private readonly INavigationService navigationService;
@@ -58,7 +60,7 @@
                 if (this.autobusesCommand == null)
                 {
                     this.autobusesCommand =
-                        new RelayCommand(() => this.navigationService.NavigateTo(ViewModelLocator.BusesPage));
+                        new RelayCommand(() => this.navigationService.Navigate(ViewModelLocator.BusesPage));
                 }
 
                 return this.autobusesCommand;
@@ -80,7 +82,7 @@
                 if (this.biziCommand == null)
                 {
                     this.biziCommand =
-                        new RelayCommand(() => this.navigationService.NavigateTo(ViewModelLocator.BizisPage));
+                        new RelayCommand(() => this.navigationService.Navigate(ViewModelLocator.BizisPage));
                 }
 
                 return this.biziCommand;
@@ -102,7 +104,7 @@
                 if (this.wifiCommand == null)
                 {
                     this.wifiCommand =
-                        new RelayCommand(() => this.navigationService.NavigateTo(ViewModelLocator.WifiPage));
+                        new RelayCommand(() => this.navigationService.Navigate(ViewModelLocator.WifiPage));
                 }
 
                 return this.wifiCommand;
@@ -126,7 +128,7 @@
                     this.aboutCommand =
                         new RelayCommand(
                             () =>
-                            this.navigationService.NavigateTo(
+                            this.navigationService.Navigate(
                                 new Uri("/YourLastAboutDialog;component/AboutPage.xaml", UriKind.Relative)));
                 }
 

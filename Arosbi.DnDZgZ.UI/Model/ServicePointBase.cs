@@ -17,31 +17,31 @@ namespace Arosbi.DnDZgZ.UI.Model
         /// <summary>
         /// Gets or sets Id.
         /// </summary>
-        public string Id { get; set; }
+        public string id { get; set; }
 
         /// <summary>
         /// Gets or sets Subtittle.
         /// </summary>
-        public string Subtitle { get; set; }
+        public string subtitle { get; set; }
 
         /// <summary>
         /// Gets or sets Lon.
         /// </summary>
-        public double Lon { get; set; }
+        public double lon { get; set; }
 
         /// <summary>
         /// Gets or sets Lat.
         /// </summary>
-        public double Lat { get; set; }
+        public double lat { get; set; }
 
         /// <summary>
         /// Gets or sets Name.
         /// </summary>
-        public string Name { get; set; }
+        public string name { get; set; }
 
         /// <summary>
         /// Gets or sets Title.
         /// </summary>
-        public string Title { get; set; }
+        public string title { get; set; }
     }
 }

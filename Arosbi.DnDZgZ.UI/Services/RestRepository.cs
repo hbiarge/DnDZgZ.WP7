@@ -13,8 +13,9 @@ namespace Arosbi.DnDZgZ.UI.Services
     using System.Collections.Generic;
     using System.Net;
 
-    using Arosbi.DnDZgZ.UI.Infrastructure;
     using Arosbi.DnDZgZ.UI.Model;
+
+    using WP7Contrib.Communications;
 
     /// <summary>
     /// Implementation of <see cref="IRepository"/> that fetches the info from a public REST API.
@@ -24,7 +25,7 @@ namespace Arosbi.DnDZgZ.UI.Services
         /// <summary>
         /// Stores the instance of the Json Deserializer.
         /// </summary>
-        private readonly JsonSerializer jsonSerializer;
+        private readonly ISerializer serializer;
 
         /// <summary>
         /// URI to get the stations info.
@@ -39,16 +40,16 @@ namespace Arosbi.DnDZgZ.UI.Services
         /// <summary>
         /// Initializes a new instance of the <see cref="RestRepository"/> class.
         /// </summary>
-        /// <param name="jsonSerializer">The json serializer.</param>
+        /// <param name="serializer">The json serializer.</param>
         /// <exception cref="ArgumentNullException">If json serializer is null.</exception>
-        public RestRepository(JsonSerializer jsonSerializer)
+        public RestRepository(ISerializer serializer)
         {
-            if (jsonSerializer == null)
+            if (serializer == null)
             {
-                throw new ArgumentNullException("jsonSerializer");
+                throw new ArgumentNullException("serializer");
             }
 
-            this.jsonSerializer = jsonSerializer;
+            this.serializer = serializer;
         }
 
         /// <summary>
@@ -137,19 +138,19 @@ namespace Arosbi.DnDZgZ.UI.Services
         /// <exception cref="InvalidOperationException">If http call don't return with 200 OK.</exception>
         private void GetData<T>(Uri uri, Action<T> callback) where T : class
         {
-            var request = new WebClient();
-            request.DownloadStringCompleted += (sender, args) =>
+            var request = new WebClient { AllowReadStreamBuffering = true };
+            request.OpenReadCompleted += (sender, args) =>
              {
                  if (args.Error != null)
                  {
                      throw new InvalidOperationException("No se han podido recuperar los datos", args.Error);
                  }
 
-                 var data = jsonSerializer.Deserialize<T>(args.Result);
+                 var data = serializer.Deserialize<T>(args.Result);
                  callback(data);
              };
 
-            request.DownloadStringAsync(uri);
+            request.OpenReadAsync(uri);
         }
     }
 }

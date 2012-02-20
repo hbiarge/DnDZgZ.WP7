@@ -11,9 +11,12 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
 
-    using Arosbi.DnDZgZ.UI.Infrastructure;
     using Arosbi.DnDZgZ.UI.Model;
+
+    using WP7Contrib.Communications;
 
     /// <summary>
     /// Fake IRepository for UI design and test.
@@ -23,25 +26,25 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
         /// <summary>
         /// Stores the JsonSerializer.
         /// </summary>
-        private readonly JsonSerializer jsonSerializer;
+        private readonly ISerializer serializer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FakeRepository"/> class.
         /// </summary>
-        /// <param name="jsonSerializer">
+        /// <param name="serializer">
         /// The json serializer.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// If the JsonSerializer is null.
         /// </exception>
-        public FakeRepository(JsonSerializer jsonSerializer)
+        public FakeRepository(ISerializer serializer)
         {
-            if (jsonSerializer == null)
+            if (serializer == null)
             {
-                throw new ArgumentNullException("jsonSerializer");
+                throw new ArgumentNullException("serializer");
             }
 
-            this.jsonSerializer = jsonSerializer;
+            this.serializer = serializer;
         }
 
         /// <summary>
@@ -55,8 +58,12 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
                 throw new ArgumentNullException("callback");
             }
 
-            var buses = this.jsonSerializer.Deserialize<IEnumerable<BusServicePoint>>(FakeData.GetBusesData());
-            callback(buses);
+            var buffer = Encoding.UTF8.GetBytes(FakeData.GetBusesData());
+            using (var ms = new MemoryStream(buffer))
+            {
+                var buses = this.serializer.Deserialize<IEnumerable<BusServicePoint>>(ms);
+                callback(buses);
+            }
         }
 
         /// <summary>
@@ -70,8 +77,12 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
                 throw new ArgumentNullException("callback");
             }
 
-            var bizis = this.jsonSerializer.Deserialize<IEnumerable<BiziServicePoint>>(FakeData.GetBizisData());
-            callback(bizis);
+            var buffer = Encoding.UTF8.GetBytes(FakeData.GetBizisData());
+            using (var ms = new MemoryStream(buffer))
+            {
+                var bizis = this.serializer.Deserialize<IEnumerable<BiziServicePoint>>(ms);
+                callback(bizis);
+            }
         }
 
         /// <summary>
@@ -85,8 +96,12 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
                 throw new ArgumentNullException("callback");
             }
 
-            var wifis = this.jsonSerializer.Deserialize<IEnumerable<WifiServicePoint>>(FakeData.GetWifisData());
-            callback(wifis);
+            var buffer = Encoding.UTF8.GetBytes(FakeData.GetWifisData());
+            using (var ms = new MemoryStream(buffer))
+            {
+                var wifis = this.serializer.Deserialize<IEnumerable<WifiServicePoint>>(ms);
+                callback(wifis);
+            }
         }
 
         /// <summary>
@@ -101,8 +116,12 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
                 throw new ArgumentNullException("callback");
             }
 
-            var busDetail = this.jsonSerializer.Deserialize<BusDetail>(FakeData.GetDetalleBusData());
-            callback(busDetail);
+            var buffer = Encoding.UTF8.GetBytes(FakeData.GetDetalleBusData());
+            using (var ms = new MemoryStream(buffer))
+            {
+                var busDetail = this.serializer.Deserialize<BusDetail>(ms);
+                callback(busDetail);
+            }
         }
 
         /// <summary>
@@ -117,8 +136,12 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
                 throw new ArgumentNullException("callback");
             }
 
-            var biziDetail = this.jsonSerializer.Deserialize<BiziDetail>(FakeData.GetDetalleBiziData());
-            callback(biziDetail);
+            var buffer = Encoding.UTF8.GetBytes(FakeData.GetDetalleBiziData());
+            using (var ms = new MemoryStream(buffer))
+            {
+                var biziDetail = this.serializer.Deserialize<BiziDetail>(ms);
+                callback(biziDetail);
+            }
         }
     }
 }

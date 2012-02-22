@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using GalaSoft.MvvmLight;
-
 namespace Arosbi.DnDZgZ.UI.ViewModel
 {
     using System;
@@ -20,6 +18,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
     using Arosbi.DnDZgZ.UI.Model;
     using Arosbi.DnDZgZ.UI.Services;
 
+    using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Command;
 
     using Microsoft.Phone.Controls.Maps;

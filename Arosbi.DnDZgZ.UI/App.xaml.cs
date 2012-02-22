@@ -8,6 +8,10 @@ using Microsoft.Phone.Shell;
 
 namespace Arosbi.DnDZgZ.UI
 {
+    using System;
+
+    using NorthernLights;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -97,6 +101,10 @@ namespace Arosbi.DnDZgZ.UI
             {
                 // An unhandled exception has occurred; break into the debugger
                 System.Diagnostics.Debugger.Break();
+            }
+            else
+            {
+                LittleWatson.SaveExceptionForReporting(e.ExceptionObject);
             }
         }
 

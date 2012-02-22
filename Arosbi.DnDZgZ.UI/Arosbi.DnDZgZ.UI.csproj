@@ -64,6 +64,21 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NorthernLights.Controls">
+      <HintPath>..\packages\NorthernLightsWP7Toolkit.1.1.1\lib\sl4-windowsphone71\NorthernLights.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="NorthernLights.Core">
+      <HintPath>..\packages\NorthernLightsWP7Toolkit.1.1.1\lib\sl4-windowsphone71\NorthernLights.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NorthernLights.LittleWatson">
+      <HintPath>..\packages\NorthernLightsWP7Toolkit.1.1.1\lib\sl4-windowsphone71\NorthernLights.LittleWatson.dll</HintPath>
+    </Reference>
+    <Reference Include="NorthernLights.PersistentVariables">
+      <HintPath>..\packages\NorthernLightsWP7Toolkit.1.1.1\lib\sl4-windowsphone71\NorthernLights.PersistentVariables.dll</HintPath>
+    </Reference>
+    <Reference Include="NorthernLights.StateVariables">
+      <HintPath>..\packages\NorthernLightsWP7Toolkit.1.1.1\lib\sl4-windowsphone71\NorthernLights.StateVariables.dll</HintPath>
+    </Reference>
     <Reference Include="SilverlightSerializer.WP71">
       <HintPath>..\packages\WP7Contrib.Caching.1.0.0.16\lib\sl4-WindowsPhone71\SilverlightSerializer.WP71.dll</HintPath>
     </Reference>
@@ -136,6 +151,7 @@
     <Compile Include="Model\ServicePointBase.cs" />
     <Compile Include="Model\WifiServicePoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CacheRepository.cs" />
     <Compile Include="Services\LocationChangedEventArgs.cs" />
     <Compile Include="Services\ILocation.cs" />
     <Compile Include="Services\ILocationService.cs" />

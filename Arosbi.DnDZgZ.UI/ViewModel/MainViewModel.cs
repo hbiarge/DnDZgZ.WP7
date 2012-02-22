@@ -3,12 +3,13 @@
     using System;
     using System.Windows;
     using System.Windows.Input;
-    using System.Windows.Navigation;
-
-    using Arosbi.DnDZgZ.UI.Services;
 
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Command;
+
+    using Microsoft.Phone.Tasks;
+
+    using NorthernLights;
 
     using WP7Contrib.Services.Navigation;
 
@@ -35,6 +36,8 @@
             }
 
             this.navigationService = navigationService;
+
+            this.CheckForUnhandledExceptions();
         }
 
         public string ApplicationTitle
@@ -133,6 +136,37 @@
                 }
 
                 return this.aboutCommand;
+            }
+        }
+
+        private void CheckForUnhandledExceptions()
+        {
+            var exception = LittleWatson.GetPreviousException();
+
+            if (exception == null)
+            {
+                return;
+            }
+
+            if (LittleWatson.Instance.AllowAnonymousHttpReporting)
+            {
+                const string PostUri = "http://www.yourdomain.com/data/post.php";
+                LittleWatson.Instance.SendExceptionToHttpEndpoint(PostUri, exception);
+            }
+            else
+            {
+                // show popup.
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    var email = new EmailComposeTask
+                    {
+                        To = "error@arosbi.com.com",
+                        Subject = "DnDZgZ: auto-generated problem report",
+                        Body = exception.Message + Environment.NewLine + exception.StackTrace
+                    };
+
+                    email.Show();
+                });
             }
         }
     }

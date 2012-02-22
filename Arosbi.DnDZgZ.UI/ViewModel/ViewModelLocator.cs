@@ -58,22 +58,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
 
         static ViewModelLocator()
         {
-            container = new Funq.Container();
-
-            container.Register<ISerializer>(c => new JsonContractSerializer());
-
-            container.Register<INavigationService>(c => new ApplicationFrameNavigationService(((App)Application.Current).RootFrame));
-            container.Register<ILocationService>(c => new LocationService());
-            
-            container.Register<IRepository>(c => new FakeRepository(
-                container.Resolve<ISerializer>()));
-
-            container.Register<MainViewModel>(c => new MainViewModel(
-                container.Resolve<INavigationService>()));
-            container.Register<BusesViewModel>(c => new BusesViewModel(
-                container.Resolve<ILocationService>(),
-                container.Resolve<IRepository>()));
-
+            InitializeContainer();
         }
 
         /// <summary>
@@ -214,6 +199,25 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             ClearBuses();
 
             container.Dispose();
+        }
+
+        private static void InitializeContainer()
+        {
+            container = new Funq.Container();
+
+            container.Register<ISerializer>(c => new JsonContractSerializer());
+
+            container.Register<INavigationService>(c => new ApplicationFrameNavigationService(((App)Application.Current).RootFrame));
+            container.Register<ILocationService>(c => new LocationService());
+
+            container.Register<IRepository>(c => new FakeRepository(
+                                                     container.Resolve<ISerializer>()));
+
+            container.Register<MainViewModel>(c => new MainViewModel(
+                                                       container.Resolve<INavigationService>()));
+            container.Register<BusesViewModel>(c => new BusesViewModel(
+                                                        container.Resolve<ILocationService>(),
+                                                        container.Resolve<IRepository>()));
         }
     }
 }

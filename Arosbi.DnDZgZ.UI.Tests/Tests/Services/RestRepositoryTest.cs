@@ -1,4 +1,4 @@
-﻿namespace Arosbi.DnDZgZ.UI.Tests.Tests.Services.RestApi
+﻿namespace Arosbi.DnDZgZ.UI.Tests.Tests.Services
 {
     using System.Collections.Generic;
 
@@ -11,7 +11,7 @@
 
     [Ignore]
     [TestClass]
-    public class RestApiTest
+    public class RestRepositoryTest
     {
         [TestMethod]
         public void GetBuses_devuelve_informacion()

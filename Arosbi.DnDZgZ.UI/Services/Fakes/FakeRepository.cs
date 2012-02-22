@@ -47,6 +47,12 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
             this.serializer = serializer;
         }
 
+        public int TimesGetBusesHasBeenCalled { get; private set; }
+        public int TimesGetBizisHasBeenCalled { get; private set; }
+        public int TimesGetWifisHasBeenCalled { get; private set; }
+        public int TimesGetBusDetailsHasBeenCalled { get; private set; }
+        public int TimesGetBiziDetailsHasBeenCalled { get; private set; }
+
         /// <summary>
         /// Get all the bus stations.
         /// </summary>
@@ -57,6 +63,8 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
             {
                 throw new ArgumentNullException("callback");
             }
+
+            this.TimesGetBusesHasBeenCalled += 1;
 
             var buffer = Encoding.UTF8.GetBytes(FakeData.GetBusesData());
             using (var ms = new MemoryStream(buffer))
@@ -77,6 +85,8 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
                 throw new ArgumentNullException("callback");
             }
 
+            this.TimesGetBizisHasBeenCalled += 1;
+
             var buffer = Encoding.UTF8.GetBytes(FakeData.GetBizisData());
             using (var ms = new MemoryStream(buffer))
             {
@@ -95,6 +105,8 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
             {
                 throw new ArgumentNullException("callback");
             }
+
+            this.TimesGetWifisHasBeenCalled += 1;
 
             var buffer = Encoding.UTF8.GetBytes(FakeData.GetWifisData());
             using (var ms = new MemoryStream(buffer))
@@ -116,6 +128,8 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
                 throw new ArgumentNullException("callback");
             }
 
+            this.TimesGetBusDetailsHasBeenCalled += 1;
+
             var buffer = Encoding.UTF8.GetBytes(FakeData.GetDetalleBusData());
             using (var ms = new MemoryStream(buffer))
             {
@@ -135,6 +149,8 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
             {
                 throw new ArgumentNullException("callback");
             }
+
+            this.TimesGetBiziDetailsHasBeenCalled += 1;
 
             var buffer = Encoding.UTF8.GetBytes(FakeData.GetDetalleBiziData());
             using (var ms = new MemoryStream(buffer))

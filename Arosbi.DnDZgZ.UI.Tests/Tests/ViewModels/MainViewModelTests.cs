@@ -7,6 +7,8 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using NorthernLights;
+
     [TestClass]
     public class MainViewModelTests
     {

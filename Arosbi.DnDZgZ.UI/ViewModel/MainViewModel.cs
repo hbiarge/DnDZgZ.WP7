@@ -15,7 +15,7 @@
 
     public class MainViewModel : ViewModelBase
     {
-        private readonly INavigationService navigationService;
+        private readonly Func<INavigationService> navigationService;
 
         private RelayCommand autobusesCommand;
         private RelayCommand biziCommand;
@@ -28,7 +28,7 @@
         /// <param name="navigationService">
         /// The navigation Service.
         /// </param>
-        public MainViewModel(INavigationService navigationService)
+        public MainViewModel(Func<INavigationService> navigationService)
         {
             if (navigationService == null)
             {
@@ -63,7 +63,7 @@
                 if (this.autobusesCommand == null)
                 {
                     this.autobusesCommand =
-                        new RelayCommand(() => this.navigationService.Navigate(ViewModelLocator.BusesPage));
+                        new RelayCommand(() => this.navigationService().Navigate(ViewModelLocator.BusesPage));
                 }
 
                 return this.autobusesCommand;
@@ -85,7 +85,7 @@
                 if (this.biziCommand == null)
                 {
                     this.biziCommand =
-                        new RelayCommand(() => this.navigationService.Navigate(ViewModelLocator.BizisPage));
+                        new RelayCommand(() => this.navigationService().Navigate(ViewModelLocator.BizisPage));
                 }
 
                 return this.biziCommand;
@@ -107,7 +107,7 @@
                 if (this.wifiCommand == null)
                 {
                     this.wifiCommand =
-                        new RelayCommand(() => this.navigationService.Navigate(ViewModelLocator.WifiPage));
+                        new RelayCommand(() => this.navigationService().Navigate(ViewModelLocator.WifiPage));
                 }
 
                 return this.wifiCommand;
@@ -131,7 +131,7 @@
                     this.aboutCommand =
                         new RelayCommand(
                             () =>
-                            this.navigationService.Navigate(
+                            this.navigationService().Navigate(
                                 new Uri("/YourLastAboutDialog;component/AboutPage.xaml", UriKind.Relative)));
                 }
 
@@ -142,6 +142,7 @@
         private void CheckForUnhandledExceptions()
         {
             var exception = LittleWatson.GetPreviousException();
+            LittleWatson.Instance.AllowAnonymousHttpReporting = false;
 
             if (exception == null)
             {

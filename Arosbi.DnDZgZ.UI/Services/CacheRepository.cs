@@ -25,6 +25,7 @@
             {
                 throw new ArgumentNullException("repository");
             }
+
             if (cacheProvider == null)
             {
                 throw new ArgumentNullException("cacheProvider");

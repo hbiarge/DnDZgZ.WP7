@@ -13,15 +13,7 @@
     [TestClass]
     public class BusesViewModelTests
     {
-        private static LocationServiceMock locationService;
-
-        [TestMethod]
-        public void LocationService_Arranca_Al_Entrar()
-        {
-            BusesViewModel sut = GetSut();
-
-            Assert.AreEqual(true, locationService.IsStarted);
-        }
+        private static LocationServiceWp7Mock locationService;
 
         [TestMethod]
         public void Carga_Buses_Al_Entrar()
@@ -44,7 +36,7 @@
         [TestMethod]
         public void DefaultLocation_Si_Null_Location_Al_Entrar()
         {
-            BusesViewModel sut = GetSut(CurrentLocationType.NullLocation);
+            BusesViewModel sut = GetSut();
 
             Assert.AreEqual(ViewModelLocator.DefaultLocation, sut.Center);
         }
@@ -52,18 +44,17 @@
         [TestMethod]
         public void LocationService_Location_Al_Entrar()
         {
-            BusesViewModel sut = GetSut();
+            var expectedLocation = new GeoCoordinate(1, 1);
+            BusesViewModel sut = GetSut(GeoPositionStatus.Ready, expectedLocation);
 
-            Assert.AreEqual(locationService.CurrentLocation.Latitude, sut.Center.Latitude);
-            Assert.AreEqual(locationService.CurrentLocation.Longitude, sut.Center.Longitude);
+            Assert.AreEqual(expectedLocation, sut.Center);
         }
 
         [TestMethod]
         public void Center_Se_Actualiza_Con_Nueva_Posicion()
         {
-            BusesViewModel sut = GetSut();
             var newLocation = new GeoCoordinate(25, 25);
-            locationService.ChangeLocation(newLocation);
+            BusesViewModel sut = GetSut(GeoPositionStatus.Ready, newLocation);
 
             Assert.AreEqual(newLocation, sut.Center);
         }
@@ -140,12 +131,22 @@
             Assert.AreEqual(false, sut.IsPopupOpen);
         }
 
-        private static BusesViewModel GetSut(CurrentLocationType locationType = CurrentLocationType.DefaultLocation)
+        private static BusesViewModel GetSut(
+            GeoPositionStatus positionStatus = GeoPositionStatus.Disabled,
+            GeoCoordinate location = null)
         {
-            locationService = new LocationServiceMock(locationType);
+            locationService = new LocationServiceWp7Mock();
             var jsonSerializer = new JsonContractSerializer();
             var repository = new FakeRepository(jsonSerializer);
-            return new BusesViewModel(locationService, repository);
+            var vm = new BusesViewModel(locationService, repository);
+
+            if (positionStatus == GeoPositionStatus.Ready)
+            {
+                locationService.ChangeStatus(positionStatus);
+                locationService.ChangeLocation(location);
+            }
+
+            return vm;
         }
     }
 }

@@ -136,15 +136,12 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mocks\LocationServiceWp7Mock.cs" />
-    <Compile Include="Mocks\CurrentLocationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Mocks\LocationServiceMock.cs" />
     <Compile Include="Mocks\NavigationServiceMock.cs" />
     <Compile Include="Tests\Services\CacheRepositoryTest.cs" />
     <Compile Include="Tests\Services\JsonSerializeTest.cs" />
     <Compile Include="Tests\Services\RestRepositoryTest.cs" />
     <Compile Include="Tests\ViewModels\BusesViewModelTests.cs" />
-    <Compile Include="Tests\ViewModels\Dummy.cs" />
     <Compile Include="Tests\ViewModels\MainViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>

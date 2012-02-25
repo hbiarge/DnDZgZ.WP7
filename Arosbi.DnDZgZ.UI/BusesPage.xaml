@@ -6,10 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps" 
-    xmlns:System_Device_Location="clr-namespace:System.Device.Location;assembly=System.Device" 
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
     xmlns:mvvm="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71" 
-    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Arosbi.DnDZgZ.UI.BusesPage"
+    xmlns:System="clr-namespace:System;assembly=mscorlib" 
+    x:Class="Arosbi.DnDZgZ.UI.BusesPage"
     mc:Ignorable="d"
     d:DesignWidth="480"
     d:DesignHeight="696"
@@ -27,7 +27,9 @@
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Configuración"/>
             </shell:ApplicationBar.MenuItems>
-            <shell:ApplicationBarIconButton IconUri="/Resources/Icons/ApplicationBar/Location.png" Text="yo"/>
+            <shell:ApplicationBarIconButton IconUri="/Resources/Icons/ApplicationBar/Location.png" 
+                                            Text="mi posición"
+                                            Click="ApplicationBarIconButtonClick"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
@@ -44,7 +46,7 @@
                     <maps:RoadMode />
                 </maps:Map.Mode>
 
-                <maps:Pushpin x:Name="Center" Style="{StaticResource CenterStyle}" Location="{Binding Center}"/>
+                <maps:Pushpin x:Name="Center" Style="{StaticResource CenterStyle}" Location="{Binding CurrentLocation, Mode=OneWay}"/>
 
                 <maps:MapItemsControl x:Name="Buses" ItemsSource="{Binding BusStops}">
                     <maps:MapItemsControl.ItemTemplate>

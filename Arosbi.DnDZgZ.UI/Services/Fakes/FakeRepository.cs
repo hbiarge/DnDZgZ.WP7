@@ -12,6 +12,7 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Reactive.Concurrency;
     using System.Text;
 
     using Arosbi.DnDZgZ.UI.Model;
@@ -66,12 +67,16 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
 
             this.TimesGetBusesHasBeenCalled += 1;
 
-            var buffer = Encoding.UTF8.GetBytes(FakeData.GetBusesData());
-            using (var ms = new MemoryStream(buffer))
-            {
-                var buses = this.serializer.Deserialize<IEnumerable<BusServicePoint>>(ms);
-                callback(buses);
-            }
+            Scheduler.ThreadPool.Schedule(
+                () =>
+                {
+                    var buffer = Encoding.UTF8.GetBytes(FakeData.GetBusesData());
+                    using (var ms = new MemoryStream(buffer))
+                    {
+                        var buses = this.serializer.Deserialize<IEnumerable<BusServicePoint>>(ms);
+                        DispatcherScheduler.Instance.Schedule(() => callback(buses));
+                    }
+                });
         }
 
         /// <summary>
@@ -87,12 +92,16 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
 
             this.TimesGetBizisHasBeenCalled += 1;
 
-            var buffer = Encoding.UTF8.GetBytes(FakeData.GetBizisData());
-            using (var ms = new MemoryStream(buffer))
-            {
-                var bizis = this.serializer.Deserialize<IEnumerable<BiziServicePoint>>(ms);
-                callback(bizis);
-            }
+            Scheduler.ThreadPool.Schedule(
+                () =>
+                {
+                    var buffer = Encoding.UTF8.GetBytes(FakeData.GetBizisData());
+                    using (var ms = new MemoryStream(buffer))
+                    {
+                        var bizis = this.serializer.Deserialize<IEnumerable<BiziServicePoint>>(ms);
+                        DispatcherScheduler.Instance.Schedule(() => callback(bizis));
+                    }
+                });
         }
 
         /// <summary>
@@ -108,12 +117,16 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
 
             this.TimesGetWifisHasBeenCalled += 1;
 
-            var buffer = Encoding.UTF8.GetBytes(FakeData.GetWifisData());
-            using (var ms = new MemoryStream(buffer))
-            {
-                var wifis = this.serializer.Deserialize<IEnumerable<WifiServicePoint>>(ms);
-                callback(wifis);
-            }
+            Scheduler.ThreadPool.Schedule(
+                () =>
+                {
+                    var buffer = Encoding.UTF8.GetBytes(FakeData.GetWifisData());
+                    using (var ms = new MemoryStream(buffer))
+                    {
+                        var wifis = this.serializer.Deserialize<IEnumerable<WifiServicePoint>>(ms);
+                        DispatcherScheduler.Instance.Schedule(() => callback(wifis));
+                    }
+                });
         }
 
         /// <summary>
@@ -130,12 +143,16 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
 
             this.TimesGetBusDetailsHasBeenCalled += 1;
 
-            var buffer = Encoding.UTF8.GetBytes(FakeData.GetDetalleBusData());
-            using (var ms = new MemoryStream(buffer))
-            {
-                var busDetail = this.serializer.Deserialize<BusDetail>(ms);
-                callback(busDetail);
-            }
+            Scheduler.ThreadPool.Schedule(
+                () =>
+                {
+                    var buffer = Encoding.UTF8.GetBytes(FakeData.GetDetalleBusData());
+                    using (var ms = new MemoryStream(buffer))
+                    {
+                        var busDetail = this.serializer.Deserialize<BusDetail>(ms);
+                        DispatcherScheduler.Instance.Schedule(() => callback(busDetail));
+                    }
+                });
         }
 
         /// <summary>
@@ -152,12 +169,16 @@ namespace Arosbi.DnDZgZ.UI.Services.Fakes
 
             this.TimesGetBiziDetailsHasBeenCalled += 1;
 
-            var buffer = Encoding.UTF8.GetBytes(FakeData.GetDetalleBiziData());
-            using (var ms = new MemoryStream(buffer))
-            {
-                var biziDetail = this.serializer.Deserialize<BiziDetail>(ms);
-                callback(biziDetail);
-            }
+            Scheduler.ThreadPool.Schedule(
+                () =>
+                {
+                    var buffer = Encoding.UTF8.GetBytes(FakeData.GetDetalleBiziData());
+                    using (var ms = new MemoryStream(buffer))
+                    {
+                        var biziDetail = this.serializer.Deserialize<BiziDetail>(ms);
+                        DispatcherScheduler.Instance.Schedule(() => callback(biziDetail));
+                    }
+                });
         }
     }
 }

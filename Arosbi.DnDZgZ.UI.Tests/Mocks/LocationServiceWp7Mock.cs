@@ -2,80 +2,79 @@
 {
     using System;
     using System.Device.Location;
-    using System.Reactive.Linq;
     using System.Reactive.Subjects;
 
     using WP7Contrib.Services.Location;
 
     public class LocationServiceWp7Mock : ILocationService
     {
-        private Subject<GeoCoordinate> subject;
+        private Subject<GeoCoordinate> location;
         private Subject<GeoPositionStatus> status;
 
         public LocationServiceWp7Mock()
         {
-            subject = new Subject<GeoCoordinate>();
+            location = new Subject<GeoCoordinate>();
             status = new Subject<GeoPositionStatus>();
         }
 
         public IObservable<GeoCoordinate> LocationByTimeThreshold(int frequency)
         {
-            return this.subject.Select(g => g);
+            return this.location;
         }
 
         public IObservable<GeoCoordinate> LocationByTimeThreshold(int frequency, GeoPositionAccuracy accuracy)
         {
-            return this.subject.Select(g => g);
+            return this.location;
         }
 
         public IObservable<GeoCoordinate> LocationByTimeThreshold(TimeSpan frequency)
         {
-            return this.subject.Select(g => g);
+            return this.location;
         }
 
         public IObservable<GeoCoordinate> LocationByTimeThreshold(TimeSpan frequency, GeoPositionAccuracy accuracy)
         {
-            return this.subject.Select(g => g);
+            return this.location;
         }
 
         public IObservable<GeoCoordinate> LocationByDistanceThreshold(int distance)
         {
-            return this.subject.Select(g => g);
+            return this.location;
         }
 
         public IObservable<GeoCoordinate> LocationByDistanceThreshold(int distance, GeoPositionAccuracy accuracy)
         {
-            return this.subject.Select(g => g);
+            return this.location;
         }
 
         public IObservable<GeoPositionStatus> Status()
         {
-            return this.status.Select(s => s);
+            return this.status;
         }
 
         public IObservable<GeoCoordinate> Location()
         {
-            return this.subject.Select(g => g);
+            return this.location;
         }
 
         public IObservable<GeoCoordinate> Location(GeoPositionAccuracy accuracy)
         {
-            return this.subject.Select(g => g);
+            return this.location;
         }
 
         public IObservable<GeoCoordinate> Location(TimeSpan locationTimeout)
         {
-            return this.subject.Select(g => g);
+            return this.location;
         }
 
         public IObservable<GeoCoordinate> Location(GeoPositionAccuracy accuracy, TimeSpan locationTimeout)
         {
-            return this.subject.Select(g => g);
+            return this.location;
         }
 
         public void ChangeLocation(GeoCoordinate newLocation)
         {
-            this.subject.OnNext(newLocation);
+            this.location.OnNext(newLocation);
         }
 
         public void ChangeStatus(GeoPositionStatus newStatus)

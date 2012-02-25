@@ -23,11 +23,15 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
     using Arosbi.DnDZgZ.UI.Services;
     using Arosbi.DnDZgZ.UI.Services.Fakes;
 
+    using Funq;
+
     using GalaSoft.MvvmLight;
 
     using Microsoft.Phone.Controls.Maps;
 
     using WP7Contrib.Communications;
+    using WP7Contrib.Logging;
+    using WP7Contrib.Services.Location;
     using WP7Contrib.Services.Navigation;
 
     public class ViewModelLocator
@@ -207,14 +211,23 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
 
             container.Register<ISerializer>(c => new JsonContractSerializer());
 
-            container.Register<INavigationService>(c => new ApplicationFrameNavigationService(((App)Application.Current).RootFrame));
-            container.Register<ILocationService>(c => new LocationService());
+            container.Register<ILog>(c => new ConsoleLog());
+
+            // Navigation service es un singleton
+            container.Register<INavigationService>(c => 
+                new ApplicationFrameNavigationService(((App)Application.Current).RootFrame))
+                    .ReusedWithin(ReuseScope.Container);
+            
+
+            container.Register<ILocationService>(c => new LocationService(
+                GeoPositionAccuracy.Default,
+                container.Resolve<ILog>()));
 
             container.Register<IRepository>(c => new FakeRepository(
                                                      container.Resolve<ISerializer>()));
 
             container.Register<MainViewModel>(c => new MainViewModel(
-                                                       container.Resolve<INavigationService>()));
+                                                       container.LazyResolve<INavigationService>()));
             container.Register<BusesViewModel>(c => new BusesViewModel(
                                                         container.Resolve<ILocationService>(),
                                                         container.Resolve<IRepository>()));

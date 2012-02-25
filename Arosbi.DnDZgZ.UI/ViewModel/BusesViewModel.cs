@@ -13,6 +13,8 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
     using System.Collections.ObjectModel;
     using System.Device.Location;
     using System.Linq;
+    using System.Reactive.Concurrency;
+    using System.Windows;
     using System.Windows.Input;
 
     using Arosbi.DnDZgZ.UI.Model;
@@ -22,6 +24,8 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
     using GalaSoft.MvvmLight.Command;
 
     using Microsoft.Phone.Controls.Maps;
+
+    using ILocationService = WP7Contrib.Services.Location.ILocationService;
 
     public class BusesViewModel : ViewModelBase
     {
@@ -41,7 +45,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         internal const double DefaultZoomLevel = 18.0;
 
         /// <summary>
-        /// The device location service.
+        /// The location service.
         /// </summary>
         private readonly ILocationService locationService;
 
@@ -55,6 +59,8 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// </summary>
         private readonly ObservableCollection<PushpinModel> busStops = new ObservableCollection<PushpinModel>();
 
+        private IDisposable locationSuscription;
+
         /// <summary>
         /// Command for the ZoomIn button.
         /// </summary>
@@ -64,6 +70,11 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// Command for the ZoomOut button.
         /// </summary>
         private RelayCommand zoomOutCommand;
+
+        /// <summary>
+        /// Command that gets the current location.
+        /// </summary>
+        private RelayCommand currentLocationCommand;
 
         /// <summary>
         /// Command for the pushpins.
@@ -79,6 +90,11 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         /// Map zoom level.
         /// </summary>
         private double zoom;
+
+        /// <summary>
+        /// The current location provided by the GPS.
+        /// </summary>
+        private GeoCoordinate currentLocation;
 
         /// <summary>
         /// Map center coordinate.
@@ -127,8 +143,10 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             this.locationService = locationService;
             this.repository = repository;
 
-            this.locationService.Start();
-            this.locationService.LocationChanged += this.OnCurrentLocationChanged;
+            this.locationSuscription = locationService.Location()
+                .Subscribe(
+                    location => this.CurrentLocation = this.Center = location,
+                    () => this.locationSuscription.Dispose());
 
             this.InitializeDefaults();
         }
@@ -150,7 +168,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             {
                 return this.zoom;
             }
-            internal set
+            set
             {
                 var coercedZoom = Math.Max(MinZoomLevel, Math.Min(MaxZoomLevel, value));
 
@@ -165,6 +183,25 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         }
 
         /// <summary>
+        /// Gets or sets the current location coordinate.
+        /// </summary>
+        public GeoCoordinate CurrentLocation
+        {
+            get
+            {
+                return this.currentLocation;
+            }
+            internal set
+            {
+                if (this.currentLocation != value)
+                {
+                    this.currentLocation = value;
+                    this.RaisePropertyChanged("CurrentLocation");
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the map center location coordinate.
         /// </summary>
         public GeoCoordinate Center
@@ -173,7 +210,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             {
                 return this.center;
             }
-            internal set
+            set
             {
                 if (this.center != value)
                 {
@@ -258,6 +295,26 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             }
         }
 
+        public ICommand CurrentLocationCommand
+        {
+            get
+            {
+                if (this.currentLocationCommand == null)
+                {
+                    this.currentLocationCommand = new RelayCommand(
+                        () =>
+                        {
+                            this.locationSuscription = this.locationService.Location()
+                                .Subscribe(
+                                    location => this.CurrentLocation = this.Center = location,
+                                    () => this.locationSuscription.Dispose());
+                        });
+                }
+
+                return this.currentLocationCommand;
+            }
+        }
+
         public ICommand PushpinCommand
         {
             get
@@ -310,39 +367,25 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
 
                     foreach (var pushpin in pushpins)
                     {
-                        this.busStops.Add(pushpin);
+                        var p = pushpin;
+                        Deployment.Current.Dispatcher.BeginInvoke(() => this.busStops.Add(p));
                     }
                 });
         }
 
         private GeoCoordinate GetCenter()
         {
-            var currentLocation = this.locationService.GetCurrentLocation();
-
-            if (currentLocation != null)
+            if (this.currentLocation != null)
             {
-                return new GeoCoordinate(currentLocation.Latitude, currentLocation.Longitude);
+                return this.currentLocation;
             }
 
             return ViewModelLocator.DefaultLocation;
         }
 
-        private void OnCurrentLocationChanged(object sender, LocationChangedEventArgs e)
-        {
-            if (e.Location == null)
-            {
-                return;
-            }
-
-            this.Center = new GeoCoordinate(e.Location.Latitude, e.Location.Longitude);
-        }
-
         public override void Cleanup()
         {
             // Clean own resources if needed
-            this.locationService.LocationChanged -= this.OnCurrentLocationChanged;
-            this.locationService.Stop();
-
             base.Cleanup();
         }
     }

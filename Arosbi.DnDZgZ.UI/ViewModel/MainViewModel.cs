@@ -48,7 +48,7 @@
             }
         }
 
-        public string Autobuses
+        public string TextoAutobuses
         {
             get
             {

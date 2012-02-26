@@ -41,10 +41,10 @@
 				<RowDefinition Height="Auto"  />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
-				<RowDefinition Height="400"/>
+				<RowDefinition Height="*"/>
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
-			<Button x:Name="btnBuses" Content="{Binding Autobuses, Mode=OneWay}" Grid.Row="0" Command="{Binding AutobusesCommand, Mode=OneWay}" />
+			<Button x:Name="btnBuses" Grid.Row="0" Command="{Binding AutobusesCommand, Mode=OneWay}" Content="{Binding TextoAutobuses, Mode=OneTime}" />
 			<Button x:Name="btnBizis" Content="{Binding Bizi, Mode=OneWay}" Grid.Row="1" Command="{Binding BiziCommand, Mode=OneWay}" />
 			<Button x:Name="btnWifi" Content="{Binding Wifi, Mode=OneWay}" Grid.Row="2" Command="{Binding WifiCommand, Mode=OneWay}" />
 			<Button x:Name="btnAbout" Content="{Binding About, Mode=OneWay}" Grid.Row="4" Command="{Binding AboutCommand, Mode=OneWay}" />

@@ -18,10 +18,10 @@
         {
             var sut = InitializeSut();
 
-            sut.GetBuses(buses =>
+            sut.GetBusStops(buses =>
                 {
                     Assert.IsNotNull(buses);
-                    var listaBuses = new List<BusServicePoint>(buses);
+                    var listaBuses = new List<BusStop>(buses);
                     CollectionAssert.AllItemsAreNotNull(listaBuses);
                 });
         }
@@ -31,10 +31,10 @@
         {
             var sut = InitializeSut();
 
-            sut.GetBizis(bizis =>
+            sut.GetBiziStations(bizis =>
             {
                 Assert.IsNotNull(bizis);
-                var listaBizis = new List<BiziServicePoint>(bizis);
+                var listaBizis = new List<BiziStation>(bizis);
                 CollectionAssert.AllItemsAreNotNull(listaBizis);
             });
         }
@@ -44,10 +44,10 @@
         {
             var sut = InitializeSut();
 
-            sut.GetWifis(wifis =>
+            sut.GetWifiHotSpots(wifis =>
             {
                 Assert.IsNotNull(wifis);
-                var listaWifis = new List<WifiServicePoint>(wifis);
+                var listaWifis = new List<WifiHotSpot>(wifis);
                 CollectionAssert.AllItemsAreNotNull(listaWifis);
             });
         }
@@ -57,7 +57,7 @@
         {
             var sut = InitializeSut();
 
-            sut.GetBusDetails(
+            sut.GetBusStopDetails(
                 "3062",
                 Assert.IsNotNull);
         }
@@ -67,7 +67,7 @@
         {
             var sut = InitializeSut();
 
-            sut.GetBiziDetails(
+            sut.GetBiziStationDetails(
                 "101",
                 Assert.IsNotNull);
         }

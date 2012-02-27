@@ -29,7 +29,7 @@
         public int TimesGetBusDetailsHasBeenCalled { get; private set; }
         public int TimesGetBiziDetailsHasBeenCalled { get; private set; }
 
-        public void GetBuses(Action<IEnumerable<BusServicePoint>> callback)
+        public void GetBusStops(Action<IEnumerable<BusStop>> callback)
         {
             if (callback == null)
             {
@@ -41,12 +41,12 @@
             var buffer = Encoding.UTF8.GetBytes(FakeData.GetBusesData());
             using (var ms = new MemoryStream(buffer))
             {
-                var buses = this.serializer.Deserialize<IEnumerable<BusServicePoint>>(ms);
+                var buses = this.serializer.Deserialize<IEnumerable<BusStop>>(ms);
                 callback(buses);
             }
         }
 
-        public void GetBizis(Action<IEnumerable<BiziServicePoint>> callback)
+        public void GetBiziStations(Action<IEnumerable<BiziStation>> callback)
         {
             if (callback == null)
             {
@@ -58,12 +58,12 @@
             var buffer = Encoding.UTF8.GetBytes(FakeData.GetBizisData());
             using (var ms = new MemoryStream(buffer))
             {
-                var bizis = this.serializer.Deserialize<IEnumerable<BiziServicePoint>>(ms);
+                var bizis = this.serializer.Deserialize<IEnumerable<BiziStation>>(ms);
                 callback(bizis);
             }
         }
 
-        public void GetWifis(Action<IEnumerable<WifiServicePoint>> callback)
+        public void GetWifiHotSpots(Action<IEnumerable<WifiHotSpot>> callback)
         {
             if (callback == null)
             {
@@ -75,12 +75,12 @@
             var buffer = Encoding.UTF8.GetBytes(FakeData.GetWifisData());
             using (var ms = new MemoryStream(buffer))
             {
-                var wifis = this.serializer.Deserialize<IEnumerable<WifiServicePoint>>(ms);
+                var wifis = this.serializer.Deserialize<IEnumerable<WifiHotSpot>>(ms);
                 callback(wifis);
             }
         }
 
-        public void GetBusDetails(string id, Action<BusDetail> callback)
+        public void GetBusStopDetails(string id, Action<BusStopDetail> callback)
         {
             if (callback == null)
             {
@@ -92,12 +92,12 @@
             var buffer = Encoding.UTF8.GetBytes(FakeData.GetDetalleBusData());
             using (var ms = new MemoryStream(buffer))
             {
-                var busDetail = this.serializer.Deserialize<BusDetail>(ms);
+                var busDetail = this.serializer.Deserialize<BusStopDetail>(ms);
                 callback(busDetail);
             }
         }
 
-        public void GetBiziDetails(string id, Action<BiziDetail> callback)
+        public void GetBiziStationDetails(string id, Action<BiziStationDetail> callback)
         {
             if (callback == null)
             {
@@ -109,7 +109,7 @@
             var buffer = Encoding.UTF8.GetBytes(FakeData.GetDetalleBiziData());
             using (var ms = new MemoryStream(buffer))
             {
-                var biziDetail = this.serializer.Deserialize<BiziDetail>(ms);
+                var biziDetail = this.serializer.Deserialize<BiziStationDetail>(ms);
                 callback(biziDetail);
             }
         }

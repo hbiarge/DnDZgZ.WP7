@@ -35,13 +35,13 @@
             this.cacheProvider = cacheProvider;
         }
 
-        public void GetBuses(Action<IEnumerable<BusServicePoint>> callback)
+        public void GetBusStops(Action<IEnumerable<BusStop>> callback)
         {
-            var buses = this.cacheProvider.Get<string, IEnumerable<BusServicePoint>>(BusesKey);
+            var buses = this.cacheProvider.Get<string, IEnumerable<BusStop>>(BusesKey);
 
             if (buses == null)
             {
-                this.repository.GetBuses(b =>
+                this.repository.GetBusStops(b =>
                     {
                         this.cacheProvider.Add(BusesKey, b, cacheDuration);
                         callback(b);
@@ -53,13 +53,13 @@
             }
         }
 
-        public void GetBizis(Action<IEnumerable<BiziServicePoint>> callback)
+        public void GetBiziStations(Action<IEnumerable<BiziStation>> callback)
         {
-            var bizis = this.cacheProvider.Get<string, IEnumerable<BiziServicePoint>>(BizisKey);
+            var bizis = this.cacheProvider.Get<string, IEnumerable<BiziStation>>(BizisKey);
 
             if (bizis == null)
             {
-                this.repository.GetBizis(b =>
+                this.repository.GetBiziStations(b =>
                 {
                     this.cacheProvider.Add(BizisKey, b, cacheDuration);
                     callback(b);
@@ -71,13 +71,13 @@
             }
         }
 
-        public void GetWifis(Action<IEnumerable<WifiServicePoint>> callback)
+        public void GetWifiHotSpots(Action<IEnumerable<WifiHotSpot>> callback)
         {
-            var wifis = this.cacheProvider.Get<string, IEnumerable<WifiServicePoint>>(WifisKey);
+            var wifis = this.cacheProvider.Get<string, IEnumerable<WifiHotSpot>>(WifisKey);
 
             if (wifis == null)
             {
-                this.repository.GetWifis(w =>
+                this.repository.GetWifiHotSpots(w =>
                 {
                     this.cacheProvider.Add(WifisKey, w, cacheDuration);
                     callback(w);
@@ -89,16 +89,16 @@
             }
         }
 
-        public void GetBusDetails(string id, Action<BusDetail> callback)
+        public void GetBusStopDetails(string id, Action<BusStopDetail> callback)
         {
             // Las llamadas a los detalles no se cachean
-            this.repository.GetBusDetails(id, callback);
+            this.repository.GetBusStopDetails(id, callback);
         }
 
-        public void GetBiziDetails(string id, Action<BiziDetail> callback)
+        public void GetBiziStationDetails(string id, Action<BiziStationDetail> callback)
         {
             // Las llamadas a los detalles no se cachean
-            this.repository.GetBiziDetails(id, callback);
+            this.repository.GetBiziStationDetails(id, callback);
         }
     }
 }

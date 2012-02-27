@@ -7,14 +7,14 @@
 
     public interface IRepository
     {
-        void GetBuses(Action<IEnumerable<BusServicePoint>> callback);
+        void GetBusStops(Action<IEnumerable<BusStop>> callback);
 
-        void GetBizis(Action<IEnumerable<BiziServicePoint>> callback);
+        void GetBiziStations(Action<IEnumerable<BiziStation>> callback);
 
-        void GetWifis(Action<IEnumerable<WifiServicePoint>> callback);
+        void GetWifiHotSpots(Action<IEnumerable<WifiHotSpot>> callback);
 
-        void GetBusDetails(string id, Action<BusDetail> callback);
+        void GetBusStopDetails(string id, Action<BusStopDetail> callback);
 
-        void GetBiziDetails(string id, Action<BiziDetail> callback);
+        void GetBiziStationDetails(string id, Action<BiziStationDetail> callback);
     }
 }

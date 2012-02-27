@@ -21,9 +21,9 @@
         {
             var sut = InitializeSut();
 
-            sut.GetBuses(Assert.IsNotNull);
+            sut.GetBusStops(Assert.IsNotNull);
             Assert.AreEqual(1, innerRepository.TimesGetBusesHasBeenCalled);
-            sut.GetBuses(Assert.IsNotNull);
+            sut.GetBusStops(Assert.IsNotNull);
             Assert.AreEqual(1, innerRepository.TimesGetBusesHasBeenCalled);
         }
 
@@ -32,9 +32,9 @@
         {
             var sut = InitializeSut();
 
-            sut.GetBizis(Assert.IsNotNull);
+            sut.GetBiziStations(Assert.IsNotNull);
             Assert.AreEqual(1, innerRepository.TimesGetBizisHasBeenCalled);
-            sut.GetBizis(Assert.IsNotNull);
+            sut.GetBiziStations(Assert.IsNotNull);
             Assert.AreEqual(1, innerRepository.TimesGetBizisHasBeenCalled);
         }
 
@@ -43,9 +43,9 @@
         {
             var sut = InitializeSut();
 
-            sut.GetWifis(Assert.IsNotNull);
+            sut.GetWifiHotSpots(Assert.IsNotNull);
             Assert.AreEqual(1, innerRepository.TimesGetWifisHasBeenCalled);
-            sut.GetWifis(Assert.IsNotNull);
+            sut.GetWifiHotSpots(Assert.IsNotNull);
             Assert.AreEqual(1, innerRepository.TimesGetWifisHasBeenCalled);
         }
 
@@ -54,9 +54,9 @@
         {
             var sut = InitializeSut();
 
-            sut.GetBusDetails("3062", Assert.IsNotNull);
+            sut.GetBusStopDetails("3062", Assert.IsNotNull);
             Assert.AreEqual(1, innerRepository.TimesGetBusDetailsHasBeenCalled);
-            sut.GetBusDetails("3062", Assert.IsNotNull);
+            sut.GetBusStopDetails("3062", Assert.IsNotNull);
             Assert.AreEqual(2, innerRepository.TimesGetBusDetailsHasBeenCalled);
         }
 
@@ -65,9 +65,9 @@
         {
             var sut = InitializeSut();
 
-            sut.GetBiziDetails("101", Assert.IsNotNull);
+            sut.GetBiziStationDetails("101", Assert.IsNotNull);
             Assert.AreEqual(1, innerRepository.TimesGetBiziDetailsHasBeenCalled);
-            sut.GetBiziDetails("101", Assert.IsNotNull);
+            sut.GetBiziStationDetails("101", Assert.IsNotNull);
             Assert.AreEqual(2, innerRepository.TimesGetBiziDetailsHasBeenCalled);
         }
 

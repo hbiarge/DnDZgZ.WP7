@@ -2,12 +2,12 @@
 {
     public abstract class DetailBase
     {
-        public string title { get; set; }
+        public string Title { get; set; }
 
-        public string id { get; set; }
+        public string Id { get; set; }
 
-        public string service { get; set; }
+        public string Service { get; set; }
 
-        public string[][] items { get; set; }
+        public string[][] Items { get; set; }
     }
 }

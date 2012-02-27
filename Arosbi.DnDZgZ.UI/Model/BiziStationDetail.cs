@@ -1,12 +1,12 @@
 ﻿namespace Arosbi.DnDZgZ.UI.Model
 {
-    public class BiziDetail : DetailBase
+    public class BiziStationDetail : DetailBase
     {
         public string Bizis
         {
             get
             {
-                return this.items[0][0];
+                return this.Items[0][0];
             }
         }
 
@@ -14,7 +14,7 @@
         {
             get
             {
-                return this.items[1][0];
+                return this.Items[1][0];
             }
         }
     }

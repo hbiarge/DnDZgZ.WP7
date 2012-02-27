@@ -50,7 +50,7 @@
 
         private bool isPopupOpen;
 
-        private BusDetail currentBusInfo;
+        private BusStopDetail currentBusInfo;
 
         public BusesViewModel(ILocationService locationService, IRepository repository)
         {
@@ -66,12 +66,12 @@
 
             if (IsInDesignMode)
             {
-                this.CurrentBusInfo = new BusDetail
+                this.CurrentBusInfo = new BusStopDetail
                     {
-                        id = "123",
-                        service = "Bus",
-                        title = "123",
-                        items = new string[][]
+                        Id = "123",
+                        Service = "Bus",
+                        Title = "123",
+                        Items = new string[][]
                             {
                                 new string[] { "[Ci1] 7 min.", "Dirección CAMINO LAS TORRES" },
                                 new string[] { "[Ci1] 14 min.", "Dirección CAMINO LAS TORRES" },
@@ -175,7 +175,7 @@
             }
         }
 
-        public BusDetail CurrentBusInfo
+        public BusStopDetail CurrentBusInfo
         {
             get
             {
@@ -245,7 +245,7 @@
                 if (this.pushpinCommand == null)
                 {
                     this.pushpinCommand = new RelayCommand<string>(
-                        p => this.repository.GetBusDetails(
+                        p => this.repository.GetBusStopDetails(
                             p,
                             busDetail =>
                             {
@@ -276,13 +276,13 @@
             this.Zoom = DefaultZoomLevel;
             this.Center = this.GetCenter();
 
-            this.repository.GetBuses(buses =>
+            this.repository.GetBusStops(buses =>
                 {
                     var pushpins = buses
                         .Select(b => new PushpinModel
                             {
-                                Location = new GeoCoordinate(b.lat, b.lon),
-                                Id = b.id
+                                Location = new GeoCoordinate(b.Lat, b.Lon),
+                                Id = b.Id
                             });
 
                     foreach (var pushpin in pushpins)

@@ -4,11 +4,11 @@
     using System.Text.RegularExpressions;
     using System.Linq;
 
-    public class BusDetail : DetailBase
+    public class BusStopDetail : DetailBase
     {
-        public class BusArrival
+        public class BusSchedule
         {
-            public BusArrival(string[] data)
+            public BusSchedule(string[] data)
             {
                 var index = data[0].IndexOf(']');
 
@@ -42,9 +42,9 @@
 
         private bool timelinesLoaded = false;
 
-        private ObservableCollection<BusArrival> timelines = new ObservableCollection<BusArrival>();
+        private readonly ObservableCollection<BusSchedule> timelines = new ObservableCollection<BusSchedule>();
 
-        public ObservableCollection<BusArrival> Timelines
+        public ObservableCollection<BusSchedule> Timelines
         {
             get
             {
@@ -52,8 +52,8 @@
                 {
                     this.timelinesLoaded = true;
 
-                    var llegadas = this.items
-                        .Select(data => new BusArrival(data));
+                    var llegadas = this.Items
+                        .Select(data => new BusSchedule(data));
 
                     var llegadasOrdenadas = llegadas
                         .OrderBy(t => !t.MinutesToArrive.HasValue)

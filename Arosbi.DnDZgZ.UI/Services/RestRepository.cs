@@ -26,7 +26,7 @@
             this.serializer = serializer;
         }
 
-        public void GetBuses(Action<IEnumerable<BusServicePoint>> callback)
+        public void GetBusStops(Action<IEnumerable<BusStop>> callback)
         {
             if (callback == null)
             {
@@ -37,7 +37,7 @@
             this.GetData(uri, callback);
         }
 
-        public void GetBizis(Action<IEnumerable<BiziServicePoint>> callback)
+        public void GetBiziStations(Action<IEnumerable<BiziStation>> callback)
         {
             if (callback == null)
             {
@@ -48,7 +48,7 @@
             this.GetData(uri, callback);
         }
 
-        public void GetWifis(Action<IEnumerable<WifiServicePoint>> callback)
+        public void GetWifiHotSpots(Action<IEnumerable<WifiHotSpot>> callback)
         {
             if (callback == null)
             {
@@ -59,7 +59,7 @@
             this.GetData(uri, callback);
         }
 
-        public void GetBusDetails(string id, Action<BusDetail> callback)
+        public void GetBusStopDetails(string id, Action<BusStopDetail> callback)
         {
             if (callback == null)
             {
@@ -70,7 +70,7 @@
             this.GetData(uri, callback);
         }
 
-        public void GetBiziDetails(string id, Action<BiziDetail> callback)
+        public void GetBiziStationDetails(string id, Action<BiziStationDetail> callback)
         {
             if (callback == null)
             {

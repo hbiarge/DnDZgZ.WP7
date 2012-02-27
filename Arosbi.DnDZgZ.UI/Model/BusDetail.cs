@@ -1,23 +1,9 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BusDetail.cs" company="Arosbi">
-//   Copyright (c) Hugo Biarge. Todos los derechos reservados.
-// </copyright>
-// <summary>
-//   Defines the BusItem type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Arosbi.DnDZgZ.UI.Model
+﻿namespace Arosbi.DnDZgZ.UI.Model
 {
-    using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Text.RegularExpressions;
     using System.Linq;
 
-    /// <summary>
-    /// Defines the details of a bus stop.
-    /// </summary>
     public class BusDetail : DetailBase
     {
         public class BusArrival

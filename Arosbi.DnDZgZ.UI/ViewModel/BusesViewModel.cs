@@ -368,7 +368,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
                     foreach (var pushpin in pushpins)
                     {
                         var p = pushpin;
-                        Deployment.Current.Dispatcher.BeginInvoke(() => this.busStops.Add(p));
+                        this.busStops.Add(p);
                     }
                 });
         }

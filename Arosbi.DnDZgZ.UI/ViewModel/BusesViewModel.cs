@@ -1,20 +1,9 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BusesViewModel.cs" company="Arosbi">
-//   Copyright (c) Hugo Biarge. Todos los derechos reservados.
-// </copyright>
-// <summary>
-//   Defines the BusesViewModel type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Arosbi.DnDZgZ.UI.ViewModel
+﻿namespace Arosbi.DnDZgZ.UI.ViewModel
 {
     using System;
     using System.Collections.ObjectModel;
     using System.Device.Location;
     using System.Linq;
-    using System.Reactive.Concurrency;
-    using System.Windows;
     using System.Windows.Input;
 
     using Arosbi.DnDZgZ.UI.Model;
@@ -29,86 +18,38 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
 
     public class BusesViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Maximum map zoom level allowed.
-        /// </summary>
         internal const double MaxZoomLevel = 19.0;
 
-        /// <summary>
-        /// Minimum map zoom level allowed.
-        /// </summary>
         internal const double MinZoomLevel = 16.0;
 
-        /// <summary>
-        /// Default map zoom level.
-        /// </summary>
         internal const double DefaultZoomLevel = 18.0;
 
-        /// <summary>
-        /// The location service.
-        /// </summary>
         private readonly ILocationService locationService;
 
-        /// <summary>
-        /// The repository.
-        /// </summary>
         private readonly IRepository repository;
 
-        /// <summary>
-        /// Collection of pushpins available on map.
-        /// </summary>
         private readonly ObservableCollection<PushpinModel> busStops = new ObservableCollection<PushpinModel>();
 
         private IDisposable locationSuscription;
 
-        /// <summary>
-        /// Command for the ZoomIn button.
-        /// </summary>
         private RelayCommand zoomInCommand;
 
-        /// <summary>
-        /// Command for the ZoomOut button.
-        /// </summary>
         private RelayCommand zoomOutCommand;
 
-        /// <summary>
-        /// Command that gets the current location.
-        /// </summary>
         private RelayCommand currentLocationCommand;
 
-        /// <summary>
-        /// Command for the pushpins.
-        /// </summary>
         private RelayCommand<string> pushpinCommand;
 
-        /// <summary>
-        /// Command that closes the popup.
-        /// </summary>
         private RelayCommand closePopupCommand;
 
-        /// <summary>
-        /// Map zoom level.
-        /// </summary>
         private double zoom;
 
-        /// <summary>
-        /// The current location provided by the GPS.
-        /// </summary>
         private GeoCoordinate currentLocation;
 
-        /// <summary>
-        /// Map center coordinate.
-        /// </summary>
         private GeoCoordinate center;
 
-        /// <summary>
-        /// The state of the info popup.
-        /// </summary>
         private bool isPopupOpen;
 
-        /// <summary>
-        /// Info of the current bus stop.
-        /// </summary>
         private BusDetail currentBusInfo;
 
         public BusesViewModel(ILocationService locationService, IRepository repository)
@@ -151,17 +92,11 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             this.InitializeDefaults();
         }
 
-        /// <summary>
-        /// Gets the credentials provider for the map control.
-        /// </summary>
         public CredentialsProvider CredentialsProvider
         {
             get { return ViewModelLocator.CredentialsProvider; }
         }
 
-        /// <summary>
-        /// Gets or sets the map zoom level.
-        /// </summary>
         public double Zoom
         {
             get
@@ -182,9 +117,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets or sets the current location coordinate.
-        /// </summary>
         public GeoCoordinate CurrentLocation
         {
             get
@@ -201,9 +133,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets or sets the map center location coordinate.
-        /// </summary>
         public GeoCoordinate Center
         {
             get
@@ -220,9 +149,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets a collection of pushpins.
-        /// </summary>
         public ObservableCollection<PushpinModel> BusStops
         {
             get
@@ -231,9 +157,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the popup is open.
-        /// </summary>
         public bool IsPopupOpen
         {
             get
@@ -348,9 +271,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             }
         }
 
-        /// <summary>
-        /// Set defaults.
-        /// </summary>
         private void InitializeDefaults()
         {
             this.Zoom = DefaultZoomLevel;

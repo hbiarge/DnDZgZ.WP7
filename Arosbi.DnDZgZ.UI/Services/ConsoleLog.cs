@@ -1,6 +1,4 @@
-﻿
-
-namespace Arosbi.DnDZgZ.UI.Services
+﻿namespace Arosbi.DnDZgZ.UI.Services
 {
     using System;
     using System.Diagnostics;

@@ -22,12 +22,6 @@
         private RelayCommand wifiCommand;
         private RelayCommand aboutCommand;
 
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
-        /// <param name="navigationService">
-        /// The navigation Service.
-        /// </param>
         public MainViewModel(Func<INavigationService> navigationService)
         {
             if (navigationService == null)

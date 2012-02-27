@@ -1,20 +1,4 @@
-﻿/*
-  In App.xaml:
-  <Application.Resources>
-      <vm:ViewModelLocatorTemplate xmlns:vm="clr-namespace:Arosbi.DnDZgZ.UI.ViewModel"
-                                   x:Key="Locator" />
-  </Application.Resources>
-  
-  In the View:
-  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
-  
-  OR (WPF only):
-  
-  xmlns:vm="clr-namespace:Arosbi.DnDZgZ.UI.ViewModel"
-  DataContext="{Binding Source={x:Static vm:ViewModelLocatorTemplate.ViewModelNameStatic}}"
-*/
-
-namespace Arosbi.DnDZgZ.UI.ViewModel
+﻿namespace Arosbi.DnDZgZ.UI.ViewModel
 {
     using System;
     using System.Device.Location;
@@ -36,14 +20,8 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
 
     public class ViewModelLocator
     {
-        /// <summary>
-        /// Credentials for the map control.
-        /// </summary>
         internal static readonly CredentialsProvider CredentialsProvider = new ApplicationIdCredentialsProvider(MapId);
 
-        /// <summary>
-        /// Default location coordinate.
-        /// </summary>
         internal static readonly GeoCoordinate DefaultLocation = new GeoCoordinate(41.6521, -0.8809);
 
         internal static readonly Uri BusesPage = new Uri("/BusesPage.xaml", UriKind.Relative);
@@ -52,9 +30,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
 
         private static Funq.Container container;
 
-        /// <summary>
-        /// Registered ID used to access map control and Bing maps service.
-        /// </summary>
         private const string MapId = "replace-with-your-private-key";
 
         private static MainViewModel main;
@@ -65,9 +40,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             InitializeContainer();
         }
 
-        /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
-        /// </summary>
         public ViewModelLocator()
         {
             if (ViewModelBase.IsInDesignModeStatic)
@@ -83,9 +55,7 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
         }
 
         #region Main
-        /// <summary>
-        /// Gets the Main property.
-        /// </summary>
+        
         public static MainViewModel MainStatic
         {
             get
@@ -99,9 +69,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets the Main property.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
@@ -113,18 +80,12 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             }
         }
 
-        /// <summary>
-        /// Provides a deterministic way to delete the Main property.
-        /// </summary>
         public static void ClearMain()
         {
             main.Cleanup();
             main = null;
         }
 
-        /// <summary>
-        /// Provides a deterministic way to create the Main property.
-        /// </summary>
         public static void CreateMain()
         {
             if (main == null)
@@ -137,9 +98,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
 
         #region Buses
 
-        /// <summary>
-        /// Gets the $ViewModelPropertyName$ property.
-        /// </summary>
         public static BusesViewModel BusesStatic
         {
             get
@@ -153,9 +111,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets the Buses property.
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
@@ -167,9 +122,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             }
         }
 
-        /// <summary>
-        /// Provides a deterministic way to delete the $ViewModelPropertyName$ property.
-        /// </summary>
         public static void ClearBuses()
         {
             if (buses == null)
@@ -181,9 +133,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
             buses = null;
         }
 
-        /// <summary>
-        /// Provides a deterministic way to create the $ViewModelPropertyName$ property.
-        /// </summary>
         public static void CreateBuses()
         {
             if (buses == null)
@@ -194,9 +143,6 @@ namespace Arosbi.DnDZgZ.UI.ViewModel
 
         #endregion
 
-        /// <summary>
-        /// Cleans up all the resources.
-        /// </summary>
         public static void Cleanup()
         {
             ClearMain();

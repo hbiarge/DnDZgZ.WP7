@@ -35,10 +35,6 @@
             this.cacheProvider = cacheProvider;
         }
 
-        /// <summary>
-        /// Get all the bus stations.
-        /// </summary>
-        /// <param name="callback">The callback.</param>
         public void GetBuses(Action<IEnumerable<BusServicePoint>> callback)
         {
             var buses = this.cacheProvider.Get<string, IEnumerable<BusServicePoint>>(BusesKey);
@@ -57,10 +53,6 @@
             }
         }
 
-        /// <summary>
-        /// Get all the bizi stations.
-        /// </summary>
-        /// <param name="callback">The callback.</param>
         public void GetBizis(Action<IEnumerable<BiziServicePoint>> callback)
         {
             var bizis = this.cacheProvider.Get<string, IEnumerable<BiziServicePoint>>(BizisKey);
@@ -79,10 +71,6 @@
             }
         }
 
-        /// <summary>
-        /// Get all wifi hotspots.
-        /// </summary>
-        /// <param name="callback">The callback.</param>
         public void GetWifis(Action<IEnumerable<WifiServicePoint>> callback)
         {
             var wifis = this.cacheProvider.Get<string, IEnumerable<WifiServicePoint>>(WifisKey);
@@ -101,22 +89,12 @@
             }
         }
 
-        /// <summary>
-        /// Get the details (buses to arrive) from a certain bus station.
-        /// </summary>
-        /// <param name="id">The id.</param>
-        /// <param name="callback">The callback.</param>
         public void GetBusDetails(string id, Action<BusDetail> callback)
         {
             // Las llamadas a los detalles no se cachean
             this.repository.GetBusDetails(id, callback);
         }
 
-        /// <summary>
-        /// Get the details (cycles remaining) from a certain bizi station.
-        /// </summary>
-        /// <param name="id">The id.</param>
-        /// <param name="callback">The callback.</param>
         public void GetBiziDetails(string id, Action<BiziDetail> callback)
         {
             // Las llamadas a los detalles no se cachean

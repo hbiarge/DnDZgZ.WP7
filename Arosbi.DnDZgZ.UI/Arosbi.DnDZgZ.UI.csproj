@@ -50,6 +50,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Coding4Fun.Phone.Controls">
+      <HintPath>..\packages\Coding4Fun.Phone.Controls.1.5.1\lib\Coding4Fun.Phone.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Funq">
       <HintPath>..\packages\Funq\WP7\Funq.dll</HintPath>
     </Reference>
@@ -61,19 +64,40 @@
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Maps, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>..\packages\SilverlightToolkitWP.4.2011.12.14\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\sl4-windowsphone71\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NorthernLights.LittleWatson">
+    <Reference Include="NorthernLights.Controls">
+      <HintPath>..\packages\NorthernLightsWP7Toolkit.1.1.1\lib\sl4-windowsphone71\NorthernLights.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="NorthernLights.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NorthernLightsWP7Toolkit.1.1.1\lib\sl4-windowsphone71\NorthernLights.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NorthernLights.LittleWatson, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NorthernLightsWP7Toolkit.1.1.1\lib\sl4-windowsphone71\NorthernLights.LittleWatson.dll</HintPath>
+    </Reference>
+    <Reference Include="NorthernLights.PersistentVariables, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NorthernLightsWP7Toolkit.1.1.1\lib\sl4-windowsphone71\NorthernLights.PersistentVariables.dll</HintPath>
+    </Reference>
+    <Reference Include="NorthernLights.StateVariables">
+      <HintPath>..\packages\NorthernLightsWP7Toolkit.1.1.1\lib\sl4-windowsphone71\NorthernLights.StateVariables.dll</HintPath>
+    </Reference>
+    <Reference Include="SilverlightSerializer.WP71, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WP7Contrib.Caching.1.0.0.16\lib\sl4-WindowsPhone71\SilverlightSerializer.WP71.dll</HintPath>
     </Reference>
     <Reference Include="System.Device">
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="System.Observable" />
-    <Reference Include="System.Reactive">
+    <Reference Include="System.Reactive, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Rx-Main.1.0.11226\lib\SL3-WP\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading">
+      <HintPath>..\packages\Rx-Xaml.1.0.10621\lib\SL3-WP\System.Reactive.Windows.Threading.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows">
       <Private>False</Private>
@@ -86,16 +110,28 @@
     <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLight.3.1.1\lib\sl4-windowsphone71\System.Windows.Interactivity.dll</HintPath>
     </Reference>
-    <Reference Include="WP7Contrib.Caching">
+    <Reference Include="WP7Contrib.Caching, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WP7Contrib.Caching.1.0.0.16\lib\sl4-WindowsPhone71\WP7Contrib.Caching.dll</HintPath>
     </Reference>
-    <Reference Include="WP7Contrib.Communications">
+    <Reference Include="WP7Contrib.Collections, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WP7Contrib.Core.1.0.0.16\lib\sl4-wp71\WP7Contrib.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Common, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WP7Contrib.Core.1.0.0.16\lib\sl4-wp71\WP7Contrib.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Communications, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WP7Contrib.Net.1.0.0.16\lib\sl4-wp71\WP7Contrib.Communications.dll</HintPath>
     </Reference>
-    <Reference Include="WP7Contrib.Logging">
+    <Reference Include="WP7Contrib.Diagnostics, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WP7Contrib.Core.1.0.0.16\lib\sl4-wp71\WP7Contrib.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Logging, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WP7Contrib.Core.1.0.0.16\lib\sl4-wp71\WP7Contrib.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="WP7Contrib.Services">
+    <Reference Include="WP7Contrib.Serialization.Helpers, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WP7Contrib.Services.1.0.0.16\lib\sl4-wp71\WP7Contrib.Serialization.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="WP7Contrib.Services, Version=1.0.0.16, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WP7Contrib.Services.1.0.0.16\lib\sl4-wp71\WP7Contrib.Services.dll</HintPath>
     </Reference>
   </ItemGroup>

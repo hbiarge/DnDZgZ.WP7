@@ -8,39 +8,90 @@
     xmlns:maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps" 
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
     xmlns:mvvm="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71" 
-    xmlns:System="clr-namespace:System;assembly=mscorlib" 
+    xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" 
     x:Class="Arosbi.DnDZgZ.UI.BusesPage"
     mc:Ignorable="d"
     d:DesignWidth="480"
     d:DesignHeight="696"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"
+    SupportedOrientations="PortraitOrLandscape"
     Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
-    DataContext="{Binding Buses, Source={StaticResource Locator}}">
+    >
+    <phone:PhoneApplicationPage.Resources>
+        <c4f:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </phone:PhoneApplicationPage.Resources>
+    <phone:PhoneApplicationPage.FontFamily>
+        <StaticResource ResourceKey="PhoneFontFamilyNormal"/>
+    </phone:PhoneApplicationPage.FontFamily>
+    <phone:PhoneApplicationPage.FontSize>
+        <StaticResource ResourceKey="PhoneFontSizeNormal"/>
+    </phone:PhoneApplicationPage.FontSize>
+    <phone:PhoneApplicationPage.Foreground>
+        <StaticResource ResourceKey="PhoneForegroundBrush"/>
+    </phone:PhoneApplicationPage.Foreground>
+    <phone:PhoneApplicationPage.DataContext>
+        <Binding Path="Buses" Source="{StaticResource Locator}"/>
+    </phone:PhoneApplicationPage.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Unloaded">
+            <mvvm:EventToCommand x:Name="UnloadedEventToCommand" Command="{Binding UnloadedCommand, Mode=OneWay}"/>
+        </i:EventTrigger>
+        <i:EventTrigger>
+            <mvvm:EventToCommand x:Name="LoadedEventToCommand" Command="{Binding LoadedCommand, Mode=OneWay}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
-    <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="true" IsMenuEnabled="True">
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Configuración"/>
-            </shell:ApplicationBar.MenuItems>
             <shell:ApplicationBarIconButton IconUri="/Resources/Icons/ApplicationBar/Location.png" 
                                             Text="mi posición"
                                             Click="ApplicationBarIconButtonClick"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot" Background="Black">
+
+        <Grid x:Name="Popup" Background="#99000000" Canvas.ZIndex="1" Visibility="{Binding ShowBusStopDetail, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+        	<i:Interaction.Triggers>
+        		<i:EventTrigger EventName="Tap">
+        			<mvvm:EventToCommand Command="{Binding ClosePopupCommand, Mode=OneWay}"/>
+        		</i:EventTrigger>
+        	</i:Interaction.Triggers>
+            <ListBox x:Name="ListaTiempos"
+        			ItemsSource="{Binding CurrentBusStopDetail.Timelines}" Padding="20" d:LayoutOverrides="Width, Height" HorizontalAlignment="Center" Margin="0,50">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border d:LayoutOverrides="Width, Height" Background="#FFBE0B0B" Padding="5,0" CornerRadius="5" BorderBrush="White" BorderThickness="1">
+                                <TextBlock Foreground="White" FontWeight="Bold" FontSize="26.667" Text="{Binding BusNumber, Mode=OneTime}"/>
+                            </Border>
+                            <TextBlock Foreground="White" d:LayoutOverrides="Height" Grid.Column="1" Text="{Binding TimeToArrive, Mode=OneTime}" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBlock x:Name="Poste" 
+                       HorizontalAlignment="Left" 
+                       TextWrapping="Wrap" 
+                       VerticalAlignment="Top" 
+                       Margin="15,15,0,0" 
+                       FontSize="26.667" FontWeight="Bold" >
+                <Run>Poste: </Run>
+                <Run Text="{Binding CurrentBusStopDetail.Id}" />
+            </TextBlock>
+        </Grid>
+
         <Border x:Name="MapView"
 		    	BorderBrush="Black">
             <maps:Map x:Name="Map"
-				CredentialsProvider="{Binding CredentialsProvider}"
+				CredentialsProvider="{Binding CredentialsProvider, Mode=OneWay}"
 				CopyrightVisibility="Collapsed" LogoVisibility="Collapsed"
-				ZoomLevel="{Binding Zoom, Mode=TwoWay}"
-				Center="{Binding Center, Mode=TwoWay}">
+				ZoomLevel="{Binding ZoomLevel, Mode=TwoWay}"
+				Center="{Binding Center, Mode=TwoWay}" ScaleVisibility="Visible" ZoomBarVisibility="Collapsed">
 
                 <maps:Map.Mode>
                     <maps:RoadMode />
@@ -77,64 +128,6 @@
 
             </maps:Map>
         </Border>
-
-        <Popup x:Name="InfoPopup" Width="300" Height="400" IsOpen="{Binding IsPopupOpen}">
-            <ListBox x:Name="ListBoxPushpinCatalog"
-					 ItemsSource="{Binding CurrentBusInfo.Timelines}" BorderBrush="#00000000" Background="#B38B3F3F" Padding="20">
-            	<i:Interaction.Triggers>
-            		<i:EventTrigger EventName="Tap">
-            			<mvvm:EventToCommand Command="{Binding ClosePopupCommand, Mode=OneWay}"/>
-            		</i:EventTrigger>
-            	</i:Interaction.Triggers>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding ArrivalInfo, Mode=OneWay}" Foreground="Black"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Popup>
-
-        <!-- Visual States -->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="PushpinsStates">
-                <VisualStateGroup.Transitions>
-                    <VisualTransition To="ShowPushpins" />
-                    <VisualTransition To="HidePushpins" />
-                </VisualStateGroup.Transitions>
-                <VisualState x:Name="ShowPushpins">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Popup.IsOpen)" Storyboard.TargetName="InfoPopup">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <System:Boolean>True</System:Boolean>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <DoubleAnimation Duration="0:0:0.3" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="InfoPopup" d:IsOptimized="True">
-                            <DoubleAnimation.EasingFunction>
-                            	<CircleEase EasingMode="EaseIn" />
-                            </DoubleAnimation.EasingFunction>
-                        </DoubleAnimation>
-                    </Storyboard>
-                </VisualState>
-                <VisualState x:Name="HidePushpins">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Popup.IsOpen)" Storyboard.TargetName="InfoPopup">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <System:Boolean>False</System:Boolean>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <DoubleAnimation Duration="0:0:0.3" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="InfoPopup" d:IsOptimized="True">
-                            <DoubleAnimation.EasingFunction>
-                            	<CircleEase EasingMode="EaseOut" />
-                            </DoubleAnimation.EasingFunction>
-                        </DoubleAnimation>
-                    </Storyboard>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
 
     </Grid>
 

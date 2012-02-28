@@ -38,19 +38,23 @@
 
         private RelayCommand currentLocationCommand;
 
-        private RelayCommand<string> pushpinCommand;
+        private RelayCommand<string> busStopDetailCommand;
 
         private RelayCommand closePopupCommand;
 
-        private double zoom;
+        private RelayCommand loadedCommand;
+
+        private RelayCommand unloadedCommand;
+
+        private double zoomLevelLevel;
 
         private GeoCoordinate currentLocation;
 
         private GeoCoordinate center;
 
-        private bool isPopupOpen;
+        private bool showBusStopDetail;
 
-        private BusStopDetail currentBusInfo;
+        private BusStopDetail currentBusStopDetail;
 
         public BusesViewModel(ILocationService locationService, IRepository repository)
         {
@@ -66,7 +70,7 @@
 
             if (IsInDesignMode)
             {
-                this.CurrentBusInfo = new BusStopDetail
+                this.CurrentBusStopDetail = new BusStopDetail
                     {
                         Id = "123",
                         Service = "Bus",
@@ -89,7 +93,8 @@
                     location => this.CurrentLocation = this.Center = location,
                     () => this.locationSuscription.Dispose());
 
-            this.InitializeDefaults();
+            this.ZoomLevel = DefaultZoomLevel;
+            this.Center = this.GetCenter();
         }
 
         public CredentialsProvider CredentialsProvider
@@ -97,20 +102,20 @@
             get { return ViewModelLocator.CredentialsProvider; }
         }
 
-        public double Zoom
+        public double ZoomLevel
         {
             get
             {
-                return this.zoom;
+                return this.zoomLevelLevel;
             }
             set
             {
                 var coercedZoom = Math.Max(MinZoomLevel, Math.Min(MaxZoomLevel, value));
 
-                if (this.zoom != coercedZoom)
+                if (this.zoomLevelLevel != coercedZoom)
                 {
-                    this.zoom = value;
-                    this.RaisePropertyChanged("Zoom");
+                    this.zoomLevelLevel = value;
+                    this.RaisePropertyChanged("ZoomLevel");
                     ((RelayCommand)this.ZoomInCommand).RaiseCanExecuteChanged();
                     ((RelayCommand)this.ZoomOutCommand).RaiseCanExecuteChanged();
                 }
@@ -157,34 +162,34 @@
             }
         }
 
-        public bool IsPopupOpen
+        public bool ShowBusStopDetail
         {
             get
             {
-                return this.isPopupOpen;
+                return this.showBusStopDetail;
             }
             internal set
             {
-                if (value == this.isPopupOpen)
+                if (value == this.showBusStopDetail)
                 {
                     return;
                 }
 
-                this.isPopupOpen = value;
-                RaisePropertyChanged("IsPopupOpen");
+                this.showBusStopDetail = value;
+                RaisePropertyChanged("ShowBusStopDetail");
             }
         }
 
-        public BusStopDetail CurrentBusInfo
+        public BusStopDetail CurrentBusStopDetail
         {
             get
             {
-                return this.currentBusInfo;
+                return this.currentBusStopDetail;
             }
             private set
             {
-                this.currentBusInfo = value;
-                this.RaisePropertyChanged("CurrentBusInfo");
+                this.currentBusStopDetail = value;
+                this.RaisePropertyChanged("CurrentBusStopDetail");
             }
         }
 
@@ -195,8 +200,8 @@
                 if (this.zoomInCommand == null)
                 {
                     this.zoomInCommand = new RelayCommand(
-                        () => this.Zoom += 1,
-                        () => this.Zoom < MaxZoomLevel);
+                        () => this.ZoomLevel += 1,
+                        () => this.ZoomLevel < MaxZoomLevel);
                 }
 
                 return this.zoomInCommand;
@@ -210,8 +215,8 @@
                 if (this.zoomOutCommand == null)
                 {
                     this.zoomOutCommand = new RelayCommand(
-                        () => this.Zoom -= 1,
-                        () => this.Zoom > MinZoomLevel);
+                        () => this.ZoomLevel -= 1,
+                        () => this.ZoomLevel > MinZoomLevel);
                 }
 
                 return this.zoomOutCommand;
@@ -242,19 +247,19 @@
         {
             get
             {
-                if (this.pushpinCommand == null)
+                if (this.busStopDetailCommand == null)
                 {
-                    this.pushpinCommand = new RelayCommand<string>(
+                    this.busStopDetailCommand = new RelayCommand<string>(
                         p => this.repository.GetBusStopDetails(
                             p,
                             busDetail =>
                             {
-                                this.CurrentBusInfo = busDetail;
-                                this.IsPopupOpen = true;
+                                this.CurrentBusStopDetail = busDetail;
+                                this.ShowBusStopDetail = true;
                             }));
                 }
 
-                return this.pushpinCommand;
+                return this.busStopDetailCommand;
             }
         }
 
@@ -264,18 +269,41 @@
             {
                 if (this.closePopupCommand == null)
                 {
-                    this.closePopupCommand = new RelayCommand(() => this.IsPopupOpen = false);
+                    this.closePopupCommand = new RelayCommand(() => this.ShowBusStopDetail = false);
                 }
 
                 return this.closePopupCommand;
             }
         }
 
-        private void InitializeDefaults()
+        public ICommand LoadedCommand
         {
-            this.Zoom = DefaultZoomLevel;
-            this.Center = this.GetCenter();
+            get
+            {
+                if (this.loadedCommand == null)
+                {
+                    this.loadedCommand = new RelayCommand(this.GetBusStops);
+                }
 
+                return this.loadedCommand;
+            }
+        }
+
+        public ICommand UnloadedCommand
+        {
+            get
+            {
+                if (this.unloadedCommand == null)
+                {
+                    this.unloadedCommand = new RelayCommand(() => this.ShowBusStopDetail = false);
+                }
+
+                return this.unloadedCommand;
+            }
+        }
+
+        private void GetBusStops()
+        {
             this.repository.GetBusStops(buses =>
                 {
                     var pushpins = buses
@@ -283,12 +311,11 @@
                             {
                                 Location = new GeoCoordinate(b.Lat, b.Lon),
                                 Id = b.Id
-                            });
+                            }); 
 
                     foreach (var pushpin in pushpins)
                     {
-                        var p = pushpin;
-                        this.busStops.Add(p);
+                        this.busStops.Add(pushpin);
                     }
                 });
         }

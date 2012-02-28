@@ -155,7 +155,7 @@
         {
             container = new Funq.Container();
 
-            container.Register<ISerializer>(c => new JsonContractSerializer());
+            container.Register<ISerializer>(c => new JsonSerializer());
 
             container.Register<ILog>(c => new ConsoleLog());
 

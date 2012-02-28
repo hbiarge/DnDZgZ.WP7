@@ -30,7 +30,7 @@
         {
             BusesViewModel sut = GetSut();
 
-            Assert.AreEqual(BusesViewModel.DefaultZoomLevel, sut.Zoom);
+            Assert.AreEqual(BusesViewModel.DefaultZoomLevel, sut.ZoomLevel);
         }
 
         [TestMethod]
@@ -63,18 +63,18 @@
         public void ZooIn_Incrementa_Zoom()
         {
             BusesViewModel sut = GetSut();
-            var actualZoom = sut.Zoom;
+            var actualZoom = sut.ZoomLevel;
 
             sut.ZoomInCommand.Execute(null);
 
-            Assert.AreEqual(actualZoom + 1, sut.Zoom);
+            Assert.AreEqual(actualZoom + 1, sut.ZoomLevel);
         }
 
         [TestMethod]
         public void No_Puede_Hacer_ZooIn_En_MaxZoom()
         {
             BusesViewModel sut = GetSut();
-            sut.Zoom = BusesViewModel.MaxZoomLevel;
+            sut.ZoomLevel = BusesViewModel.MaxZoomLevel;
 
             Assert.IsFalse(sut.ZoomInCommand.CanExecute(null));
         }
@@ -83,18 +83,18 @@
         public void ZooOut_decrementa_Zoom()
         {
             BusesViewModel sut = GetSut();
-            var actualZoom = sut.Zoom;
+            var actualZoom = sut.ZoomLevel;
 
             sut.ZoomOutCommand.Execute(null);
 
-            Assert.AreEqual(actualZoom - 1.0, sut.Zoom);
+            Assert.AreEqual(actualZoom - 1.0, sut.ZoomLevel);
         }
 
         [TestMethod]
         public void No_Puede_Hacer_Zooout_En_MinZoom()
         {
             BusesViewModel sut = GetSut();
-            sut.Zoom = BusesViewModel.MinZoomLevel;
+            sut.ZoomLevel = BusesViewModel.MinZoomLevel;
 
             Assert.IsFalse(sut.ZoomOutCommand.CanExecute(null));
         }
@@ -106,8 +106,8 @@
 
             sut.PushpinCommand.Execute("fake");
 
-            Assert.IsNotNull(sut.CurrentBusInfo);
-            Assert.AreEqual(true, sut.IsPopupOpen);
+            Assert.IsNotNull(sut.CurrentBusStopDetail);
+            Assert.AreEqual(true, sut.ShowBusStopDetail);
         }
 
         [TestMethod]
@@ -117,18 +117,18 @@
 
             sut.PushpinCommand.Execute("fake");
 
-            Assert.AreEqual(true, sut.IsPopupOpen);
+            Assert.AreEqual(true, sut.ShowBusStopDetail);
         }
 
         [TestMethod]
         public void ClosePopup_Cierra_Popup()
         {
             BusesViewModel sut = GetSut();
-            sut.IsPopupOpen = true;
+            sut.ShowBusStopDetail = true;
 
             sut.ClosePopupCommand.Execute(null);
 
-            Assert.AreEqual(false, sut.IsPopupOpen);
+            Assert.AreEqual(false, sut.ShowBusStopDetail);
         }
 
         private static BusesViewModel GetSut(

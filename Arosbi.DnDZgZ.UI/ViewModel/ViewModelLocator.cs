@@ -20,6 +20,9 @@
 
     public class ViewModelLocator
     {
+        //private const string MapId = "";
+        private const string MapId = "replace-with-your-private-key";
+
         internal static readonly CredentialsProvider CredentialsProvider = new ApplicationIdCredentialsProvider(MapId);
 
         internal static readonly GeoCoordinate DefaultLocation = new GeoCoordinate(41.6521, -0.8809);
@@ -29,9 +32,7 @@
         internal static readonly Uri WifiPage = new Uri("/WifisPage.xaml", UriKind.Relative);
 
         private static Funq.Container container;
-
-        private const string MapId = "replace-with-your-private-key";
-
+        
         private static MainViewModel main;
         private static BusesViewModel buses;
 
@@ -164,7 +165,6 @@
                 new ApplicationFrameNavigationService(((App)Application.Current).RootFrame))
                     .ReusedWithin(ReuseScope.Container);
             
-
             container.Register<ILocationService>(c => new LocationService(
                 GeoPositionAccuracy.Default,
                 container.Resolve<ILog>()));

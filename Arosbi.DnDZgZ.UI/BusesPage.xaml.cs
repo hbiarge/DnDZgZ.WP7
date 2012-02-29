@@ -3,6 +3,7 @@
     using Arosbi.DnDZgZ.UI.ViewModel;
 
     using Microsoft.Phone.Controls;
+    using Microsoft.Phone.Controls.Maps;
 
     /// <summary>
     /// Description for BusesPage.
@@ -27,6 +28,20 @@
             }
 
             vm.CurrentLocationCommand.Execute(null);
+        }
+
+        private void MapViewChangeEnd(object sender, MapEventArgs e)
+        {
+            var vm = DataContext as BusesViewModel;
+
+            if (vm == null)
+            {
+                return;
+            }
+
+            var targetBoundingRectangle = this.Map.TargetBoundingRectangle;
+
+            vm.LoadBusStopsInExtents(targetBoundingRectangle);
         }
     }
 }

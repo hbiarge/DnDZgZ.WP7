@@ -27,7 +27,7 @@
                 return;
             }
 
-            vm.CurrentLocationCommand.Execute(null);
+            vm.FindCurrentLocationCommand.Execute(null);
         }
 
         private void MapViewChangeEnd(object sender, MapEventArgs e)

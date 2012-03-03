@@ -13,6 +13,7 @@
 
     using Microsoft.Phone.Controls.Maps;
 
+    using WP7Contrib.Caching;
     using WP7Contrib.Communications;
     using WP7Contrib.Logging;
     using WP7Contrib.Services.Location;
@@ -154,7 +155,9 @@
 
         private static void InitializeContainer()
         {
-            container = new Funq.Container();
+            container = new Container();
+
+#if DEBUG
 
             container.Register<ISerializer>(c => new JsonSerializer());
 
@@ -177,6 +180,33 @@
             container.Register<BusesViewModel>(c => new BusesViewModel(
                                                         container.Resolve<ILocationService>(),
                                                         container.Resolve<IRepository>()));
+#else
+
+            container.Register<ISerializer>(c => new JsonSerializer());
+
+            container.Register<ILog>(c => new NullLoggingService());
+
+            //container.Register<ICacheProvider>(new IsolatedStorageCacheProvider());
+
+            // Navigation service es un singleton
+            container.Register<INavigationService>(c => 
+                new ApplicationFrameNavigationService(((App)Application.Current).RootFrame))
+                    .ReusedWithin(ReuseScope.Container);
+            
+            container.Register<ILocationService>(c => new LocationService(
+                GeoPositionAccuracy.Default,
+                container.Resolve<ILog>()));
+
+            container.Register<IRepository>(c =>new RestRepository(
+                                                     container.Resolve<ISerializer>()));
+
+            container.Register<MainViewModel>(c => new MainViewModel(
+                                                       container.LazyResolve<INavigationService>()));
+            container.Register<BusesViewModel>(c => new BusesViewModel(
+                                                        container.Resolve<ILocationService>(),
+                                                        container.Resolve<IRepository>()));
+
+#endif
         }
     }
 }

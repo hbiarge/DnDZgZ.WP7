@@ -32,14 +32,6 @@
     <phone:PhoneApplicationPage.DataContext>
         <Binding Path="Buses" Source="{StaticResource Locator}"/>
     </phone:PhoneApplicationPage.DataContext>
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Unloaded">
-            <mvvm:EventToCommand x:Name="UnloadedEventToCommand" Command="{Binding UnloadedCommand, Mode=OneWay}"/>
-        </i:EventTrigger>
-        <i:EventTrigger>
-            <mvvm:EventToCommand x:Name="LoadedEventToCommand" Command="{Binding LoadedCommand, Mode=OneWay}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="true" IsMenuEnabled="True">
@@ -53,16 +45,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="Popup" Background="#99000000" Canvas.ZIndex="1" Visibility="{Binding ShowBusStopDetail, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Grid.RowSpan="2">
+        <Grid x:Name="Popup" Background="#99000000" Canvas.ZIndex="1" Visibility="{Binding ShowBusStopDetail, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Grid.RowSpan="3">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Tap">
-                    <mvvm:EventToCommand Command="{Binding ClosePopupCommand, Mode=OneWay}"/>
+                    <mvvm:EventToCommand Command="{Binding HideBusStopDetailsCommand, Mode=OneWay}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox x:Name="ListaTiempos"
-        			ItemsSource="{Binding CurrentBusStopDetail.Timelines}" Padding="20" d:LayoutOverrides="Width, Height" HorizontalAlignment="Center" Margin="0,50">
+        			ItemsSource="{Binding CurrentBusStopDetails.Timelines}" Padding="20" d:LayoutOverrides="Width, Height" HorizontalAlignment="Center" Margin="0,50">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,3">
@@ -85,21 +78,21 @@
                        Margin="15,15,0,0" 
                        FontSize="26.667" FontWeight="Bold" >
                 <Run>Poste: </Run>
-                <Run Text="{Binding CurrentBusStopDetail.Id}" />
+                <Run Text="{Binding CurrentBusStopDetails.Id}" />
             </TextBlock>
         </Grid>
 
-        <Grid x:Name="ProgressBarGrid" Visibility="{Binding IsDoingAsyncWork, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+        <Grid x:Name="FindingLocationGrid" Visibility="{Binding IsFindingLocation, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Background="#7F000000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" TextWrapping="Wrap" Text="{Binding AsyncMessage, Mode=OneWay}"/>
-            <toolkit:PerformanceProgressBar Grid.Column="1" Margin="20,0,10,0" IsIndeterminate="{Binding IsDoingAsyncWork, Mode=OneWay}" />
+            <TextBlock Grid.Column="0" TextWrapping="Wrap" Text="{Binding FindingLocationMessage, Mode=OneWay}"/>
+            <toolkit:PerformanceProgressBar Grid.Column="1" Margin="20,0,10,0" IsIndeterminate="{Binding IsFindingLocation, Mode=OneWay}" />
         </Grid>
 
         <Border x:Name="MapView"
-		    	BorderBrush="Black" Grid.Row="1">
+		    	BorderBrush="Black" Grid.RowSpan="3" Canvas.ZIndex="-1">
             <maps:Map x:Name="Map"
                       CredentialsProvider="{Binding CredentialsProvider, Mode=OneWay}"
                       CopyrightVisibility="Collapsed" LogoVisibility="Collapsed"
@@ -121,7 +114,7 @@
 								Background="{StaticResource PushpinBrush}" >
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger SourceName="pushpin" EventName="Tap">
-                                        <mvvm:EventToCommand Command="{Binding Buses.PushpinCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding Id}"/>
+                                        <mvvm:EventToCommand Command="{Binding Buses.ShowBusStopDetailsCommand, Mode=OneWay, Source={StaticResource Locator}}" CommandParameter="{Binding Id}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                                 <Image Source="{Binding Icon}" />
@@ -142,6 +135,14 @@
 
             </maps:Map>
         </Border>
+        <Grid x:Name="FindingInfoGrid" Visibility="{Binding IsFindingInfo, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" Grid.Row="2" Background="#7F000000">
+        	<Grid.ColumnDefinitions>
+        		<ColumnDefinition Width="Auto"/>
+        		<ColumnDefinition/>
+        	</Grid.ColumnDefinitions>
+        	<TextBlock Grid.Column="0" TextWrapping="Wrap" Text="{Binding FindingInfoMessage, Mode=OneWay}"/>
+        	<toolkit:PerformanceProgressBar Grid.Column="1" Margin="20,0,10,0" IsIndeterminate="{Binding IsFindingInfo, Mode=OneWay}" />
+        </Grid>
 
     </Grid>
 

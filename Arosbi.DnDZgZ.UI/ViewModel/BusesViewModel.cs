@@ -35,21 +35,17 @@
 
         private readonly List<PushpinModel> cachedBusStops = new List<PushpinModel>();
 
-        private readonly ObservableCollection<PushpinModel> showedBusStops = new ObservableCollection<PushpinModel>();
+        private readonly System.Collections.ObjectModel.ObservableCollection<PushpinModel> showedBusStops = new System.Collections.ObjectModel.ObservableCollection<PushpinModel>();
 
         private RelayCommand zoomInCommand;
 
         private RelayCommand zoomOutCommand;
 
-        private RelayCommand currentLocationCommand;
+        private RelayCommand findCurrentLocationCommand;
 
-        private RelayCommand<string> busStopDetailCommand;
+        private RelayCommand<string> showBusStopDetailsCommand;
 
-        private RelayCommand closePopupCommand;
-
-        private RelayCommand loadedCommand;
-        
-        private RelayCommand unloadedCommand;
+        private RelayCommand hideBusStopDetailsCommand;
 
         private double zoomLevelLevel;
 
@@ -59,11 +55,15 @@
 
         private bool showBusStopDetail;
 
-        private BusStopDetail currentBusStopDetail;
+        private BusStopDetail currentBusStopDetailses;
 
-        private string asyncMessage;
+        private string findingLocationMessage;
 
-        private bool isDoingAsyncWork;
+        private bool isFindingLocation;
+
+        private string findingInfoMessage;
+
+        private bool isFindingInfo;
 
         public BusesViewModel(ILocationService locationService, IRepository repository)
         {
@@ -79,7 +79,7 @@
 
             if (IsInDesignMode)
             {
-                this.CurrentBusStopDetail = new BusStopDetail
+                this.CurrentBusStopDetails = new BusStopDetail
                     {
                         Id = "123",
                         Service = "Bus",
@@ -98,11 +98,18 @@
             this.repository = repository;
             this.trikler = new TrickleAllToCollection<PushpinModel>(
                 () => this.ToString(),
-                () => this.ToString());
+                () => this.IsFindingInfo = false);
 
-            locationService.Location()
+            this.findingLocationMessage = "Obteniendo posición actual...";
+            this.IsFindingLocation = true;
+
+            locationService.Location(GeoPositionAccuracy.High, TimeSpan.FromSeconds(20))
                 .Subscribe(
-                    location => this.CurrentLocation = this.Center = location);
+                    location =>
+                    {
+                        this.IsFindingLocation = false;
+                        this.CurrentLocation = this.Center = location;
+                    });
 
             this.ZoomLevel = DefaultZoomLevel;
             this.Center = this.GetCenter();
@@ -191,16 +198,16 @@
             }
         }
 
-        public BusStopDetail CurrentBusStopDetail
+        public BusStopDetail CurrentBusStopDetails
         {
             get
             {
-                return this.currentBusStopDetail;
+                return this.currentBusStopDetailses;
             }
             private set
             {
-                this.currentBusStopDetail = value;
-                this.RaisePropertyChanged("CurrentBusStopDetail");
+                this.currentBusStopDetailses = value;
+                this.RaisePropertyChanged("CurrentBusStopDetails");
             }
         }
 
@@ -234,126 +241,126 @@
             }
         }
 
-        public ICommand CurrentLocationCommand
+        public ICommand FindCurrentLocationCommand
         {
             get
             {
-                if (this.currentLocationCommand == null)
+                if (this.findCurrentLocationCommand == null)
                 {
-                    this.currentLocationCommand = new RelayCommand(
+                    this.findCurrentLocationCommand = new RelayCommand(
                         () =>
                         {
-                            this.AsyncMessage = "Oteniendo posición...";
-                            this.IsDoingAsyncWork = true;
+                            this.FindingLocationMessage = "Oteniendo posición...";
+                            this.IsFindingLocation = true;
 
-                            this.locationService.Location()
+                            this.locationService.Location(GeoPositionAccuracy.High, TimeSpan.FromSeconds(20))
                                 .Subscribe(
                                     location =>
                                     {
-                                        this.IsDoingAsyncWork = false;
+                                        this.IsFindingLocation = false;
                                         this.CurrentLocation = this.Center = location;
                                     });
                         });
                 }
 
-                return this.currentLocationCommand;
+                return this.findCurrentLocationCommand;
             }
         }
 
-        public ICommand PushpinCommand
+        public ICommand ShowBusStopDetailsCommand
         {
             get
             {
-                if (this.busStopDetailCommand == null)
+                if (this.showBusStopDetailsCommand == null)
                 {
-                    this.busStopDetailCommand = new RelayCommand<string>(
+                    this.showBusStopDetailsCommand = new RelayCommand<string>(
                         busStopId =>
                         {
-                            this.AsyncMessage = string.Format("Cargando poste {0}...", busStopId);
-                            this.IsDoingAsyncWork = true;
+                            this.FindingInfoMessage = string.Format("Cargando poste {0}...", busStopId);
+                            this.IsFindingInfo = true;
 
                             this.repository.GetBusStopDetails(
                                 busStopId,
-                                busDetail =>
+                                busDetails =>
                                 {
-                                    this.IsDoingAsyncWork = false;
+                                    this.IsFindingInfo = false;
 
-                                    this.CurrentBusStopDetail = busDetail;
+                                    this.CurrentBusStopDetails = busDetails;
                                     this.ShowBusStopDetail = true;
                                 });
                         });
                 }
 
-                return this.busStopDetailCommand;
+                return this.showBusStopDetailsCommand;
             }
         }
 
-        public ICommand ClosePopupCommand
+        public ICommand HideBusStopDetailsCommand
         {
             get
             {
-                if (this.closePopupCommand == null)
+                if (this.hideBusStopDetailsCommand == null)
                 {
-                    this.closePopupCommand = new RelayCommand(() =>
+                    this.hideBusStopDetailsCommand = new RelayCommand(() =>
                         {
-                            this.CurrentBusStopDetail = null;
+                            this.CurrentBusStopDetails = null;
                             this.ShowBusStopDetail = false;
                         });
                 }
 
-                return this.closePopupCommand;
+                return this.hideBusStopDetailsCommand;
             }
         }
 
-        public ICommand LoadedCommand
+        public string FindingLocationMessage
         {
             get
             {
-                if (this.loadedCommand == null)
-                {
-                    this.loadedCommand = new RelayCommand(() => this.ToString());
-                }
-
-                return this.loadedCommand;
-            }
-        }
-
-        public ICommand UnloadedCommand
-        {
-            get
-            {
-                if (this.unloadedCommand == null)
-                {
-                    this.unloadedCommand = new RelayCommand(() => this.ShowBusStopDetail = false);
-                }
-
-                return this.unloadedCommand;
-            }
-        }
-
-        public string AsyncMessage
-        {
-            get
-            {
-                return this.asyncMessage;
+                return this.findingLocationMessage;
             }
             internal set
             {
-                this.asyncMessage = value;
-                RaisePropertyChanged("AsyncMessage");
+                this.findingLocationMessage = value;
+                RaisePropertyChanged("FindingLocationMessage");
             }
         }
 
-        public bool IsDoingAsyncWork
+        public bool IsFindingLocation
         {
             get
             {
-                return this.isDoingAsyncWork;
+                return this.isFindingLocation;
             }
             internal set
             {
-                this.isDoingAsyncWork = value;
-                RaisePropertyChanged("IsDoingAsyncWork");
+                this.isFindingLocation = value;
+                RaisePropertyChanged("IsFindingLocation");
+            }
+        }
+
+        public string FindingInfoMessage
+        {
+            get
+            {
+                return this.findingInfoMessage;
+            }
+            internal set
+            {
+                this.findingInfoMessage = value;
+                RaisePropertyChanged("FindingInfoMessage");
+            }
+        }
+
+        public bool IsFindingInfo
+        {
+            get
+            {
+                return this.isFindingInfo;
+            }
+            internal set
+            {
+                this.isFindingInfo = value;
+                RaisePropertyChanged("IsFindingInfo");
             }
         }
 
@@ -371,6 +378,9 @@
 
         private void GetBusStops(LocationRect extents, Action<LocationRect> callback)
         {
+            this.FindingInfoMessage = "Obteniendo postes...";
+            this.IsFindingInfo = true;
+
             this.repository.GetBusStops(buses =>
                 {
                     var busStops = buses
@@ -381,6 +391,8 @@
                             });
 
                     this.cachedBusStops.AddRange(busStops);
+
+                    this.IsFindingInfo = false;
                     callback(extents);
                 });
         }
@@ -388,6 +400,9 @@
         private void LoadBusStopsInExtentsImpl(LocationRect extents)
         {
             this.trikler.Stop();
+
+            this.FindingInfoMessage = "Añadiendo postes...";
+            this.IsFindingInfo = true;
 
             // All the pins to add to the map control...
             var allPinsToAdd = this.cachedBusStops

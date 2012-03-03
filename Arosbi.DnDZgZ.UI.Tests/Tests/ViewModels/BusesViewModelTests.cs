@@ -104,9 +104,9 @@
         {
             BusesViewModel sut = GetSut();
 
-            sut.PushpinCommand.Execute("fake");
+            sut.ShowBusStopDetailsCommand.Execute("fake");
 
-            Assert.IsNotNull(sut.CurrentBusStopDetail);
+            Assert.IsNotNull(sut.CurrentBusStopDetails);
             Assert.AreEqual(true, sut.ShowBusStopDetail);
         }
 
@@ -115,7 +115,7 @@
         {
             BusesViewModel sut = GetSut();
 
-            sut.PushpinCommand.Execute("fake");
+            sut.ShowBusStopDetailsCommand.Execute("fake");
 
             Assert.AreEqual(true, sut.ShowBusStopDetail);
         }
@@ -126,7 +126,7 @@
             BusesViewModel sut = GetSut();
             sut.ShowBusStopDetail = true;
 
-            sut.ClosePopupCommand.Execute(null);
+            sut.HideBusStopDetailsCommand.Execute(null);
 
             Assert.AreEqual(false, sut.ShowBusStopDetail);
         }
